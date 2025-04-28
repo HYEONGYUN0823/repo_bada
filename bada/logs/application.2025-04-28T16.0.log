@@ -258,3 +258,102 @@ This generated password is for development use only. Your security configuration
 2025-04-28T16:14:25.813 [http-nio-8080-exec-1] INFO o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
 2025-04-28T16:14:25.814 [http-nio-8080-exec-1] INFO o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
 2025-04-28T16:14:25.816 [http-nio-8080-exec-1] INFO o.s.w.s.DispatcherServlet - Completed initialization in 2 ms 
+2025-04-28T16:18:59.573 [File Watcher] INFO o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification) 
+2025-04-28T16:18:59.579 [Thread-5] INFO o.s.b.w.e.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete 
+2025-04-28T16:18:59.581 [tomcat-shutdown] INFO o.a.c.h.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:18:59.587 [tomcat-shutdown] INFO o.s.b.w.e.t.GracefulShutdown - Graceful shutdown complete 
+2025-04-28T16:18:59.588 [Thread-5] INFO o.a.c.h.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:18:59.690 [restartedMain] INFO c.a.BadaApplication - Starting BadaApplication using Java 21.0.5 with PID 4436 (C:\factory\ws_sts4_4270\repo_bada\bada\bin\main started by user in C:\factory\ws_sts4_4270\repo_bada\bada) 
+2025-04-28T16:18:59.690 [restartedMain] INFO c.a.BadaApplication - The following 1 profile is active: "external" 
+2025-04-28T16:18:59.813 [restartedMain] INFO o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port 8080 (http) 
+2025-04-28T16:18:59.814 [restartedMain] INFO o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:18:59.814 [restartedMain] INFO o.a.c.c.StandardService - Starting service [Tomcat] 
+2025-04-28T16:18:59.814 [restartedMain] INFO o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40] 
+2025-04-28T16:18:59.821 [restartedMain] INFO o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext 
+2025-04-28T16:18:59.821 [restartedMain] INFO o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 129 ms 
+2025-04-28T16:18:59.879 [restartedMain] INFO o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729 
+2025-04-28T16:18:59.883 [restartedMain] INFO o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:18:59.885 [restartedMain] INFO o.s.b.w.e.t.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/' 
+2025-04-28T16:18:59.887 [restartedMain] INFO c.a.BadaApplication - Started BadaApplication in 0.216 seconds (process running for 281.158) 
+2025-04-28T16:18:59.888 [restartedMain] INFO o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged 
+2025-04-28T16:19:27.862 [File Watcher] INFO o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification) 
+2025-04-28T16:19:27.863 [Thread-7] INFO o.s.b.w.e.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete 
+2025-04-28T16:19:27.864 [tomcat-shutdown] INFO o.a.c.h.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:19:27.866 [tomcat-shutdown] INFO o.s.b.w.e.t.GracefulShutdown - Graceful shutdown complete 
+2025-04-28T16:19:27.866 [Thread-7] INFO o.a.c.h.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:19:27.934 [restartedMain] INFO c.a.BadaApplication - Starting BadaApplication using Java 21.0.5 with PID 4436 (C:\factory\ws_sts4_4270\repo_bada\bada\bin\main started by user in C:\factory\ws_sts4_4270\repo_bada\bada) 
+2025-04-28T16:19:27.934 [restartedMain] INFO c.a.BadaApplication - The following 1 profile is active: "external" 
+2025-04-28T16:19:28.048 [restartedMain] INFO o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port 8080 (http) 
+2025-04-28T16:19:28.048 [restartedMain] INFO o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:19:28.049 [restartedMain] INFO o.a.c.c.StandardService - Starting service [Tomcat] 
+2025-04-28T16:19:28.049 [restartedMain] INFO o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40] 
+2025-04-28T16:19:28.055 [restartedMain] INFO o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext 
+2025-04-28T16:19:28.055 [restartedMain] INFO o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 120 ms 
+2025-04-28T16:19:28.112 [restartedMain] INFO o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729 
+2025-04-28T16:19:28.116 [restartedMain] INFO o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:19:28.117 [restartedMain] INFO o.s.b.w.e.t.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/' 
+2025-04-28T16:19:28.119 [restartedMain] INFO c.a.BadaApplication - Started BadaApplication in 0.203 seconds (process running for 309.39) 
+2025-04-28T16:19:28.119 [restartedMain] INFO o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged 
+2025-04-28T16:19:30.959 [http-nio-8080-exec-3] INFO o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2025-04-28T16:19:30.960 [http-nio-8080-exec-3] INFO o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+2025-04-28T16:19:30.961 [http-nio-8080-exec-3] INFO o.s.w.s.DispatcherServlet - Completed initialization in 1 ms 
+2025-04-28T16:19:39.755 [File Watcher] INFO o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification) 
+2025-04-28T16:19:39.756 [Thread-11] INFO o.s.b.w.e.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete 
+2025-04-28T16:19:39.756 [tomcat-shutdown] INFO o.a.c.h.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:19:39.758 [tomcat-shutdown] INFO o.s.b.w.e.t.GracefulShutdown - Graceful shutdown complete 
+2025-04-28T16:19:39.758 [Thread-11] INFO o.a.c.h.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:19:39.818 [restartedMain] INFO c.a.BadaApplication - Starting BadaApplication using Java 21.0.5 with PID 4436 (C:\factory\ws_sts4_4270\repo_bada\bada\bin\main started by user in C:\factory\ws_sts4_4270\repo_bada\bada) 
+2025-04-28T16:19:39.819 [restartedMain] INFO c.a.BadaApplication - The following 1 profile is active: "external" 
+2025-04-28T16:19:39.924 [restartedMain] INFO o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port 8080 (http) 
+2025-04-28T16:19:39.924 [restartedMain] INFO o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:19:39.924 [restartedMain] INFO o.a.c.c.StandardService - Starting service [Tomcat] 
+2025-04-28T16:19:39.924 [restartedMain] INFO o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40] 
+2025-04-28T16:19:39.931 [restartedMain] INFO o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext 
+2025-04-28T16:19:39.931 [restartedMain] INFO o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 111 ms 
+2025-04-28T16:19:39.978 [restartedMain] INFO o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729 
+2025-04-28T16:19:39.982 [restartedMain] INFO o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:19:39.983 [restartedMain] INFO o.s.b.w.e.t.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/' 
+2025-04-28T16:19:39.985 [restartedMain] INFO c.a.BadaApplication - Started BadaApplication in 0.183 seconds (process running for 321.255) 
+2025-04-28T16:19:39.985 [restartedMain] INFO o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged 
+2025-04-28T16:19:40.844 [http-nio-8080-exec-1] INFO o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2025-04-28T16:19:40.844 [http-nio-8080-exec-1] INFO o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+2025-04-28T16:19:40.845 [http-nio-8080-exec-1] INFO o.s.w.s.DispatcherServlet - Completed initialization in 1 ms 
+2025-04-28T16:20:49.635 [File Watcher] INFO o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification) 
+2025-04-28T16:20:49.637 [Thread-15] INFO o.s.b.w.e.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete 
+2025-04-28T16:20:49.638 [tomcat-shutdown] INFO o.a.c.h.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:20:49.644 [tomcat-shutdown] INFO o.s.b.w.e.t.GracefulShutdown - Graceful shutdown complete 
+2025-04-28T16:20:49.645 [Thread-15] INFO o.a.c.h.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:20:49.741 [restartedMain] INFO c.a.BadaApplication - Starting BadaApplication using Java 21.0.5 with PID 4436 (C:\factory\ws_sts4_4270\repo_bada\bada\bin\main started by user in C:\factory\ws_sts4_4270\repo_bada\bada) 
+2025-04-28T16:20:49.741 [restartedMain] INFO c.a.BadaApplication - The following 1 profile is active: "external" 
+2025-04-28T16:20:49.841 [restartedMain] INFO o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port 8080 (http) 
+2025-04-28T16:20:49.842 [restartedMain] INFO o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:20:49.842 [restartedMain] INFO o.a.c.c.StandardService - Starting service [Tomcat] 
+2025-04-28T16:20:49.842 [restartedMain] INFO o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40] 
+2025-04-28T16:20:49.848 [restartedMain] INFO o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext 
+2025-04-28T16:20:49.848 [restartedMain] INFO o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 105 ms 
+2025-04-28T16:20:49.900 [restartedMain] INFO o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729 
+2025-04-28T16:20:49.904 [restartedMain] INFO o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:20:49.907 [restartedMain] INFO o.s.b.w.e.t.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/' 
+2025-04-28T16:20:49.908 [restartedMain] INFO c.a.BadaApplication - Started BadaApplication in 0.181 seconds (process running for 391.179) 
+2025-04-28T16:20:49.908 [restartedMain] INFO o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged 
+2025-04-28T16:20:52.363 [File Watcher] INFO o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification) 
+2025-04-28T16:20:52.366 [Thread-19] INFO o.s.b.w.e.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete 
+2025-04-28T16:20:52.367 [tomcat-shutdown] INFO o.a.c.h.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:20:52.373 [tomcat-shutdown] INFO o.s.b.w.e.t.GracefulShutdown - Graceful shutdown complete 
+2025-04-28T16:20:52.373 [Thread-19] INFO o.a.c.h.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:20:52.469 [restartedMain] INFO c.a.BadaApplication - Starting BadaApplication using Java 21.0.5 with PID 4436 (C:\factory\ws_sts4_4270\repo_bada\bada\bin\main started by user in C:\factory\ws_sts4_4270\repo_bada\bada) 
+2025-04-28T16:20:52.469 [restartedMain] INFO c.a.BadaApplication - The following 1 profile is active: "external" 
+2025-04-28T16:20:52.570 [restartedMain] INFO o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port 8080 (http) 
+2025-04-28T16:20:52.571 [restartedMain] INFO o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:20:52.571 [restartedMain] INFO o.a.c.c.StandardService - Starting service [Tomcat] 
+2025-04-28T16:20:52.571 [restartedMain] INFO o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.40] 
+2025-04-28T16:20:52.577 [restartedMain] INFO o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext 
+2025-04-28T16:20:52.577 [restartedMain] INFO o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 107 ms 
+2025-04-28T16:20:52.632 [restartedMain] INFO o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729 
+2025-04-28T16:20:52.636 [restartedMain] INFO o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+2025-04-28T16:20:52.638 [restartedMain] INFO o.s.b.w.e.t.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/' 
+2025-04-28T16:20:52.639 [restartedMain] INFO c.a.BadaApplication - Started BadaApplication in 0.185 seconds (process running for 393.911) 
+2025-04-28T16:20:52.640 [restartedMain] INFO o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged 
+2025-04-28T16:21:36.095 [http-nio-8080-exec-1] INFO o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2025-04-28T16:21:36.095 [http-nio-8080-exec-1] INFO o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+2025-04-28T16:21:36.097 [http-nio-8080-exec-1] INFO o.s.w.s.DispatcherServlet - Completed initialization in 2 ms 
