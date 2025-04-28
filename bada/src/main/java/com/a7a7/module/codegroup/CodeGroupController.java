@@ -7,10 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CodeGroupController {
 	
 	@RequestMapping(value = "/index")
-	public String requestMethodName() {
+	public String index() {
 		
-		return "/usr/index";
+		return "usr/index/index";
 	}
 	
+	@RequestMapping(value = "/list")
+	public String list() {
+		
+		return "usr/list/list";
+	}	
 	
 }
