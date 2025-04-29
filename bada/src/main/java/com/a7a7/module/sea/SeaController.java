@@ -45,7 +45,9 @@ public class SeaController {
 		ObjectMapper objectMapper = new ObjectMapper();			//ObjectMapper는 Jackson 라이브러리에서 제공하는 JSON 처리용 클래스야.
 		JsonNode node = objectMapper.readTree(stringBuilder.toString()); //JsonNode node = objectMapper.readTree(stringBuilder.toString());
 		
-		model.addAttribute("items", node.toString());
+		JsonNode itemsNode = node.path("response").path("body").path("items").path("item"); 
+		//이렇게 중첩된 구조에서 items는 객체이고, 그 안에 item 배열이 존재하기 때문에 items.get("item")으로 배열을 꺼내서 넘겨줘야 Thymeleaf에서 이를 순회하며 값을 출력할 수 있게 됩니다.
+		model.addAttribute("items", itemsNode);
 		return "/xdm/travel/travel";
 	}
 	
