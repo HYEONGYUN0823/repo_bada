@@ -44,6 +44,7 @@
 	<script src="/usr/assets/js/vendors/validation.js"></script>
 	<script src="/usr/assets/libs/rater-js/index.js"></script>
 	<script src="/usr/assets/js/vendors/choice.js"></script>
+	<script src="/usr/assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
 	
 	<!-- 오류나는 js -->
 <!-- 	<script src="/usr/assets/js/vendors/flag.js"></script> -->
@@ -131,57 +132,6 @@
 				</div>
 
 				<div class="d-flex align-items-center gap-4">
-					<div class="dropdown d-none d-md-block">
-						<a class="d-flex align-items-center gap-1" href="#!" id="currencyDropdown"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							<img id="current-flag" src="/usr/assets/images/flags/gb-ukm.png" alt="GBP" height="12"
-								width="16" />
-							<span id="current-currency">GBP £</span>
-							<i id="arrowIcon" class="bi bi-chevron-down ms-2"></i>
-						</a>
-						<ul class="dropdown-menu bg-white shadow" aria-labelledby="currencyDropdown">
-							<li>
-								<a class="dropdown-item d-flex align-items-center" href="#!"
-									onclick="changeCurrency('Australia', 'AUD', '/usr/assets/images/flags/au.png')">
-									<img class="flag-icon" src="/usr/assets/images/flags/au.png" alt="AUD" height="12"
-										width="16" />
-									Australia (AUD $)
-								</a>
-							</li>
-							<li>
-								<a class="dropdown-item d-flex align-items-center" href="#!"
-									onclick="changeCurrency('Canada', 'CAD', './assets/images/flags/ca.png')">
-									<img class="flag-icon" src="/usr/assets/images/flags/ca.png" alt="CAD" height="12"
-										width="16" />
-									Canada (CAD $)
-								</a>
-							</li>
-							<li>
-								<a class="dropdown-item d-flex align-items-center" href="#!"
-									onclick="changeCurrency('France', 'EUR', './assets/images/flags/fr.png')">
-									<img class="flag-icon" src="/usr/assets/images/flags/fr.png" alt="EUR" height="12"
-										width="16" />
-									France (EUR €)
-								</a>
-							</li>
-							<li>
-								<a class="dropdown-item d-flex align-items-center" href="#!"
-									onclick="changeCurrency('United Kingdom', 'GBP', './assets/images/flags/gb-ukm.png')">
-									<img class="flag-icon" src="/usr/assets/images/flags/gb-ukm.png" alt="GBP" height="12"
-										width="16" />
-									United Kingdom (GBP £)
-								</a>
-							</li>
-							<li>
-								<a class="dropdown-item d-flex align-items-center" href="#!"
-									onclick="changeCurrency('United States', 'USD', './assets/images/flags/us.png')">
-									<img class="flag-icon" src="/usr/assets/images/flags/us.png" alt="USD" height="16"
-										width="20" />
-									United States (USD $)
-								</a>
-							</li>
-						</ul>
-					</div>
 					<div class="d-flex align-items-center gap-3">
 						<a class="d-none d-md-block" data-bs-toggle="offcanvas" href="#offcanvasSearchProduct"
 							role="button" aria-controls="offcanvasSearchProduct">
