@@ -12,17 +12,35 @@ public class CodeGroupController {
 		return "usr/index/index";
 	}
 	
+//	---------------------------------
+//	              여행지
+//	---------------------------------
+	
 	@RequestMapping(value = "/travelList")
 	public String travelList() {
 		
 		return "usr/list/travelList";
-	}	
+	}
+	
+	@RequestMapping(value = "/travelView")
+	public String travelView() {
+		
+		return "usr/view/travelView";
+	}
+	
+//	---------------------------------
+//                식당
+//  ---------------------------------
 	
 	@RequestMapping(value = "/restaurantList")
 	public String restaurantList() {
 		
 		return "usr/list/restaurantList";
 	}	
+	
+//	---------------------------------
+//                숙박업소
+//  ---------------------------------
 	
 	@RequestMapping(value = "/hotelList")
 	public String hotelList() {
