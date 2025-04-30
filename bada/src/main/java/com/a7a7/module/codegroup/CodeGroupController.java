@@ -12,10 +12,22 @@ public class CodeGroupController {
 		return "usr/index/index";
 	}
 	
-	@RequestMapping(value = "/list")
-	public String list() {
+	@RequestMapping(value = "/travelList")
+	public String travelList() {
 		
-		return "usr/list/list";
+		return "usr/list/travelList";
+	}	
+	
+	@RequestMapping(value = "/restaurantList")
+	public String restaurantList() {
+		
+		return "usr/list/restaurantList";
+	}	
+	
+	@RequestMapping(value = "/hotelList")
+	public String hotelList() {
+		
+		return "usr/list/hotelList";
 	}	
 	
 }
