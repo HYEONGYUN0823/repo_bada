@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="starReview">
+
+<script type="text/javascript">
+
+	document.addEventListener("DOMContentLoaded", function() {
+		  var ratingElements = document.querySelectorAll(".rater");
+
+		  ratingElements.forEach(function(el) {
+		    const rater = raterJs({
+		      element: el,
+		      max: 5,
+		      starSize: 20,
+		      rating: Number(el.dataset.rating) || 0,
+		      onRate: function(rating) {
+		        console.log("새 별점: ", rating);
+		        el.dataset.rating = rating;
+		        rater.setRating(rating);
+		      }
+		    });
+		    el.addEventListener("click", function(event) {
+		      var clickedRating = Math.ceil((event.offsetX / el.offsetWidth) * 5);
+		      clickedRating = Math.min(clickedRating, 5);
+		      el.dataset.rating = clickedRating; 
+		      rater.setRating(clickedRating);
+		    });
+		    el.addEventListener("mouseleave", function() {
+		      rater.setRating(Number(el.dataset.rating) || 0);
+		    });
+		  });
+		});
+		
+</script>
+
+</th:block>

@@ -2,6 +2,7 @@
 <html lang="kor" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace= "~{usr/include/head :: head}"></div>
+<div th:replace= "~{usr/include/starReview :: starReview}"></div>
 
 
 	<!--Blog single start-->
@@ -51,36 +52,36 @@
 					<div class="mb-6">
 						<div class="card">
 							<div class="card-body p-md-6 p-5">
-								<h3 class="mb-2 h5">Leave A Comments</h3>
-								<p>All comments are moderated before being published</p>
+								<h3 class="mb-2 h5">리뷰를 남겨주세요!</h3>
+								<p>모든 댓글은 게시되기 전에 검토됩니다.</p>
 								<form class="row g-3 needs-validation" novalidate="">
 									<div class="mb-3 col-12">
-										<h3 class="h6">Rate your experience *</h3>
-										<div class="rater" data-rating="4"></div>
+										<h3 class="h6">귀하의 경험을 평가해 주세요 *</h3>
+										<div class="rater" data-rating="${ratingValue}"></div>
 									</div>
 									<div class="col-md-6 col-12">
 										<label for="blogsingleFormName" class="form-label visually-hidden">Name</label>
 										<input type="text" name="blogsingleFormName" id="blogsingleFormName"
-											class="form-control" placeholder="Name" required />
+											class="form-control" placeholder="이름" required />
 										<div class="invalid-feedback">Please enter name.</div>
 									</div>
 									<div class="col-md-6 col-12">
 										<label for="blogsingleFormEmail"
 											class="form-label visually-hidden">Email</label>
 										<input type="email" name="blogsingleFormEmail" id="blogsingleFormEmail"
-											class="form-control" placeholder="Email" required />
+											class="form-control" placeholder="이메일" required />
 										<div class="invalid-feedback">Please enter email.</div>
 									</div>
 									<div class="col-12">
 										<label for="blogsingleFormmessages"
 											class="form-label visually-hidden">Comment</label>
 										<textarea class="form-control" id="blogsingleFormmessages" rows="4"
-											placeholder="Message" required></textarea>
+											placeholder="메시지" required></textarea>
 										<div class="invalid-feedback">Please write comment.</div>
 									</div>
 
 									<div class="col-12">
-										<button type="submit" class="btn btn-primary">Submit</button>
+										<button type="submit" class="btn btn-primary">제출</button>
 									</div>
 								</form>
 							</div>
@@ -536,18 +537,7 @@
 	
 	<script type="text/javascript">
 		
-	document.addEventListener("DOMContentLoaded", function() {
-		  var ratingElement = document.querySelector(".rater");
-		  if (ratingElement) {
-		    raterJs({
-		      element: ratingElement,
-		      max: 5,
-		      starSize: 20,
-		      rating: Number(ratingElement.dataset.rating),
-		      readOnly: true
-		    });
-		  }
-		});
+		
 		
 	</script>
 	
