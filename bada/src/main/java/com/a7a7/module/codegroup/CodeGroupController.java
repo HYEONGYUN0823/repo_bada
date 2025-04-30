@@ -48,4 +48,14 @@ public class CodeGroupController {
 		return "usr/list/hotelList";
 	}	
 	
+//	---------------------------------
+//                1:1문의
+//  ---------------------------------
+	
+	@RequestMapping(value = "/contact")
+	public String contact() {
+		
+		return "usr/contact/contact";
+	}	
+	
 }
