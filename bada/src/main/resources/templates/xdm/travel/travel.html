@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="kor" xmlns:th="http://www.thymeleaf.org">
-   <div th:replace = "~{xdm/include/header :: header}"></div>
+   <div th:replace = "~{xdm/include/header::header}"></div>
 
          <!-- main -->
          <main class="main-content-wrapper">
@@ -78,7 +78,7 @@
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr th:each="item: ${items}">
+                                    <tr th:each="item : ${items}">
                                        <td th:text= "${item.lastScr}">바다여행점수</td>
                                        <td th:text= "${item.sareaDtlNm}">바다여행장소</td>
                                        <td th:text= "${item.lat}">위도</td>
