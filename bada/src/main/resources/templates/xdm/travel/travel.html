@@ -61,7 +61,6 @@
                               <table class="table table-centered table-hover text-nowrap table-borderless mb-0">
                                  <thead class="bg-light">
                                     <tr>
-                                       <th>바다여행점수(lastScr)</th>
                                        <th>바다여행장소(sareaDtlNm)</th>
                                        <th>위도(lat)</th>
                                        <th>경도(lot)</th>
@@ -79,7 +78,6 @@
                                  </thead>
                                  <tbody>
                                     <tr th:each="item : ${items}">
-                                       <td th:text= "${item.lastScr}">바다여행점수</td>
                                        <td th:text= "${item.sareaDtlNm}">바다여행장소</td>
                                        <td th:text= "${item.lat}">위도</td>
                                        <td th:text= "${item.lot}">경도</td>

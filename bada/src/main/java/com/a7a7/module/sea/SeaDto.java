@@ -1,7 +1,6 @@
 package com.a7a7.module.sea;
 
 public class SeaDto {
-	private String  lastScr;
     private String sareaDtlNm;
     private String  lat;
     private String  lot;
@@ -17,12 +16,7 @@ public class SeaDto {
     
     
     
-	public String getLastScr() {
-		return lastScr;
-	}
-	public void setLastScr(String lastScr) {
-		this.lastScr = lastScr;
-	}
+	
 	public String getSareaDtlNm() {
 		return sareaDtlNm;
 	}

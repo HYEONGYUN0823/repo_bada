@@ -54,7 +54,6 @@ public class SeaController {
 	    if (itemsNode.isArray()) {
 	        for (JsonNode itemNode : itemsNode) {
 	        	SeaDto itemDTO = new SeaDto();
-	            itemDTO.setLastScr(itemNode.path("lastScr").asText());
 	            itemDTO.setSareaDtlNm(itemNode.path("sareaDtlNm").asText());
 	            itemDTO.setLat(itemNode.path("lat").asText());
 	            itemDTO.setLot(itemNode.path("lot").asText());
