@@ -71,6 +71,7 @@ public class SeaController {
 	    }
 		model.addAttribute("items", itemList);
 		return "/xdm/travel/travel";
+		
 	}
 	
 	
