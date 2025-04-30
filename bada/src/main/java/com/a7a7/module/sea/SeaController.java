@@ -18,12 +18,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class SeaController {
 
-	@Value("${sea_api}")
-	private String seaApiUrl;
+	@Value("${sea_api_key}")
+	private String serviceKey;
 	
 	@RequestMapping(value="xdm/travel")
-	public String travel(Model model) throws Exception {;
-		URL url = new URL(seaApiUrl);
+	public String travel(Model model) throws Exception {
+		String apiUrl = "https://apis.data.go.kr/1192136/fcstSeaTrip/GetFcstSeaTripApiService?&type=json&reqDate=&pageNo=1&numOfRows=300&include=lastScr,sareaDtlNm,lat,lot,predcYmd,predcNoonSeCd,avgArtmp,avgWspd,avgWtem,avgWvhgt,avgCrsp,weather,totalIndex&serviceKey=" + serviceKey;
+		URL url = new URL(apiUrl);
 		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection(); //openConnection() : 해당 URL로 연결을 여는 거야.
 		httpURLConnection.setRequestMethod("GET"); //HttpURLConnection : HTTP 요청을 보낼 수 있는 클래스야., setRequestMethod("GET") : GET 방식으로 요청을 보낸다는 의미.
 		
