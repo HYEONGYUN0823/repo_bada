@@ -1,4 +1,4 @@
-package com.a7a7.module.accommodation;
+package com.a7a7.module.accom;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
