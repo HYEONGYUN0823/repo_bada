@@ -3,6 +3,7 @@
 
 <div th:replace= "~{usr/include/head :: head}"></div>
 
+
 	<!--Blog single start-->
 	<div class="py-lg-8 pt-6">
 		<div class="container">
@@ -53,6 +54,10 @@
 								<h3 class="mb-2 h5">Leave A Comments</h3>
 								<p>All comments are moderated before being published</p>
 								<form class="row g-3 needs-validation" novalidate="">
+									<div class="mb-3 col-12">
+										<h3 class="h6">Rate your experience *</h3>
+										<div class="rater" data-rating="4"></div>
+									</div>
 									<div class="col-md-6 col-12">
 										<label for="blogsingleFormName" class="form-label visually-hidden">Name</label>
 										<input type="text" name="blogsingleFormName" id="blogsingleFormName"
@@ -531,7 +536,18 @@
 	
 	<script type="text/javascript">
 		
-		
+	document.addEventListener("DOMContentLoaded", function() {
+		  var ratingElement = document.querySelector(".rater");
+		  if (ratingElement) {
+		    raterJs({
+		      element: ratingElement,
+		      max: 5,
+		      starSize: 20,
+		      rating: Number(ratingElement.dataset.rating),
+		      readOnly: true
+		    });
+		  }
+		});
 		
 	</script>
 	
