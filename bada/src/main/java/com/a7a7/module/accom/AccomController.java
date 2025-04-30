@@ -21,7 +21,7 @@ public class AccomController {
 	@RequestMapping("/xdm/accom/list")
 	public String getAccomList(Model model) throws Exception {
 		
-		String apiUrl = "http://apis.data.go.kr/B551011/KorService1/searchStay1?areaCode=32&sigunguCode=1&listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=12&pageNo=1&_type=json&ServiceKey=" + serviceKey;
+		String apiUrl = "http://apis.data.go.kr/B551011/KorService1/searchStay1?listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=20&pageNo=1&_type=json&ServiceKey=" + serviceKey;
 		
 		URL url = new URL(apiUrl);
 		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
