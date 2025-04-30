@@ -27,24 +27,23 @@
 									<span class="text-danger">*</span>
 								</label>
 								<input type="text" id="contactFName" class="form-control" name="contactFName"
-									placeholder="Enter Your First Name" required />
-								<div class="invalid-feedback">Please enter firstname.</div>
+									placeholder="이름을 입력해주세요" required />
+								<div class="invalid-feedback">이름을 입력해주세요.</div>
 							</div>
 							<div class="col-md-12 mb-3">
 								<!-- input -->
 								<label class="form-label" for="contactCompanyName">
-									주제
+									유형
 									<span class="text-danger">*</span>
 								</label>
 								<div>
 									<label for="contactSubject" class="visually-hidden">Subject</label>
 									<select id="contactSubject" name="" data-choices="" data-choices-removeitembutton="true" required>
-										<option value="">Subject</option>
-										<option value="Bedroom">Bedroom</option>
-										<option value="Kitchen">Kitchen</option>
-										<option value="Office">Office</option>
+										<option value="" selected disabled>선택하세요</option>
+										<option value="Bedroom">예약문의</option>
+										<option value="Kitchen">기타문의</option>
 									</select>
-									<div class="invalid-feedback">Please enter valid option.</div>
+									<div class="invalid-feedback">옵션을 선택하세요.</div>
 								</div>
 							</div>
 							<div class="col-md-12 mb-3">
