@@ -63,34 +63,34 @@
                                              <label class="form-check-label" for="checkAll"></label>
                                           </div>
                                        </th>
-                                       <th>Image</th>
-                                       <th>Proudct Name</th>
-                                       <th>Category</th>
-                                       <th>Status</th>
-                                       <th>Price</th>
-                                       <th>Create at</th>
+                                       <th>title</th>
+                                       <th>createdtime</th>
+                                       <th>modifiedtime</th>
+                                       <th>tel</th>
+                                       <th>addr1</th>
+                                       <th>mapx</th>
+                                       <th>mapy</th>
                                        <th></th>
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr>
+                                 
+                                    <tr th:each="item : ${list}">
                                        <td>
                                           <div class="form-check">
                                              <input class="form-check-input" type="checkbox" value="" id="productOne" />
                                              <label class="form-check-label" for="productOne"></label>
                                           </div>
                                        </td>
-                                       <td>
-                                          <a href="#!"><img src="/xdm/template/assets/images/products/product-img-1.jpg" alt="" class="icon-shape icon-md" /></a>
-                                       </td>
-                                       <td><a href="#" class="text-reset">Haldiram's Sev Bhujia</a></td>
-                                       <td>Snack & Munchies</td>
-
-                                       <td>
-                                          <span class="badge bg-light-primary text-dark-primary">Active</span>
-                                       </td>
-                                       <td>$18.00</td>
-                                       <td>24 Nov 2022</td>
+                                       
+                                       <td th:text="${item.title}"></td>
+                                       <td th:text="${item.createdtime}"></td>
+                                       <td th:text="${item.modifiedtime}"></td>
+                                       <td th:text="${item.tel}"></td>
+                                       <td th:text="${item.addr1}"></td>
+                                       <td th:text="${item.mapx}"></td>
+                                       <td th:text="${item.mapy}"></td>
+                                       
                                        <td>
                                           <div class="dropdown">
                                              <a href="#" class="text-reset" data-bs-toggle="dropdown" aria-expanded="false">
@@ -113,47 +113,6 @@
                                           </div>
                                        </td>
                                     </tr>
-                                    <tr>
-                                       <td>
-                                          <div class="form-check">
-                                             <input class="form-check-input" type="checkbox" value="" id="productTwo" />
-                                             <label class="form-check-label" for="productTwo"></label>
-                                          </div>
-                                       </td>
-                                       <td>
-                                          <a href="#!"><img src="/xdm/template/assets/images/products/product-img-2.jpg" alt="" class="icon-shape icon-md" /></a>
-                                       </td>
-                                       <td><a href="#" class="text-reset">NutriChoice Digestive</a></td>
-                                       <td>Bakery & Biscuits</td>
-
-                                       <td>
-                                          <span class="badge bg-light-primary text-dark-primary">Active</span>
-                                       </td>
-                                       <td>$24.00</td>
-                                       <td>20 Nov 2022</td>
-                                       <td>
-                                          <div class="dropdown">
-                                             <a href="#" class="text-reset" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="feather-icon icon-more-vertical fs-5"></i>
-                                             </a>
-                                             <ul class="dropdown-menu">
-                                                <li>
-                                                   <a class="dropdown-item" href="#">
-                                                      <i class="bi bi-trash me-3"></i>
-                                                      Delete
-                                                   </a>
-                                                </li>
-                                                <li>
-                                                   <a class="dropdown-item" href="#">
-                                                      <i class="bi bi-pencil-square me-3"></i>
-                                                      Edit
-                                                   </a>
-                                                </li>
-                                             </ul>
-                                          </div>
-                                       </td>
-                                    </tr>
-                                    
                                     
                                  </tbody>
                               </table>
