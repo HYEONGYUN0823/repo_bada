@@ -24,7 +24,7 @@ public class AccomController {
 		return "xdm/accom/accomList";
 	}
 	
-	// 사용자 숙박업소 목록
+	// 사용자 숙박업소 목록화면
 	@GetMapping("/bada/accom/list")
 	public String getUsrAccomList(Model model) {
 		
@@ -32,6 +32,16 @@ public class AccomController {
 		model.addAttribute("list", service.getAccomList());
 		
 		return "usr/accom/accomList";
+	}
+	
+	// 사용자 숙박업소 상세화면
+	@GetMapping("/bada/accom/list/id")
+	public String getUsrAccomDetail(Model model) {
+		
+		// DB에서 숙박업소 전체 출력
+//		model.addAttribute("item", service.getAccomList());
+		
+		return "usr/accom/accomDetail";
 	}
 	
 	
