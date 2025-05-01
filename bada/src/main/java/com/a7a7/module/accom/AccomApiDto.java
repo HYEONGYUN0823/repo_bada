@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public class AccomDto {
+public class AccomApiDto {
 	private Response response;
 
 	public static class Response {
@@ -155,7 +155,7 @@ public class AccomDto {
 		}
 	}
 //	Constructor
-	public AccomDto() {}
+	public AccomApiDto() {}
 //	Getter, Setter
 	public Response getResponse() {
 		return response;
