@@ -24,6 +24,7 @@ public class SeaController {
 	@RequestMapping(value="xdm/travel")
 	public String travel(Model model) throws Exception {
 		
+		// api 호출
 		String apiUrl = "https://apis.data.go.kr/1192136/fcstSeaTrip/GetFcstSeaTripApiService?&type=json&reqDate=&pageNo=1&numOfRows=300&include=lastScr,sareaDtlNm,lat,lot,predcYmd,predcNoonSeCd,avgArtmp,avgWspd,avgWtem,avgWvhgt,avgCrsp,weather,totalIndex&serviceKey=" + serviceKey;
 		URL url = new URL(apiUrl);
 		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection(); //openConnection() : 해당 URL로 연결을 여는 거야.
@@ -70,6 +71,13 @@ public class SeaController {
 	            itemList.add(itemDTO);
 	        }
 	    }
+	    
+	    // api 호출 값 담은 'List<SeaDto> itemList'에서 'SeaDto' 하나씩 빼서
+	    // 1. DB에 동일한 값이 있는지 검사
+	    // 2. 있으면 Insert (api 호출 값에 빠진 칼럼 데이터는 임의로 채워넣음)
+	    // 3. 없으면 Update
+	    // 4. DB에서 전체리스트 검색 후 Model에 입력
+	    
 		model.addAttribute("items", itemList);
 		return "/xdm/travel/travel";
 	}
