@@ -70,4 +70,19 @@ public class UserUiController {
 		return "usr/checkout/checkout";
 	}
 	
+//	---------------------------------
+//               마이페이지
+//  ---------------------------------
+	
+	@RequestMapping(value = "/changePassword")
+	public String changePassword() {
+		
+		return "usr/information/changePassword";
+	}
+	
+	@RequestMapping(value = "/newPassword")
+	public String newPassword() {
+		
+		return "usr/information/newPassword";
+	}
 }
