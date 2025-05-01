@@ -57,63 +57,51 @@
                               <table class="table table-centered table-hover text-nowrap table-borderless mb-0 table-with-checkbox">
                                  <thead class="bg-light">
                                     <tr>
-                                       <th>
+                                    
+                                       <th class="text-center">
                                           <div class="form-check">
                                              <input class="form-check-input" type="checkbox" value="" id="checkAll" />
                                              <label class="form-check-label" for="checkAll"></label>
                                           </div>
-                                       </th>
-                                       <th>title</th>
-                                       <th>createdtime</th>
-                                       <th>modifiedtime</th>
-                                       <th>tel</th>
-                                       <th>addr1</th>
-                                       <th>mapx</th>
-                                       <th>mapy</th>
-                                       <th></th>
+                                       </th>       
+                                                                       
+                                       <th class="text-center">숙박업소 번호</th>
+                                       <th class="text-center">숙박업소명</th>
+                                       <th class="text-center">개요</th>
+                                       <th class="text-center">숙박 정원</th>
+                                       <th class="text-center">전화번호</th>
+                                       <th class="text-center">주소</th>
+                                       <th class="text-center">위도</th>
+                                       <th class="text-center">경도</th>
+                                       <th class="text-center">등록일</th>
+                                       <th class="text-center">수정일</th>
+                                       <th class="text-center">담당자</th>
+                                       
                                     </tr>
                                  </thead>
                                  <tbody>
-                                 
                                     <tr th:each="item : ${list}">
-                                       <td>
+                                    
+                                       <td class="text-center">
                                           <div class="form-check">
                                              <input class="form-check-input" type="checkbox" value="" id="productOne" />
                                              <label class="form-check-label" for="productOne"></label>
                                           </div>
                                        </td>
                                        
-                                       <td th:text="${item.title}"></td>
-                                       <td th:text="${item.createdtime}"></td>
-                                       <td th:text="${item.modifiedtime}"></td>
-                                       <td th:text="${item.tel}"></td>
-                                       <td th:text="${item.addr1}"></td>
-                                       <td th:text="${item.mapx}"></td>
-                                       <td th:text="${item.mapy}"></td>
+                                       <td class="text-center" th:text="${item.accommodation_id}"></td>
+                                       <td class="text-center" th:text="${item.title}"></td>
+                                       <td class="text-center" th:text="${item.overview}"></td>
+                                       <td class="text-center" th:text="${item.capacity}"></td>
+                                       <td class="text-center" th:text="${item.tel}"></td>
+                                       <td class="text-center" th:text="${item.address}"></td>
+                                       <td class="text-center" th:text="${item.mapx}"></td>
+                                       <td class="text-center" th:text="${item.mapy}"></td>
+                                       <td class="text-center" th:text="${item.createdtime}"></td>
+                                       <td class="text-center" th:text="${item.modifiedtime}"></td>
+                                       <td class="text-center" th:text="${item.manager_id}"></td>
                                        
-                                       <td>
-                                          <div class="dropdown">
-                                             <a href="#" class="text-reset" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="feather-icon icon-more-vertical fs-5"></i>
-                                             </a>
-                                             <ul class="dropdown-menu">
-                                                <li>
-                                                   <a class="dropdown-item" href="#">
-                                                      <i class="bi bi-trash me-3"></i>
-                                                      Delete
-                                                   </a>
-                                                </li>
-                                                <li>
-                                                   <a class="dropdown-item" href="#">
-                                                      <i class="bi bi-pencil-square me-3"></i>
-                                                      Edit
-                                                   </a>
-                                                </li>
-                                             </ul>
-                                          </div>
-                                       </td>
                                     </tr>
-                                    
                                  </tbody>
                               </table>
                            </div>

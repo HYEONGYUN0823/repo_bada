@@ -5,4 +5,71 @@
 	
 	<resultMap id="resultMapObj" type="com.a7a7.module.accom.AccomDto"/>
 	
+	<select id="getAccomList" resultMap="resultMapObj">
+		SELECT
+			accommodation_id
+			,title
+			,overview
+			,capacity
+			,tel
+			,address
+			,mapx
+			,mapy
+			,createdtime
+			,modifiedtime
+			,manager_id
+		FROM
+			accommodation
+	</select>
+	
+	<select id="getAccomByTitle" resultMap="resultMapObj">
+		SELECT
+			accommodation_id
+			,title
+			,overview
+			,capacity
+			,tel
+			,address
+			,mapx
+			,mapy
+			,createdtime
+			,modifiedtime
+			,manager_id
+		FROM
+			accommodation
+		WHERE
+			title = #{title}
+	</select>
+	
+	<insert id="saveAccomApiResponse">
+	INSERT INTO accommodation
+	(
+	title
+	,overview
+	,capacity
+	,tel
+	,address
+	,mapx
+	,mapy
+	,createdtime
+	,modifiedtime
+	,delNy
+	,manager_id
+	)
+	VALUES
+	(
+	#{title}
+	,#{overview}
+	,#{capacity}
+	,#{tel}
+	,#{address}
+	,#{mapx}
+	,#{mapy}
+	,#{createdtime}
+	,#{modifiedtime}
+	,0
+	,#{manager_id}
+	)
+	</insert>
+	
 </mapper>
