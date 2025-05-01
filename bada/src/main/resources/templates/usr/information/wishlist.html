@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace= "~{usr/include/head :: head}"></div>
+<div th:replace= "~{usr/include/informationSide :: informationSide}"></div>
+
+
+        <!--Account sidebar end-->
+        <div class="col-lg-9 col-md-8">
+          <div class="row g-3 mb-4 align-items-center">
+            <div class="col-lg-9 col-md-6 col-4">
+              <h1 class="mb-0 h2">Wishlist</h1>
+            </div>
+            <div class="col-lg-3 col-md-6 col-8 text-end">
+              <a href="#!" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#wishlistModal">+ Add
+                Wishlist</a>
+            </div>
+
+
+
+
+          </div>
+          <div class="row g-3 mb-4">
+            <div class="col-lg-8 col-12">
+              <h2 class="mb-0 h3">Living Room Ideas</h2>
+            </div>
+
+
+
+
+
+          </div>
+          
+            <!--Product-->
+             <!-- Hoverable rows -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+            <!--Product-->
+
+
+
+              </div>
+
+
+      </div>
+
+    </div>
+  </section>
+
+
+	<script type="text/javascript">
+		
+		
+		
+	</script>
+
+<div  th:relace= "~{usr/include/footer :: footer}"></div>
+</html>

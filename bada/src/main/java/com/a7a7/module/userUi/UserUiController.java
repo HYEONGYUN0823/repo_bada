@@ -85,4 +85,11 @@ public class UserUiController {
 		
 		return "usr/information/newPassword";
 	}
+	
+	@RequestMapping(value = "/wishlist")
+	public String wishlist() {
+		
+		return "usr/information/wishlist";
+	}
+	
 }
