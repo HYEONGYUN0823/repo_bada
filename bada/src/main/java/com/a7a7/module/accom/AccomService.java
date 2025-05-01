@@ -24,7 +24,7 @@ public class AccomService {
 
 	public void saveAccomApiResponse() throws Exception {	
 		// AccomApi 호출
-		String apiUrl = "http://apis.data.go.kr/B551011/KorService1/searchStay1?listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=20&pageNo=1&_type=json&ServiceKey=" + serviceKey;
+		String apiUrl = "http://apis.data.go.kr/B551011/KorService1/searchStay1?listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=100&pageNo=1&_type=json&ServiceKey=" + serviceKey;
 		
 		URL url = new URL(apiUrl);
 		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -56,8 +56,10 @@ public class AccomService {
 			if(dao.getAccomByTitle(item.getTitle()) == null) {
 				AccomDto dto = new AccomDto();
 				dto.setTitle(item.getTitle());
-				dto.setOverview(""); // temp
-				dto.setCapacity(100); // temp
+				if(item.getFirstimage() == null || item.getFirstimage() == "") { // 이미지 필수
+					continue;
+				}
+				dto.setImage(item.getFirstimage());
 				dto.setTel(item.getTel());
 				dto.setAddress(item.getAddr1());
 				dto.setMapx(item.getMapx());

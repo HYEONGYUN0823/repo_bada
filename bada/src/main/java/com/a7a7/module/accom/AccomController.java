@@ -18,8 +18,9 @@ public class AccomController {
 	@RequestMapping("/xdm/accom/list")
 	public String getAccomList(Model model) throws Exception {
 
+		// AccomApi 호출 값 DB 저장
 		service.saveAccomApiResponse();
-		
+		// DB에서 숙박업소 전체 출력
 		model.addAttribute("list", service.getAccomList());
 		
 		return "xdm/accom/accomList";

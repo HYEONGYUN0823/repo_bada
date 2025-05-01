@@ -2,9 +2,8 @@ package com.a7a7.module.accom;
 
 public class AccomDto {
 	private String accommodation_id;
+	private String image;
 	private String title;
-	private String overview;
-	private Integer capacity;
 	private String tel;
 	private String address;
 	private String mapx;
@@ -26,17 +25,11 @@ public class AccomDto {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getOverview() {
-		return overview;
+	public String getImage() {
+		return image;
 	}
-	public void setOverview(String overview) {
-		this.overview = overview;
-	}
-	public Integer getCapacity() {
-		return capacity;
-	}
-	public void setCapacity(Integer capacity) {
-		this.capacity = capacity;
+	public void setImage(String image) {
+		this.image = image;
 	}
 	public String getTel() {
 		return tel;

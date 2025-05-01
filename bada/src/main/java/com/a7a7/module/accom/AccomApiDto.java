@@ -50,6 +50,7 @@ public class AccomApiDto {
 					private String addr1;
 					private String mapx;
 					private String mapy;
+					private String firstimage;
 //					Constructor
 					public Item() {}	
 //					Getter, Setter
@@ -95,7 +96,12 @@ public class AccomApiDto {
 					public void setMapy(String mapy) {
 						this.mapy = mapy;
 					}
-			
+					public String getFirstimage() {
+						return firstimage;
+					}
+					public void setFirstimage(String firstimage) {
+						this.firstimage = firstimage;
+					}
 				}
 //				Getter, Setter
 				public List<Item> getItem() {
