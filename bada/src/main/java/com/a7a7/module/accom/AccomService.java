@@ -6,20 +6,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Controller
-public class AccomController {
+@Service
+public class AccomService {
 	
 	@Value("${accom_api_key}")
 	private String serviceKey;
-	
-	@RequestMapping("/xdm/accom/list")
-	public String getAccomList(Model model) throws Exception {
+
+	public void saveAccomApiResponse() throws Exception {
 		
 		String apiUrl = "http://apis.data.go.kr/B551011/KorService1/searchStay1?listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=20&pageNo=1&_type=json&ServiceKey=" + serviceKey;
 		
@@ -47,8 +44,5 @@ public class AccomController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		AccomApiDto dto = objectMapper.readValue(stringBuilder.toString(), AccomApiDto.class);
 		
-		model.addAttribute("list", dto.getResponse().getBody().getItems().getItem());
-		
-		return "xdm/accom/accomList";
 	}
 }
