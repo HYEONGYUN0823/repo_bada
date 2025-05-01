@@ -57,8 +57,8 @@ public class SeaController {
 	        for (JsonNode itemNode : itemsNode) {
 	        	SeaDto itemDTO = new SeaDto();
 	            itemDTO.setSareaDtlNm(itemNode.path("sareaDtlNm").asText());
-	            itemDTO.setLat(itemNode.path("lat").asText());
-	            itemDTO.setLot(itemNode.path("lot").asText());
+	            itemDTO.setLat(itemNode.path("lat").asDouble());
+	            itemDTO.setLot(itemNode.path("lot").asDouble());
 	            itemDTO.setPredcYmd(itemNode.path("predcYmd").asText());
 	            itemDTO.setPredcNoonSeCd(itemNode.path("predcNoonSeCd").asText());
 	            itemDTO.setAvgArtmp(itemNode.path("avgArtmp").asText());

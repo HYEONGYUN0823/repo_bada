@@ -1,9 +1,13 @@
 package com.a7a7.module.sea;
 
 public class SeaDto {
+	//sea table
     private String sareaDtlNm;
-    private String  lat;
-    private String  lot;
+    private Double  lat;
+    private Double  lot;
+    
+    
+    //forecast table
     private String predcYmd;
     private String predcNoonSeCd;
     private String avgArtmp;
@@ -13,26 +17,28 @@ public class SeaDto {
     private String avgCrsp;
     private String weather;
     private String totalIndex;
-    
+    private String sea_id;		//나중에 물어보기
     
     
 	
+    // --get, set---
+    
 	public String getSareaDtlNm() {
 		return sareaDtlNm;
 	}
 	public void setSareaDtlNm(String sareaDtlNm) {
 		this.sareaDtlNm = sareaDtlNm;
 	}
-	public String getLat() {
+	public Double getLat() {
 		return lat;
 	}
-	public void setLat(String lat) {
+	public void setLat(Double lat) {
 		this.lat = lat;
 	}
-	public String getLot() {
+	public Double getLot() {
 		return lot;
 	}
-	public void setLot(String lot) {
+	public void setLot(Double lot) {
 		this.lot = lot;
 	}
 	public String getPredcYmd() {
