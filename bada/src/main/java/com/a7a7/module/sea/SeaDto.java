@@ -95,6 +95,12 @@ public class SeaDto {
 	public void setTotalIndex(String totalIndex) {
 		this.totalIndex = totalIndex;
 	}
+	public String getSea_id() {
+		return sea_id;
+	}
+	public void setSea_id(String sea_id) {
+		this.sea_id = sea_id;
+	}
 	
     
     

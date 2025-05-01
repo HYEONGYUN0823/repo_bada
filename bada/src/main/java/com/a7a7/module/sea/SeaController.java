@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class SeaController {
+	
+	@Autowired
+	SeaService service;
 
 	@Value("${sea_api_key}")
 	private String serviceKey;
@@ -53,7 +57,9 @@ public class SeaController {
 		JsonNode itemsNode = node.path("response").path("body").path("items").path("item");  //이렇게 중첩된 구조에서 items는 객체이고, 그 안에 item 배열이 존재하기 때문에 items.get("item")으로 배열을 꺼내서 넘겨줘야 Thymeleaf에서 이를 순회하며 값을 출력할 수 있게 됩니다.
 		
 		List<SeaDto> itemList = new ArrayList<>(); //items 데이터가 JSON 배열 형식이라면, 이를 제대로 List 형태로 변환하여 모델에 전달하는 것이 좋습니다. JsonNode에서 직접 데이터를 추출할 때, JsonNode를 List나 DTO 객체로 변환하는 것이 중요
-	    if (itemsNode.isArray()) {
+	    
+		
+		if (itemsNode.isArray()) {
 	        for (JsonNode itemNode : itemsNode) {
 	        	SeaDto itemDTO = new SeaDto();
 	            itemDTO.setSareaDtlNm(itemNode.path("sareaDtlNm").asText());
@@ -69,14 +75,62 @@ public class SeaController {
 	            itemDTO.setWeather(itemNode.path("weather").asText());
 	            itemDTO.setTotalIndex(itemNode.path("totalIndex").asText());          
 	            itemList.add(itemDTO);
+	            
+	            // 매번 최신 상태의 DB 확인
+	            List<SeaDto> confirmSeaList = service.seaList(); 
+	            
+	            /////여행지 관리///////////
+	            boolean seaExist = false;
+
+	            for(SeaDto checkDto : confirmSeaList) {
+	                if (checkDto.getSareaDtlNm().equals(itemDTO.getSareaDtlNm())) {
+	                    seaExist = true;
+	                    break; // 하나만 찾아도 중단
+	                }
+	            }
+	            if(!seaExist){
+	                service.seaInsert(itemDTO); 
+	            }
+	            
+	            
+	            ////////////////////////////
+	            List<SeaDto> confirmForecastList = service.forecastList();  
+	                   
+	         // 먼저 정확한 sea_id를 설정 (forecastList 비교 전에!)
+	            for (SeaDto check : confirmSeaList) {
+	                if (check.getSareaDtlNm().equals(itemDTO.getSareaDtlNm())) {
+	                    itemDTO.setSea_id(check.getSea_id());
+	                    break;
+	                }
+	            }
+
+	            // 그 다음 중복 여부 확인
+	            boolean isExist = false;
+	            for (SeaDto checkDto : confirmForecastList) {
+	                if (itemDTO.getSea_id().equals(checkDto.getSea_id()) &&
+	                    itemDTO.getPredcYmd().equals(checkDto.getPredcYmd()) &&
+	                    itemDTO.getPredcNoonSeCd().equals(checkDto.getPredcNoonSeCd())) {
+	                    isExist = true;
+	                    break;
+	                }
+	            }
+
+	            // 중복이 아니면 insert
+	            if (!isExist) {
+	                service.forecastInsert(itemDTO);
+	            }
+	            
+	            
 	        }
 	    }
-	    
 	    // api 호출 값 담은 'List<SeaDto> itemList'에서 'SeaDto' 하나씩 빼서
 	    // 1. DB에 동일한 값이 있는지 검사
 	    // 2. 있으면 Insert (api 호출 값에 빠진 칼럼 데이터는 임의로 채워넣음)
 	    // 3. 없으면 Update
 	    // 4. DB에서 전체리스트 검색 후 Model에 입력
+	    
+	    
+	    
 	    
 		model.addAttribute("items", itemList);
 		return "/xdm/travel/travel";
