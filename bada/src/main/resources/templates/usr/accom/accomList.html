@@ -72,13 +72,13 @@
 				<!--Blog category-->
 				<div th:each="item : ${list}" class="col-lg-4 col-md-6">
 					<article class="">
-						<a th:href="'/bada/accom/list/' + ${item.accomId}" class="position-relative d-flex">
+						<a th:href="'/bada/accom/' + ${item.accomId}" class="position-relative d-flex">
 							<figure class="img-hover mb-0">
 								<img th:src="${item.image}" alt="blog image" class="img-fluid w-100" style="position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden;"/>
 							</figure>
 						</a>
 						<div class="mt-4">
-							<h3 class="fs-5"><a th:href="'/bada/accom/list/' + ${item.accomId}" class="text-inherit" th:text="${item.title}"></a></h3>
+							<h3 class="fs-5"><a th:href="'/bada/accom/' + ${item.accomId}" class="text-inherit" th:text="${item.title}"></a></h3>
 							<p th:text="${item.tel}"></p>
 							<p class="d-flex gap-3 align-items-center">
 								<span class="d-flex align-items-center gap-1 small">

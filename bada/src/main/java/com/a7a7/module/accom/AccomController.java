@@ -1,6 +1,7 @@
 package com.a7a7.module.accom;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,9 @@ public class AccomController {
 	
 	@Autowired
 	AccomService service;
+	
+	@Value("${kakao_map_api}")
+	private String kakaoApiKey;
 	
 	// 관리자 숙박업소 관리 화면
 	@RequestMapping("/xdm/accom/list")
@@ -36,11 +40,13 @@ public class AccomController {
 	}
 	
 	// 사용자 숙박업소 상세화면
-	@GetMapping("/bada/accom/list/{id}")
+	@GetMapping("/bada/accom/{id}")
 	public String findUsrAccomDetail(@PathVariable("id") String accomId, Model model) {
 		
-		// DB에서 숙박업소 전체 출력
+		// 숙박업소 검색
 		model.addAttribute("item", service.findAccomById(accomId));
+		// kakao api
+		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		
 		return "usr/accom/accomDetail";
 	}
