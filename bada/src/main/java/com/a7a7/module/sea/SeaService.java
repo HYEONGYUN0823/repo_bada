@@ -28,4 +28,7 @@ public class SeaService {
 		return dao.forecastInsert(dto);
 	}
 	
+	
+	
+	
 }

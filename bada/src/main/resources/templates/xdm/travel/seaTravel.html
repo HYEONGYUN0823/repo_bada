@@ -11,7 +11,7 @@
                      <!-- page header -->
                      <div class="d-flex justify-content-between align-items-center">
                         <div>
-                           <h2>바다여행지수</h2>
+                           <h2>바다여행장소</h2>
                            <!-- breacrumb -->
                            <nav aria-label="breadcrumb">
                               <ol class="breadcrumb mb-0">
@@ -62,31 +62,19 @@
                               <table class="table table-centered table-hover text-nowrap table-borderless mb-0">
                                  <thead class="bg-light">
                                     <tr>
+                                       <th>seq</th>
                                        <th>바다여행장소(sareaDtlNm)</th>
-                                       <th>날짜(predcYmd)</th>
-                                       <th>시간(predcNoonSeCd)</th>
-                                       <th>기온(avgArtmp)</th>
-                                       <th>풍속(avgWspd)</th>
-                                       <th>수온(avgWtem)</th>
-                                       <th>파고(avgWvhgt)</th>
-                                       <th>유속(avgCrsp)</th>
-                                       <th>날씨(weather)</th>
-                                       <th>바다여행지수(totalIndex)</th>
+                                       <th>위도(lat)</th>
+                                       <th>경도(lot)</th>
                                        <th></th>
                                     </tr>
                                  </thead>
                                  <tbody>
                                     <tr th:each="item : ${items}">
+                                       <td th:text= "${item.sea_id}">바다여행장소</td>
                                        <td th:text= "${item.sareaDtlNm}">바다여행장소</td>
-                                       <td th:text= "${item.predcYmd}">날짜</td>
-                                       <td th:text= "${item.predcNoonSeCd}">시간</td>
-                                       <td th:text= "${item.avgWspd}">기온</td>
-                                       <td th:text= "${item.avgWspd}">풍속</td>
-                                       <td th:text= "${item.avgWtem}">수온</td>
-                                       <td th:text= "${item.avgWvhgt}">파고</td>
-                                       <td th:text= "${item.avgCrsp}">유속</td>
-                                       <td th:text= "${item.weather}">날씨</td>
-                                       <td th:text= "${item.totalIndex}">바다여행지수</td>
+                                       <td th:text= "${item.lat}">위도</td>
+                                       <td th:text= "${item.lot}">경도</td>
                                        <td>
                                           <div class="dropdown">
                                              <a href="#" class="text-reset" data-bs-toggle="dropdown" aria-expanded="false">

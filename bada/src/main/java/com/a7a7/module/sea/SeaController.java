@@ -132,10 +132,18 @@ public class SeaController {
 	    
 	    
 	    
-		model.addAttribute("items", itemList);
+		model.addAttribute("items", service.forecastList());
 		return "/xdm/travel/travel";
 		
 	}
+	
+	
+	@RequestMapping(value="xdm/seaTravel")
+	public String seaTravel(Model model) {
+		model.addAttribute("items",service.seaList());
+		return "/xdm/travel/seaTravel";
+	}
+	
 	
 	
 }

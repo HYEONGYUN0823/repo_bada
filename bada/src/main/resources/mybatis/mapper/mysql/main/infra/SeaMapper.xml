@@ -35,18 +35,20 @@
 	
 	<select id="forecastList" resultMap="resultMapObj">
 		select
-			predcYmd
-			,predcNoonSeCd
-			,avgArtmp
-			,avgWspd
-			,avgWtem
-			,avgWvhgt
-			,avgCrsp
-			,weather
-			,totalIndex
-			,sea_id
+			b.sareaDtlNm
+			,a.predcYmd
+			,a.predcNoonSeCd
+			,a.avgArtmp
+			,a.avgWspd
+			,a.avgWtem
+			,a.avgWvhgt
+			,a.avgCrsp
+			,a.weather
+			,a.totalIndex
+			,a.sea_id
 		from
-			forecast
+		forecast a
+		join sea b on b.sea_id = a.sea_id
 		where 1=1
 	</select>
 	
