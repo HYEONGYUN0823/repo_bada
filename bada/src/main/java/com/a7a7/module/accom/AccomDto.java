@@ -1,7 +1,8 @@
 package com.a7a7.module.accom;
 
 public class AccomDto {
-	private String accommodation_id;
+	
+	private String accomId;
 	private String image;
 	private String title;
 	private String tel;
@@ -10,15 +11,9 @@ public class AccomDto {
 	private String mapy;
 	private String createdtime;
 	private String modifiedtime;
-	private String manager_id;
+	private String managerId;
 	
-	
-	public String getAccommodation_id() {
-		return accommodation_id;
-	}
-	public void setAccommodation_id(String accommodation_id) {
-		this.accommodation_id = accommodation_id;
-	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -67,10 +62,17 @@ public class AccomDto {
 	public void setModifiedtime(String modifiedtime) {
 		this.modifiedtime = modifiedtime;
 	}
-	public String getManager_id() {
-		return manager_id;
+	public String getAccomId() {
+		return accomId;
 	}
-	public void setManager_id(String manager_id) {
-		this.manager_id = manager_id;
+	public void setAccomId(String accomId) {
+		this.accomId = accomId;
 	}
+	public String getManagerId() {
+		return managerId;
+	}
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
+	}
+	
 }

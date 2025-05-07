@@ -53,7 +53,7 @@ public class AccomService {
 		
 		// Accom 호출 값 DB 저장
 		for(Item item : itemList) {
-			if(dao.getAccomByTitle(item.getTitle()) == null) {
+			if(dao.findAccomByTitle(item.getTitle()) == null) {
 				AccomDto dto = new AccomDto();
 				dto.setTitle(item.getTitle());
 				if(item.getFirstimage() == null || item.getFirstimage() == "") { // 이미지 필수
@@ -66,7 +66,7 @@ public class AccomService {
 				dto.setMapy(item.getMapy());
 				dto.setCreatedtime(item.getCreatedtime());
 				dto.setModifiedtime(item.getModifiedtime());
-				dto.setManager_id("1"); // temp
+				dto.setManagerId("1"); // temp
 				
 				dao.saveAccomApiResponse(dto);
 			}
@@ -74,8 +74,13 @@ public class AccomService {
 		
 	}
 	
-	// 숙소 전체 출력
-	public List<AccomDto> getAccomList() {
-		return dao.getAccomList();
+	// accomId로 숙박업소 검색
+	public AccomDto findAccomById(String accomId) {
+		return dao.findAccomById(accomId);
+	}
+	
+	// 숙박업소 전체 출력
+	public List<AccomDto> findAccomList() {
+		return dao.findAccomList();
 	}
 }

@@ -5,9 +5,9 @@
 	
 	<resultMap id="resultMapObj" type="com.a7a7.module.accom.AccomDto"/>
 	
-	<select id="getAccomList" resultMap="resultMapObj">
+	<select id="findAccomList" resultMap="resultMapObj">
 		SELECT
-			accommodation_id
+			accommodation_id AS accomId
 			,title
 			,image
 			,tel
@@ -16,14 +16,14 @@
 			,mapy
 			,createdtime
 			,modifiedtime
-			,manager_id
+			,manager_id AS managerId
 		FROM
 			accommodation
 	</select>
 	
-	<select id="getAccomByTitle" resultMap="resultMapObj">
+	<select id="findAccomByTitle" resultMap="resultMapObj">
 		SELECT
-			accommodation_id
+			accommodation_id AS accomId
 			,title
 			,image
 			,tel
@@ -32,11 +32,29 @@
 			,mapy
 			,createdtime
 			,modifiedtime
-			,manager_id
+			,manager_id AS managerId
 		FROM
 			accommodation
 		WHERE
 			title = #{title}
+	</select>
+	
+	<select id="findAccomById" resultMap="resultMapObj">
+		SELECT
+			accommodation_id AS accomId
+			,title
+			,image
+			,tel
+			,address
+			,mapx
+			,mapy
+			,createdtime
+			,modifiedtime
+			,manager_id AS managerId
+		FROM
+			accommodation
+		WHERE
+			accommodation_id = #{accomId}
 	</select>
 	
 	<insert id="saveAccomApiResponse">
@@ -64,7 +82,7 @@
 	,#{createdtime}
 	,#{modifiedtime}
 	,0
-	,#{manager_id}
+	,#{managerId}
 	)
 	</insert>
 	
