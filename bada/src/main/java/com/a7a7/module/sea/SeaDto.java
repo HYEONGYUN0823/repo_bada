@@ -5,7 +5,7 @@ public class SeaDto {
     private String sareaDtlNm;
     private Double  lat;
     private Double  lot;
-    
+    private String manager_id;
     
     //forecast table
     private String predcYmd;
@@ -100,6 +100,12 @@ public class SeaDto {
 	}
 	public void setSea_id(String sea_id) {
 		this.sea_id = sea_id;
+	}
+	public String getManager_id() {
+		return manager_id;
+	}
+	public void setManager_id(String manager_id) {
+		this.manager_id = manager_id;
 	}
 	
     

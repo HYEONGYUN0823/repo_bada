@@ -77,16 +77,16 @@
                                  </thead>
                                  <tbody>
                                     <tr th:each="item : ${items}">
-                                       <td th:text= "${item.sareaDtlNm}">바다여행장소</td>
-                                       <td th:text= "${item.predcYmd}">날짜</td>
-                                       <td th:text= "${item.predcNoonSeCd}">시간</td>
-                                       <td th:text= "${item.avgWspd}">기온</td>
-                                       <td th:text= "${item.avgWspd}">풍속</td>
-                                       <td th:text= "${item.avgWtem}">수온</td>
-                                       <td th:text= "${item.avgWvhgt}">파고</td>
-                                       <td th:text= "${item.avgCrsp}">유속</td>
-                                       <td th:text= "${item.weather}">날씨</td>
-                                       <td th:text= "${item.totalIndex}">바다여행지수</td>
+                                       <td th:text= "${item?.sareaDtlNm}">바다여행장소</td>
+                                       <td th:text= "${item?.predcYmd}">날짜</td>
+                                       <td th:text= "${item?.predcNoonSeCd}">시간</td>
+                                       <td th:text= "${item?.avgWspd}">기온</td>
+                                       <td th:text= "${item?.avgWspd}">풍속</td>
+                                       <td th:text= "${item?.avgWtem}">수온</td>
+                                       <td th:text= "${item?.avgWvhgt}">파고</td>
+                                       <td th:text= "${item?.avgCrsp}">유속</td>
+                                       <td th:text= "${item?.weather}">날씨</td>
+                                       <td th:text= "${item?.totalIndex}">바다여행지수</td>
                                        <td>
                                           <div class="dropdown">
                                              <a href="#" class="text-reset" data-bs-toggle="dropdown" aria-expanded="false">

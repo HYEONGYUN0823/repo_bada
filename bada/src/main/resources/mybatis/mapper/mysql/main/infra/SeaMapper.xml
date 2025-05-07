@@ -23,12 +23,14 @@
 		,lot
 		,createdtime
 		,delNy
+		,manager_id
 	)values(
 		#{sareaDtlNm}
 		,#{lat}
 		,#{lot}
 		,now()
 		,0
+		,1
 	)
 	</insert>
 	

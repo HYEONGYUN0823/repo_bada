@@ -71,10 +71,10 @@
                                  </thead>
                                  <tbody>
                                     <tr th:each="item : ${items}">
-                                       <td th:text= "${item.sea_id}">바다여행장소</td>
-                                       <td th:text= "${item.sareaDtlNm}">바다여행장소</td>
-                                       <td th:text= "${item.lat}">위도</td>
-                                       <td th:text= "${item.lot}">경도</td>
+                                       <td th:text= "${item?.sea_id}">바다여행장소</td>
+                                       <td th:text= "${item?.sareaDtlNm}">바다여행장소</td>
+                                       <td th:text= "${item?.lat}">위도</td>
+                                       <td th:text= "${item?.lot}">경도</td>
                                        <td>
                                           <div class="dropdown">
                                              <a href="#" class="text-reset" data-bs-toggle="dropdown" aria-expanded="false">

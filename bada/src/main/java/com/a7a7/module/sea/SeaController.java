@@ -1,20 +1,12 @@
 package com.a7a7.module.sea;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class SeaController {
@@ -22,128 +14,37 @@ public class SeaController {
 	@Autowired
 	SeaService service;
 
-	@Value("${sea_api_key}")
-	private String serviceKey;
 	 
+	//******************//
+	///관리자 화면 부분/////
+	//******************//
+	
+	////////// 바다여행지수///////////////
+
 	@RequestMapping(value="xdm/travel")
-	public String travel(Model model) throws Exception {
-		
-		// api 호출
-		String apiUrl = "https://apis.data.go.kr/1192136/fcstSeaTrip/GetFcstSeaTripApiService?&type=json&reqDate=&pageNo=1&numOfRows=300&include=lastScr,sareaDtlNm,lat,lot,predcYmd,predcNoonSeCd,avgArtmp,avgWspd,avgWtem,avgWvhgt,avgCrsp,weather,totalIndex&serviceKey=" + serviceKey;
-		URL url = new URL(apiUrl);
-		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection(); //openConnection() : 해당 URL로 연결을 여는 거야.
-		httpURLConnection.setRequestMethod("GET"); //HttpURLConnection : HTTP 요청을 보낼 수 있는 클래스야., setRequestMethod("GET") : GET 방식으로 요청을 보낸다는 의미.
-		
-		BufferedReader bufferedReader; //BufferedReader는 줄 단위로 읽을 수 있게 도와줘.
-		if (httpURLConnection.getResponseCode() == 200) {
-			bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream())); //InputStreamReader는 바이트를 문자로 바꿔주는 클래스.
-		} else {
-			bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getErrorStream()));
-		}
-		
-		StringBuilder stringBuilder = new StringBuilder();
-		String line;
-		while ((line = bufferedReader.readLine()) != null) { //한 줄씩 읽어서 StringBuilder에 붙여.
-			System.out.println("line: " + line);
-			stringBuilder.append(line);
-		}
-
-		bufferedReader.close();
-		httpURLConnection.disconnect();
-
-		ObjectMapper objectMapper = new ObjectMapper();			//ObjectMapper는 Jackson 라이브러리에서 제공하는 JSON 처리용 클래스야.
-		JsonNode node = objectMapper.readTree(stringBuilder.toString()); //JsonNode node = objectMapper.readTree(stringBuilder.toString());
-		
-		JsonNode itemsNode = node.path("response").path("body").path("items").path("item");  //이렇게 중첩된 구조에서 items는 객체이고, 그 안에 item 배열이 존재하기 때문에 items.get("item")으로 배열을 꺼내서 넘겨줘야 Thymeleaf에서 이를 순회하며 값을 출력할 수 있게 됩니다.
-		
-		List<SeaDto> itemList = new ArrayList<>(); //items 데이터가 JSON 배열 형식이라면, 이를 제대로 List 형태로 변환하여 모델에 전달하는 것이 좋습니다. JsonNode에서 직접 데이터를 추출할 때, JsonNode를 List나 DTO 객체로 변환하는 것이 중요
-	    
-		
-		if (itemsNode.isArray()) {
-	        for (JsonNode itemNode : itemsNode) {
-	        	SeaDto itemDTO = new SeaDto();
-	            itemDTO.setSareaDtlNm(itemNode.path("sareaDtlNm").asText());
-	            itemDTO.setLat(itemNode.path("lat").asDouble());
-	            itemDTO.setLot(itemNode.path("lot").asDouble());
-	            itemDTO.setPredcYmd(itemNode.path("predcYmd").asText());
-	            itemDTO.setPredcNoonSeCd(itemNode.path("predcNoonSeCd").asText());
-	            itemDTO.setAvgArtmp(itemNode.path("avgArtmp").asText());
-	            itemDTO.setAvgWspd(itemNode.path("avgWspd").asText());
-	            itemDTO.setAvgWtem(itemNode.path("avgWtem").asText());
-	            itemDTO.setAvgWvhgt(itemNode.path("avgWvhgt").asText());
-	            itemDTO.setAvgCrsp(itemNode.path("avgCrsp").asText());
-	            itemDTO.setWeather(itemNode.path("weather").asText());
-	            itemDTO.setTotalIndex(itemNode.path("totalIndex").asText());          
-	            itemList.add(itemDTO);
-	            
-	            // 매번 최신 상태의 DB 확인
-	            List<SeaDto> confirmSeaList = service.seaList(); 
-	            
-	            /////여행지 관리///////////
-	            boolean seaExist = false;
-
-	            for(SeaDto checkDto : confirmSeaList) {
-	                if (checkDto.getSareaDtlNm().equals(itemDTO.getSareaDtlNm())) {
-	                    seaExist = true;
-	                    break; // 하나만 찾아도 중단
-	                }
-	            }
-	            if(!seaExist){
-	                service.seaInsert(itemDTO); 
-	            }
-	            
-	            
-	            ////////////////////////////
-	            List<SeaDto> confirmForecastList = service.forecastList();  
-	                   
-	         // 먼저 정확한 sea_id를 설정 (forecastList 비교 전에!)
-	            for (SeaDto check : confirmSeaList) {
-	                if (check.getSareaDtlNm().equals(itemDTO.getSareaDtlNm())) {
-	                    itemDTO.setSea_id(check.getSea_id());
-	                    break;
-	                }
-	            }
-
-	            // 그 다음 중복 여부 확인
-	            boolean isExist = false;
-	            for (SeaDto checkDto : confirmForecastList) {
-	                if (itemDTO.getSea_id().equals(checkDto.getSea_id()) &&
-	                    itemDTO.getPredcYmd().equals(checkDto.getPredcYmd()) &&
-	                    itemDTO.getPredcNoonSeCd().equals(checkDto.getPredcNoonSeCd())) {
-	                    isExist = true;
-	                    break;
-	                }
-	            }
-
-	            // 중복이 아니면 insert
-	            if (!isExist) {
-	                service.forecastInsert(itemDTO);
-	            }
-	            
-	            
-	        }
-	    }
-	    // api 호출 값 담은 'List<SeaDto> itemList'에서 'SeaDto' 하나씩 빼서
-	    // 1. DB에 동일한 값이 있는지 검사
-	    // 2. 있으면 Insert (api 호출 값에 빠진 칼럼 데이터는 임의로 채워넣음)
-	    // 3. 없으면 Update
-	    // 4. DB에서 전체리스트 검색 후 Model에 입력
-	    
-	    
-	    
-	    
+	public String Travel(Model model) throws Exception {
+		service.setlist();
 		model.addAttribute("items", service.forecastList());
 		return "/xdm/travel/travel";
-		
 	}
 	
 	
+	//////////바다여행장소///////////////
 	@RequestMapping(value="xdm/seaTravel")
-	public String seaTravel(Model model) {
+	public String seaTravel(Model model)throws Exception{
+		service.setlist();
 		model.addAttribute("items",service.seaList());
 		return "/xdm/travel/seaTravel";
 	}
 	
+	//******************//
+	//사용자 부분//
+	//******************//
 	
-	
+	@GetMapping("/bada/travel/list")
+	public String findUsrAccomList(Model model) {	
+		// DB에서 숙박업소 전체 출력
+		model.addAttribute("list", service.seaList());
+		return "usr/travel/travelList";
+	}
 }
