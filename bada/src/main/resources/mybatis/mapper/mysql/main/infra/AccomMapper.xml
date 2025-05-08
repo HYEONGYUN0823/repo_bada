@@ -19,6 +19,7 @@
 			,manager_id AS managerId
 		FROM
 			accommodation
+		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
 	</select>
 	
 	<select id="findAccomByTitle" resultMap="resultMapObj">
@@ -55,6 +56,13 @@
 			accommodation
 		WHERE
 			accommodation_id = #{accomId}
+	</select>
+	
+	<select id="countAccomList" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			accommodation
 	</select>
 	
 	<insert id="saveAccomApiResponse">

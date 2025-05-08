@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.a7a7.module.accom.AccomApiDto.Response.Body.Items.Item;
+import com.a7a7.module.common.PageVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -80,7 +81,12 @@ public class AccomService {
 	}
 	
 	// 숙박업소 전체 출력
-	public List<AccomDto> findAccomList() {
-		return dao.findAccomList();
+	public List<AccomDto> findAccomList(PageVo pageVo) {
+		return dao.findAccomList(pageVo);
+	}
+	
+	// 숙박업소 전체 개수
+	public int countAccomList() {
+		return dao.countAccomList();
 	}
 }

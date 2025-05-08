@@ -20,7 +20,8 @@ public class PageVo {
 
 		// 총 페이지 수 계산
 		int totalPages = (int) Math.ceil((double) getTotalRows() / getRowNumToShow());
-		setThisPage(totalPages == 0 ? 1 : totalPages);
+		setTotalPages(totalPages == 0 ? 1 : totalPages);
+		
 		
 		// 현재 페이지가 총 페이지보다 크면 마지막 페이지로 이동
 		if(getThisPage() > getTotalPages()) {
@@ -35,13 +36,13 @@ public class PageVo {
 		setStartRnumForMysql((getThisPage()-1) * getRowNumToShow());
 		
 		// 로그 출력
-//		System.out.println("getThisPage():" + getThisPage());
-//		System.out.println("getTotalRows():" + getTotalRows());
-//		System.out.println("getRowNumToShow():" + getRowNumToShow());
-//		System.out.println("getTotalPages():" + getTotalPages());
-//		System.out.println("getStartPage():" + getStartPage());
-//		System.out.println("getEndPage():" + getEndPage());		
-//		System.out.println("getStartRnumForMysql(): " + getStartRnumForMysql());
+		System.out.println("getThisPage():" + getThisPage());
+		System.out.println("getTotalRows():" + getTotalRows());
+		System.out.println("getRowNumToShow():" + getRowNumToShow());
+		System.out.println("getTotalPages():" + getTotalPages());
+		System.out.println("getStartPage():" + getStartPage());
+		System.out.println("getEndPage():" + getEndPage());		
+		System.out.println("getStartRnumForMysql(): " + getStartRnumForMysql());
 	}
 	
 	public int getThisPage() {
