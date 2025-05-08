@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.a7a7.module.common.PageVo;
 
@@ -39,9 +40,13 @@ public class AccomController {
 	
 	// 사용자 숙박업소 목록 화면
 	@GetMapping("/bada/accom/list")
-	public String findUsrAccomList(Model model, PageVo pageVo) {
+	public String findUsrAccomList(@RequestParam(name = "page", defaultValue = "1") int page , Model model) {
 		
+		// 페이징
+		PageVo pageVo = new PageVo();
+		pageVo.setThisPage(page);
 		pageVo.setParamsPaging(service.countAccomList());
+		model.addAttribute("pageVo", pageVo);
 		// DB에서 숙박업소 전체 출력
 		model.addAttribute("list", service.findAccomList(pageVo));
 		

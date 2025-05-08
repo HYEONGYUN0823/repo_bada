@@ -115,17 +115,21 @@
 				<div class="mt-6">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
-							<li class="page-item">
-								<a class="page-link" href="#!" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
+							<li class="page-item" th:if="${pageVo.thisPage > pageVo.pageNumToShow}">
+								<a class="page-link" th:href="@{'/bada/accom/list?page=' + ${pageVo.startPage - 1}}">
+									<span>&laquo;</span>
 								</a>
 							</li>
-							<li class="page-item"><a class="page-link active" href="#!">1</a></li>
-							<li class="page-item"><a class="page-link" href="#!">2</a></li>
-							<li class="page-item"><a class="page-link" href="#!">3</a></li>
-							<li class="page-item">
-								<a class="page-link" href="#!" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
+							
+							<li class="page-item" 
+								th:each="num : ${#numbers.sequence(pageVo.startPage, pageVo.endPage)}"
+								th:classappend="${num == pageVo.thisPage} ? 'active' : ''">
+								<a class="page-link" th:href="@{'/bada/accom/list?page=' + ${num}}" th:text="${num}"></a>
+							</li>
+							
+							<li class="page-item" th:if="${pageVo.endPage < pageVo.totalPages}">
+								<a class="page-link" th:href="@{'/bada/accom/list?page=' + ${pageVo.endPage + 1}}">
+									<span>&raquo;</span>
 								</a>
 							</li>
 						</ul>
