@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace= "~{usr/include/head :: head}"></div>
+<div th:replace= "~{usr/include/starReview :: starReview}"></div>
+
+
+	<!--Blog single start-->
+	<div class="py-lg-5 pt-6">
+		<div class="container">
+			<div class="row">
+				<article class="col-lg-12 mx-auto">
+	
+					<!--Breadcrumb start-->
+					<div class="container py-1">
+						<div class="row">
+							<div class="col-12 py-2">
+								<nav aria-label="breadcrumb">
+									<ol class="breadcrumb mb-0">
+										<li class="breadcrumb-item"><a href="/index"><b>홈</b></a></li>
+										<li class="breadcrumb-item"><a href="/bada/restaurant/list"><b>식당 목록</b></a></li>
+										<li class="breadcrumb-item active"><b th:text="${item.title}"></b></li>
+									</ol>
+								</nav>
+							</div>
+						</div>
+					</div>
+					
+					<!--Product start-->
+					<section class="pb-lg-8">
+					  <div class="container">
+					    <div class="row gy-4 gy-lg-0">
+					      <!-- Product image -->
+					      <div class="col-lg-6">
+					        <div>
+					          <!-- Main image wrapped with GLightbox link -->
+					          <img id="mainProductImage" th:src="${item.image}" alt=""
+					              class="img-fluid imgLoop" style="width: 800px; height: 450px;" />
+					
+					        </div>
+					      </div>
+					
+					      <!-- Product details -->
+					      <div class="col-lg-6 mb-5">
+					        <div class="ps-lg-4">
+					          <div class="d-flex align-items-start justify-content-between mt-3 mb-2">
+					            <div class="mb-3">
+					              <h2 th:text="${item.title}"></h2>
+					              <span th:text="${item.tel}"></span>
+					            </div>
+								<div class="text-success d-flex align-items-center gap-2 mt-2">
+									<svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path opacity="0.2"
+											d="M14 8C14 9.18669 13.6481 10.3467 12.9888 11.3334C12.3295 12.3201 11.3925 13.0892 10.2961 13.5433C9.19975 13.9974 7.99335 14.1162 6.82946 13.8847C5.66558 13.6532 4.59648 13.0818 3.75736 12.2426C2.91825 11.4035 2.3468 10.3344 2.11529 9.17054C1.88378 8.00666 2.0026 6.80026 2.45673 5.7039C2.91085 4.60754 3.67989 3.67047 4.66658 3.01118C5.65328 2.35189 6.81331 2 8 2C9.5913 2 11.1174 2.63214 12.2426 3.75736C13.3679 4.88258 14 6.4087 14 8Z"
+											fill="#16A34A"></path>
+										<path
+											d="M10.8538 6.14625C10.9002 6.19269 10.9371 6.24783 10.9623 6.30853C10.9874 6.36923 11.0004 6.43429 11.0004 6.5C11.0004 6.56571 10.9874 6.63077 10.9623 6.69147C10.9371 6.75217 10.9002 6.80731 10.8538 6.85375L7.35375 10.3538C7.30732 10.4002 7.25217 10.4371 7.19147 10.4623C7.13077 10.4874 7.06571 10.5004 7 10.5004C6.9343 10.5004 6.86923 10.4874 6.80853 10.4623C6.74783 10.4371 6.69269 10.4002 6.64625 10.3538L5.14625 8.85375C5.05243 8.75993 4.99972 8.63268 4.99972 8.5C4.99972 8.36732 5.05243 8.24007 5.14625 8.14625C5.24007 8.05243 5.36732 7.99972 5.5 7.99972C5.63268 7.99972 5.75993 8.05243 5.85375 8.14625L7 9.29313L10.1463 6.14625C10.1927 6.09976 10.2478 6.06288 10.3085 6.03772C10.3692 6.01256 10.4343 5.99961 10.5 5.99961C10.5657 5.99961 10.6308 6.01256 10.6915 6.03772C10.7522 6.06288 10.8073 6.09976 10.8538 6.14625ZM14.5 8C14.5 9.28558 14.1188 10.5423 13.4046 11.6112C12.6903 12.6801 11.6752 13.5132 10.4874 14.0052C9.29973 14.4972 7.99279 14.6259 6.73192 14.3751C5.47104 14.1243 4.31285 13.5052 3.40381 12.5962C2.49477 11.6872 1.8757 10.529 1.6249 9.26809C1.37409 8.00721 1.50282 6.70028 1.99479 5.51256C2.48676 4.32484 3.31988 3.30968 4.3888 2.59545C5.45772 1.88122 6.71442 1.5 8 1.5C9.72335 1.50182 11.3756 2.18722 12.5942 3.40582C13.8128 4.62441 14.4982 6.27665 14.5 8ZM13.5 8C13.5 6.9122 13.1774 5.84883 12.5731 4.94436C11.9687 4.03989 11.1098 3.33494 10.1048 2.91866C9.09977 2.50238 7.9939 2.39346 6.92701 2.60568C5.86011 2.8179 4.8801 3.34172 4.11092 4.11091C3.34173 4.8801 2.8179 5.86011 2.60568 6.927C2.39347 7.9939 2.50238 9.09977 2.91867 10.1048C3.33495 11.1098 4.0399 11.9687 4.94437 12.5731C5.84884 13.1774 6.91221 13.5 8 13.5C9.45819 13.4983 10.8562 12.9184 11.8873 11.8873C12.9184 10.8562 13.4983 9.45818 13.5 8Z"
+											fill="#16A34A"></path>
+									</svg>
+									<strong>예약가능</strong>
+								</div>
+					          </div>
+					          <div class="d-flex justify-content-between align-items-center">
+					            <div class="d-flex align-items-center gap-3">
+					              <p class="mb-0">
+					                <span class="text-dark">500원</span>
+					              </p>
+					            </div>
+					            <span>
+					              4.5
+					            </span>
+					          </div>
+					
+					          <hr class="my-3" />
+					
+					          <div class="d-flex flex-md-row flex-column gap-2">
+					          	<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">지도보기</button>
+					            <a href="#!" class="btn btn-dark">예약하기</a>
+					            <a href="/contact" class="btn btn-outline-dark">1:1문의</a>
+					          </div>
+					        </div>
+					      </div>
+					    </div>
+					  </div>
+					</section>
+
+
+
+					<!-- Review Start -->
+					<div class="mb-6">
+						<h3 class="fs-4 mb-6">9 comments</h3>
+						<div>
+							<div class="d-flex gap-4 mb-6">
+								<img src="/usr/assets/images/avatar/avatar-1.jpg" alt="avatar"
+									class="avatar avatar-lg rounded-circle" />
+								<div class="">
+									<div
+										class="d-flex align-items-md-center flex-md-row flex-column gap-md-3  gap-2 mb-2">
+										<h3 class="fs-6 mb-0">Anita parmar</h3>
+										<div class="d-flex flex-row gap-3">
+											<span class="text-success fw-semibold small">Author</span>
+											<span class="small d-flex align-items-center gap-1">
+												<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+													fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+													<path
+														d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+													<path
+														d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+												</svg>
+												2 days ago
+											</span>
+										</div>
+									</div>
+									<p class="mb-4">
+										There are many variations of passages of Lorem Ipsum available, but the majority
+										have suffered
+										alteration in some form, by injected humour, or randomised words which don't
+										look
+										even slightly believable.by injected humour, or randomised.
+									</p>
+									<p class="small d-flex align-items-center gap-2">
+										<span>
+											<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+												fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+												<path
+													d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+												<path fill-rule="evenodd"
+													d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+											</svg>
+										</span>
+										<span>
+											Last edited 3 days ago by
+											<a href="#!" class="text-link">Anita parmar</a>
+										</span>
+									</p>
+									<div class="d-flex flex-row gap-3">
+										<div class="d-flex flex-row gap-2 small align-items-center">
+											<a href="#!" class="">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+													fill="currentColor" class="bi bi-hand-thumbs-up"
+													viewBox="0 0 16 16">
+													<path
+														d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2 2 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a10 10 0 0 0-.443.05 9.4 9.4 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a9 9 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.2 2.2 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.9.9 0 0 1-.121.416c-.165.288-.503.56-1.066.56z">
+													</path>
+												</svg>
+												2
+											</a>
+											<a href="#!" class="">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+													fill="currentColor" class="bi bi-hand-thumbs-down"
+													viewBox="0 0 16 16">
+													<path
+														d="M8.864 15.674c-.956.24-1.843-.484-1.908-1.42-.072-1.05-.23-2.015-.428-2.59-.125-.36-.479-1.012-1.04-1.638-.557-.624-1.282-1.179-2.131-1.41C2.685 8.432 2 7.85 2 7V3c0-.845.682-1.464 1.448-1.546 1.07-.113 1.564-.415 2.068-.723l.048-.029c.272-.166.578-.349.97-.484C6.931.08 7.395 0 8 0h3.5c.937 0 1.599.478 1.934 1.064.164.287.254.607.254.913 0 .152-.023.312-.077.464.201.262.38.577.488.9.11.33.172.762.004 1.15.069.13.12.268.159.403.077.27.113.567.113.856s-.036.586-.113.856c-.035.12-.08.244-.138.363.394.571.418 1.2.234 1.733-.206.592-.682 1.1-1.2 1.272-.847.283-1.803.276-2.516.211a10 10 0 0 1-.443-.05 9.36 9.36 0 0 1-.062 4.51c-.138.508-.55.848-1.012.964zM11.5 1H8c-.51 0-.863.068-1.14.163-.281.097-.506.229-.776.393l-.04.025c-.555.338-1.198.73-2.49.868-.333.035-.554.29-.554.55V7c0 .255.226.543.62.65 1.095.3 1.977.997 2.614 1.709.635.71 1.064 1.475 1.238 1.977.243.7.407 1.768.482 2.85.025.362.36.595.667.518l.262-.065c.16-.04.258-.144.288-.255a8.34 8.34 0 0 0-.145-4.726.5.5 0 0 1 .595-.643h.003l.014.004.058.013a9 9 0 0 0 1.036.157c.663.06 1.457.054 2.11-.163.175-.059.45-.301.57-.651.107-.308.087-.67-.266-1.021L12.793 7l.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581s-.027-.414-.075-.581c-.05-.174-.111-.273-.154-.315l-.353-.354.353-.354c.047-.047.109-.176.005-.488a2.2 2.2 0 0 0-.505-.804l-.353-.354.353-.354c.006-.005.041-.05.041-.17a.9.9 0 0 0-.121-.415C12.4 1.272 12.063 1 11.5 1">
+													</path>
+												</svg>
+												0
+											</a>
+										</div>
+										<div>
+											<a href="#!" class="text-link small">
+												<svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+													xmlns="http://www.w3.org/2000/svg">
+													<path
+														d="M14.3538 9.85375L11.3538 12.8538C11.2599 12.9476 11.1327 13.0003 11 13.0003C10.8673 13.0003 10.7401 12.9476 10.6462 12.8538C10.5524 12.7599 10.4997 12.6327 10.4997 12.5C10.4997 12.3673 10.5524 12.2401 10.6462 12.1462L12.7931 10H8C6.27665 9.99818 4.62441 9.31278 3.40582 8.09418C2.18722 6.87559 1.50182 5.22335 1.5 3.5C1.5 3.36739 1.55268 3.24021 1.64645 3.14645C1.74021 3.05268 1.86739 3 2 3C2.13261 3 2.25979 3.05268 2.35355 3.14645C2.44732 3.24021 2.5 3.36739 2.5 3.5C2.50165 4.95818 3.08165 6.35617 4.11274 7.38726C5.14383 8.41835 6.54182 8.99835 8 9H12.7931L10.6462 6.85375C10.5524 6.75993 10.4997 6.63268 10.4997 6.5C10.4997 6.36732 10.5524 6.24007 10.6462 6.14625C10.7401 6.05243 10.8673 5.99972 11 5.99972C11.1327 5.99972 11.2599 6.05243 11.3538 6.14625L14.3538 9.14625C14.4002 9.19269 14.4371 9.24783 14.4623 9.30853C14.4874 9.36923 14.5004 9.43429 14.5004 9.5C14.5004 9.56571 14.4874 9.63077 14.4623 9.69147C14.4371 9.75217 14.4002 9.80731 14.3538 9.85375Z"
+														fill="#211F1C" />
+												</svg>
+
+												Reply
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Review End -->
+					
+					<!-- Review Form Start -->
+					<div class="mb-6">
+						<div class="card">
+							<div class="card-body p-md-6 p-5">
+								<h3 class="mb-2 h5">리뷰를 남겨주세요!</h3>
+								<p>모든 댓글은 게시되기 전에 검토됩니다.</p>
+								<form class="row g-3 needs-validation" novalidate="">
+									<div class="mb-3 col-12">
+										<h3 class="h6">귀하의 경험을 평가해 주세요 *</h3>
+										<div class="rater"></div>
+									</div>
+									<div class="col-12">
+										<label for="blogsingleFormmessages"
+											class="form-label visually-hidden">Comment</label>
+										<textarea class="form-control" id="blogsingleFormmessages" rows="4"
+											placeholder="메시지" required></textarea>
+										<div class="invalid-feedback">Please write comment.</div>
+									</div>
+
+									<div class="col-12">
+										<button type="submit" class="btn btn-primary">제출</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- Review Form End -->
+					
+				</article>
+			</div>
+		</div>
+	</div>
+	<!--Blog single end-->
+	
+	
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">위치</h1>
+        <input type="hidden" id="mapx" th:value="${item.mapx}">
+        <input type="hidden" id="mapy" th:value="${item.mapy}">
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="map" style="width:100%;height:400px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+	
+	
+<script type="text/javascript">
+	
+  const thumbnails = document.querySelectorAll('label.btn img');
+  const mainImage = document.getElementById('mainProductImage');
+
+  thumbnails.forEach(thumbnail => {
+    thumbnail.addEventListener('click', () => {
+      mainImage.src = thumbnail.src;
+    });
+  });
+  
+  
+	
+</script>
+
+<!-- kakaoMap -->
+<script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${kakaoApiKey}"></script>
+<script>
+
+	document.getElementById('exampleModal').addEventListener('shown.bs.modal', () => {
+		if (!window.kakao) {
+			return;
+		}
+		
+		const latitude = document.getElementById('mapy').value;
+        const longitude = document.getElementById('mapx').value;
+		
+		const container = document.getElementById('map');
+		const options = {
+			center: new kakao.maps.LatLng(latitude, longitude),
+			level: 3
+		};
+		
+		const map = new kakao.maps.Map(container, options);
+		
+		const markerPosition = new kakao.maps.LatLng(latitude, longitude);
+		const marker = new kakao.maps.Marker({
+			position: markerPosition
+		});
+		
+		marker.setMap(map);
+	});
+	
+</script>
+	
+<div th:replace= "~{usr/include/footer :: footer}"></div>
+
+</html>
