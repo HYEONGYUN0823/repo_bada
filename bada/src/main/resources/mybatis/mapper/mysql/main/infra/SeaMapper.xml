@@ -82,6 +82,19 @@
 	)
 	</insert>
 	
+	<update id="forecastUpdate">
+	update forecast set
+		avgArtmp = #{avgArtmp}
+		,avgWspd = #{avgWspd}
+		,avgWtem = #{avgWtem}
+		,avgWvhgt = #{avgWvhgt}
+		,avgCrsp = #{avgCrsp}
+		,weather = #{weather}
+		,totalIndex = #{totalIndex}
+	where 1=1
+		sea_id =#{sea_id}
+	</update>
+	
 	
 	<select id="countSeaList" resultType="Integer">
 		SELECT

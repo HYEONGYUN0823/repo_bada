@@ -14,7 +14,7 @@ public interface SeaDao {
 	
 	public int seaInsert(SeaDto dto); // api에서 바다여행지역 리스트
 	public int forecastInsert(SeaDto dto); // api에서 바다여행지수 리스트
-	
+	public int forecastUpdate(SeaDto dto);
 	
 	public int countSeaList(); // 바다여행지역 전체 개수
 	

@@ -93,7 +93,7 @@ public class SeaService {
 	            ////////////////////////////
 //	            List<SeaDto> confirmForecastList = dao.forecastList();  
 	                   
-	         // 먼저 정확한 sea_id를 설정 (forecastList 비교 전에!)
+	         // 먼저 정확한 sea_id를 설정 (forecastList 비교 전에)
 	            for (SeaDto check : confirmSeaList) {
 	                if (check.getSareaDtlNm().equals(itemDTO.getSareaDtlNm())) {
 	                    itemDTO.setSea_id(check.getSea_id());
@@ -105,8 +105,9 @@ public class SeaService {
 	            for (SeaDto checkDto : confirmForecastList) {
 	                if (itemDTO.getSea_id().equals(checkDto.getSea_id()) &&
 	                    itemDTO.getPredcYmd().equals(checkDto.getPredcYmd()) &&
-	                    itemDTO.getPredcNoonSeCd().equals(checkDto.getPredcNoonSeCd())) {
+	                    itemDTO.getPredcNoonSeCd().equals(checkDto.getPredcNoonSeCd())){
 	                    isExist = true;
+	                    dao.forecastUpdate(itemDTO);
 	                    break;
 	                }
 	            }
