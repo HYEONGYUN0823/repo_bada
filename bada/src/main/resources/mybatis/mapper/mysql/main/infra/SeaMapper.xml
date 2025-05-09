@@ -92,7 +92,9 @@
 		,weather = #{weather}
 		,totalIndex = #{totalIndex}
 	where 1=1
-		sea_id =#{sea_id}
+		and sea_id =#{sea_id}
+		and predcNoonSeCd = #{predcNoonSeCd}
+		and predcYmd = #{predcYmd}
 	</update>
 	
 	
