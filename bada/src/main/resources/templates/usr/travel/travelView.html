@@ -215,8 +215,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">위치</h1>
-        <input type="hidden" id="mapx" th:value="${list.lat}">
-        <input type="hidden" id="mapy" th:value="${list.lot}">
+        <input type="hidden" id="lat" th:value="${list.lat}">
+        <input type="hidden" id="lot" th:value="${list.lot}">
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
@@ -247,8 +247,8 @@
 				return;
 			}
 			
-			const latitude = document.getElementById('mapy').value;
-	        const longitude = document.getElementById('mapx').value;
+			const latitude = document.getElementById('lat').value;
+	        const longitude = document.getElementById('lot').value;
 			
 			const container = document.getElementById('map');
 			const options = {
