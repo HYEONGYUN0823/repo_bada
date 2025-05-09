@@ -24,7 +24,7 @@ public class SeaService {
 	private String serviceKey;
 	
 	
-	public void setlist(PageVo pageVo) throws Exception {		
+	public void seaApiResponse() throws Exception {		
 		// api 호출
 		String apiUrl = "https://apis.data.go.kr/1192136/fcstSeaTrip/GetFcstSeaTripApiService?&type=json&reqDate=&pageNo=1&numOfRows=300&include=lastScr,sareaDtlNm,lat,lot,predcYmd,predcNoonSeCd,avgArtmp,avgWspd,avgWtem,avgWvhgt,avgCrsp,weather,totalIndex&serviceKey=" + serviceKey;
 		URL url = new URL(apiUrl);
@@ -54,7 +54,7 @@ public class SeaService {
 		JsonNode itemsNode = node.path("response").path("body").path("items").path("item");  //이렇게 중첩된 구조에서 items는 객체이고, 그 안에 item 배열이 존재하기 때문에 items.get("item")으로 배열을 꺼내서 넘겨줘야 Thymeleaf에서 이를 순회하며 값을 출력할 수 있게 됩니다.
 		
 		List<SeaDto> itemList = new ArrayList<>(); //items 데이터가 JSON 배열 형식이라면, 이를 제대로 List 형태로 변환하여 모델에 전달하는 것이 좋습니다. JsonNode에서 직접 데이터를 추출할 때, JsonNode를 List나 DTO 객체로 변환하는 것이 중요
-		 List<SeaDto> confirmSeaList = dao.seaList(pageVo); 
+		 List<SeaDto> confirmSeaList = dao.seaList(); 
 		 List<SeaDto> confirmForecastList = dao.forecastList();  
 		 
 		if(itemsNode.isArray()) {
@@ -88,7 +88,7 @@ public class SeaService {
 	            }
 	            if(!seaExist){
 	                dao.seaInsert(itemDTO); 
-	                confirmSeaList = dao.seaList(pageVo);  // DB에서 최신 여행지 리스트를 다시 불러옵니다.
+	                confirmSeaList = dao.seaList();  // DB에서 최신 여행지 리스트를 다시 불러옵니다.
 	            }
 	            ////////////////////////////
 //	            List<SeaDto> confirmForecastList = dao.forecastList();  
@@ -121,8 +121,8 @@ public class SeaService {
 	}
 	
 	//db에서 list값 보여주기
-	public List<SeaDto> seaList(PageVo pageVo){
-		return dao.seaList(pageVo);
+	public List<SeaDto> seaList(){
+		return dao.seaList();
 	}
 	public List<SeaDto> forecastList(){
 		return dao.forecastList();
@@ -140,6 +140,10 @@ public class SeaService {
 	
 	
 	//사용자부분
+	public List<SeaDto> seaUsrList(PageVo pageVo){
+		return dao.seaUsrList(pageVo);
+	}
+	
 	public SeaDto seaView(String sea_id) {
 		return dao.seaView(sea_id);
 	}

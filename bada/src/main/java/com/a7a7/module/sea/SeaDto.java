@@ -3,8 +3,8 @@ package com.a7a7.module.sea;
 public class SeaDto {
 	//sea table
     private String sareaDtlNm;
-    private Double  lat;
-    private Double  lot;
+    private Double lat;
+    private Double lot;
     private String manager_id;
     
     //forecast table

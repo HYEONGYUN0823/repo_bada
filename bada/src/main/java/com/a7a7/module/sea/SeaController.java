@@ -25,23 +25,26 @@ public class SeaController {
 	///관리자 화면 부분/////
 	//******************//
 	
+	
+
+	//////////바다여행장소///////////////
+	@RequestMapping(value="xdm/seaTravel")
+	public String seaTravel(PageVo pageVo,Model model)throws Exception{
+		service.seaApiResponse();
+		model.addAttribute("items",service.seaList());
+		return "/xdm/travel/seaTravel";
+	}
+	
 	////////// 바다여행지수///////////////
 
 	@RequestMapping(value="xdm/travel")
 	public String Travel(PageVo pageVo,Model model) throws Exception {
-		service.setlist(pageVo);
+		service.seaApiResponse();
 		model.addAttribute("items", service.forecastList());
 		return "/xdm/travel/travel";
 	}
 	
 	
-	//////////바다여행장소///////////////
-	@RequestMapping(value="xdm/seaTravel")
-	public String seaTravel(PageVo pageVo,Model model)throws Exception{
-		service.setlist(pageVo);
-		model.addAttribute("items",service.seaList(pageVo));
-		return "/xdm/travel/seaTravel";
-	}
 	
 	//******************//
 	//사용자 부분//
@@ -55,7 +58,7 @@ public class SeaController {
 		pageVo.setParamsPaging(service.countSeaList());
 		model.addAttribute("pageVo", pageVo);
 		// DB에서 숙박업소 전체 출력
-		model.addAttribute("list", service.seaList(pageVo));
+		model.addAttribute("list", service.seaUsrList(pageVo));
 		return "usr/travel/travelList";
 	}
 	

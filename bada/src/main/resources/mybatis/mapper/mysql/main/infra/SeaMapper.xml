@@ -12,7 +12,9 @@
 			,a.lot
 		from
 			sea a
-		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
+		
+		<!--LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}-->
+	
 	</select>
 	
 	
@@ -90,6 +92,17 @@
 	
 	
 	<!--사용자 부분-->
+	<select id="seaUsrList" resultMap="resultMapObj">
+		select
+			a.sea_id
+			,a.sareaDtlNm
+			,a.lat
+			,a.lot
+		from
+			sea a
+		
+		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
+	</select>
 	
 	<select id="seaView" resultMap="resultMapObj">
 	select
