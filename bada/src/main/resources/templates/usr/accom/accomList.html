@@ -28,7 +28,7 @@
 						<input type="text" class="form-control" name="shValue" th:value="${searchVo.shValue}">
 					  </div>
 					  <div class="col-lg-1 d-flex align-items-center">
-						<button type="submit" class="btn btn-primary">
+						<button type="button" class="btn btn-primary" id="btnSearch">
 						  <svg xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 512 512"
 							width="20" height="20"
@@ -146,6 +146,12 @@ goList = function (thisPage) {
     document.querySelector("input[name=thisPage]").value = thisPage;
     form.submit();
 }
+
+// 검색
+document.getElementById("btnSearch").onclick = function () {
+	document.querySelector("input[name=thisPage]").value = 1;
+    form.submit();
+};
 	
 	
 </script>
