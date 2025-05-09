@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.a7a7.module.accom.AccomApiDto.Response.Body.Items.Item;
 import com.a7a7.module.common.PageVo;
+import com.a7a7.module.common.SearchVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -81,8 +82,8 @@ public class AccomService {
 	}
 	
 	// 숙박업소 전체 출력
-	public List<AccomDto> findAccomList(PageVo pageVo) {
-		return dao.findAccomList(pageVo);
+	public List<AccomDto> findAccomList(PageVo pageVo, SearchVo searchVo) {
+		return dao.findAccomList(pageVo, searchVo);
 	}
 	
 	// 숙박업소 전체 개수
