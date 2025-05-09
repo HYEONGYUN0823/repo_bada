@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
   <style>
+  
     body {
       font-family: sans-serif;
     }
@@ -55,6 +56,7 @@
 	}
 
   </style>
+  <script src="https://js.tosspayments.com/v1/payment"></script>
 
 	<!--Breadcrumb start-->
 	<div class="container">
@@ -86,52 +88,26 @@
 				<div class="col-lg-8">
 					<div class="">
 						<div class="d-flex justify-content-center align-items-center mb-2">
-  <div class="search-box">
-    <div class="search-item">
-      <div class="search-item-title">여행지</div>
-      <input type="text" placeholder="자동입력">
-    </div>
-
-    <div class="divider"></div>
-
-  <div class="search-item checkin-item">
-    <div class="search-item-title">체크인</div>
-    <input class="search-item-value" type="text" id="checkin" readonly>
-  </div>
+<!-- <div class="search-box"> -->
+<!--   <div class="search-item"> -->
+<!--     <div class="search-item-title">여행지</div> -->
+<!--     <input type="text" placeholder="자동입력" disabled> -->
+<!--   </div> -->
 
   <div class="divider"></div>
 
-  <div class="search-item checkout-item">
-    <div class="search-item-title">체크아웃</div>
-    <input class="search-item-value" type="text" id="checkout" readonly>
+  <div class="search-item">
+    <div class="search-item-title">체크인 & 체크아웃</div>
+    <!-- 달력 위치 여기 -->
+    <div id="calendar"></div>
+    <!-- 값 서버로 넘길 거면 hidden input 유지 -->
+    <input type="hidden" id="checkin">
+    <input type="hidden" id="checkout">
   </div>
+<!-- </div> -->
 
-<!--     <div class="divider"></div> -->
-
-<!--     <div class="search-item"> -->
-<!--       <div class="search-item-title">여행자</div> -->
-<!--       <div class="search-item-value">게스트 추가</div> -->
-<!--     </div> -->
-  </div>
-<!-- 							<a href="#!" class="text-link" data-bs-toggle="modal" data-bs-target="#addressModal">Add -->
-<!-- 								address</a> -->
 						</div>
-<!-- 						<div class="d-flex justify-content-between align-items-lg-center flex-column flex-md-row gap-2"> -->
-<!-- 							<p class="mb-0 d-flex align-items-center gap-2"> -->
-<!-- 								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" -->
-<!-- 									xmlns="http://www.w3.org/2000/svg"> -->
-<!-- 									<path -->
-<!-- 										d="M13.3327 6.66668C13.3327 9.99534 9.64002 13.462 8.40002 14.5327C8.2845 14.6195 8.14388 14.6665 7.99935 14.6665C7.85482 14.6665 7.7142 14.6195 7.59868 14.5327C6.35868 13.462 2.66602 9.99534 2.66602 6.66668C2.66602 5.25219 3.22792 3.89563 4.22811 2.89544C5.22831 1.89525 6.58486 1.33334 7.99935 1.33334C9.41384 1.33334 10.7704 1.89525 11.7706 2.89544C12.7708 3.89563 13.3327 5.25219 13.3327 6.66668Z" -->
-<!-- 										stroke="#DC2626" stroke-linecap="round" stroke-linejoin="round" /> -->
-<!-- 									<path -->
-<!-- 										d="M8 8.66666C9.10457 8.66666 10 7.77123 10 6.66666C10 5.56209 9.10457 4.66666 8 4.66666C6.89543 4.66666 6 5.56209 6 6.66666C6 7.77123 6.89543 8.66666 8 8.66666Z" -->
-<!-- 										stroke="#DC2626" stroke-linecap="round" stroke-linejoin="round" /> -->
-<!-- 								</svg> -->
-<!-- 								4450 North Avenue Oakland, Nebraska, United States, -->
-<!-- 							</p> -->
-<!-- 							<a class="text-link" data-bs-toggle="offcanvas" href="#offcanvasChange" -->
-<!-- 								aria-controls="offcanvasChange">Change address</a> -->
-<!-- 						</div> -->
+
 						<div>
 							<div class="d-flex align-items-center mt-5 mb-2 justify-content-between">
 								<h3 class="fs-5">Contact</h3>
@@ -508,10 +484,28 @@
 									</div>
 									<div class="collapse" id="collapseCash" data-bs-parent="#paymentMethod"></div>
 								</div>
+<!-- TossPay 결제 방법 추가 -->
+<div class="mb-2">
+    <div class="bg-light p-3 d-flex justify-content-between align-items-center mt-2"
+         data-bs-target="#collapseTossPay" aria-expanded="false" aria-controls="collapseTossPay">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioTossPay" />
+            <label class="form-check-label" for="flexRadioTossPay">TossPay</label>
+        </div>
+        <div>
+            <!-- TossPay 아이콘 추가 (예시로 아이콘 삽입) -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- 아이콘 경로 예시, 실제 TossPay 아이콘으로 교체 가능 -->
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z" fill="#16A34A"/>
+            </svg>
+        </div>
+    </div>
+    <div class="collapse" id="collapseTossPay" data-bs-parent="#paymentMethod"></div>
+</div>
 							</div>
 						</div>
 						<div class="d-grid mt-4">
-							<button class="btn btn-primary" type="submit">Place Your Order</button>
+							<button class="btn btn-primary" type="button" id="placeOrderBtn">Place Your Order</button>
 
 						</div>
 					</div>
@@ -542,20 +536,15 @@
 									<span class="text-dark">$78</span>
 								</div>
 							</div>
-							<div class="mb-2 border-top pt-3 mb-2">
-								<div class="d-flex align-items-center justify-content-between mb-2">
-									<span>Subtotal(1 item)</span>
-									<span class="text-dark fw-medium">$78</span>
-								</div>
-								<div class="d-flex align-items-center justify-content-between mb-2">
-									<span>Shipping</span>
-									<span class="">Free</span>
-								</div>
-								<div class="d-flex align-items-center justify-content-between">
-									<span>Total Saving</span>
-									<span class="">$15</span>
-								</div>
-							</div>
+<div class="mb-2 border-top pt-3 mb-2">
+  <div class="d-flex align-items-center justify-content-between mb-2">
+    <span>체크인</span>
+    <span id="selected-checkin">-</span>
+  </div>
+  <div class="d-flex align-items-center justify-content-between mb-2">
+    <span>체크아웃</span>
+    <span id="selected-checkout">-</span>
+  </div>
 							<div
 								class="d-flex align-items-center justify-content-between border-top pt-3 mb-2 fw-medium text-dark">
 								<span class="">Estimated total:</span>
@@ -576,32 +565,58 @@
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
 		
 	<script type="text/javascript">
-		
-	  $(function () {
-		    // 예약된 기간 (체크인 ~ 체크아웃 전날까지)
-		    const reservedRanges = [
-		      { from: "2025-05-01", to: "2025-05-07" },
-		      { from: "2025-05-15", to: "2025-05-17" }
-		    ];
+	
+	// 달력
+	$(function () {
+		  const reservedRanges = [
+		    { from: "2025-05-01", to: "2025-05-07" },
+		    { from: "2025-05-15", to: "2025-05-17" }
+		  ];
 
-		    const calendar = flatpickr("#checkin", {
-		      mode: "range",
-		      dateFormat: "Y-m-d",
-		      minDate: "today",
-		      locale: "ko",
-		      disable: reservedRanges,
-		      onChange: function(selectedDates) {
-		        if (selectedDates.length === 2) {
-		          $('#checkin').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-		          $('#checkout').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
-		        }
+		  const calendar = flatpickr("#calendar", {
+		    inline: true,
+		    mode: "range",
+		    dateFormat: "Y-m-d",
+		    minDate: "today",
+		    locale: "ko",
+		    disable: reservedRanges,
+		    showMonths: 2,  // 📌 여기 추가!
+		    onChange: function(selectedDates) {
+		      if (selectedDates.length === 2) {
+		        $('#checkin').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+		        $('#checkout').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
+
+		        $('#selected-checkin').text(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+		        $('#selected-checkout').text(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
 		      }
-		    });
-
-		    $("#checkout").on("focus", function () {
-		      calendar.open();
-		    });
+		    }
 		  });
+		});
+	
+		// 토스페이 하는중..
+		document.getElementById('placeOrderBtn').addEventListener('click', function () {
+		  const selected = document.querySelector('input[name="flexRadioDefault"]:checked');
+		
+		  if (!selected) {
+		    alert('결제 수단을 선택해주세요!');
+		    return;
+		  }
+		
+		  if (selected.id === 'flexRadioTossPay') {
+		    const tossPayments = TossPayments('test_ck_nRQoOaPz8Lxz2KndYGEe8y47BMw6'); // 클라이언트 키
+		
+		    tossPayments.requestPayment('카드', {
+		      amount: 15000,  // 금액
+		      orderId: 'order-' + new Date().getTime(),  // 고유 주문번호
+		      orderName: '테스트 결제',
+		      customerName: '홍길동',
+		      successUrl: 'http://localhost:8080/payment-success',
+		      failUrl: 'http://localhost:8080/payment-fail'
+		    });
+		  } else {
+		    alert('지원하지 않는 결제 수단입니다.');
+		  }
+		});
 		
 	</script>
 
