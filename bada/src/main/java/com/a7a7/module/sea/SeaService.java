@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.a7a7.module.common.PageVo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,7 +24,7 @@ public class SeaService {
 	private String serviceKey;
 	
 	
-	public void setlist() throws Exception {		
+	public void seaApiResponse() throws Exception {		
 		// api 호출
 		String apiUrl = "https://apis.data.go.kr/1192136/fcstSeaTrip/GetFcstSeaTripApiService?&type=json&reqDate=&pageNo=1&numOfRows=300&include=lastScr,sareaDtlNm,lat,lot,predcYmd,predcNoonSeCd,avgArtmp,avgWspd,avgWtem,avgWvhgt,avgCrsp,weather,totalIndex&serviceKey=" + serviceKey;
 		URL url = new URL(apiUrl);
@@ -92,7 +93,7 @@ public class SeaService {
 	            ////////////////////////////
 //	            List<SeaDto> confirmForecastList = dao.forecastList();  
 	                   
-	         // 먼저 정확한 sea_id를 설정 (forecastList 비교 전에!)
+	         // 먼저 정확한 sea_id를 설정 (forecastList 비교 전에)
 	            for (SeaDto check : confirmSeaList) {
 	                if (check.getSareaDtlNm().equals(itemDTO.getSareaDtlNm())) {
 	                    itemDTO.setSea_id(check.getSea_id());
@@ -104,8 +105,9 @@ public class SeaService {
 	            for (SeaDto checkDto : confirmForecastList) {
 	                if (itemDTO.getSea_id().equals(checkDto.getSea_id()) &&
 	                    itemDTO.getPredcYmd().equals(checkDto.getPredcYmd()) &&
-	                    itemDTO.getPredcNoonSeCd().equals(checkDto.getPredcNoonSeCd())) {
+	                    itemDTO.getPredcNoonSeCd().equals(checkDto.getPredcNoonSeCd())){
 	                    isExist = true;
+	                    dao.forecastUpdate(itemDTO);
 	                    break;
 	                }
 	            }
@@ -137,6 +139,19 @@ public class SeaService {
 	}
 	
 	
+	
+	//사용자부분
+	public List<SeaDto> seaUsrList(PageVo pageVo){
+		return dao.seaUsrList(pageVo);
+	}
+	
+	public SeaDto seaView(String sea_id) {
+		return dao.seaView(sea_id);
+	}
+	// 숙박업소 전체 개수
+	public int countSeaList() {
+		return dao.countSeaList();
+	}
 	
 	
 }

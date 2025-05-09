@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.a7a7.module.common.PageVo;
 import com.a7a7.module.restaurant.RestaurantApiDto.Response.Body.Items.Item;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -80,8 +81,13 @@ public class RestaurantService {
 	}
 	
 	// 숙박업소 전체 출력
-	public List<RestaurantDto> findRestaurantList() {
-		return dao.findRestaurantList();
+	public List<RestaurantDto> findRestaurantList(PageVo pageVo) {
+		return dao.findRestaurantList(pageVo);
+	}
+	
+	// 숙박업소 전체 개수
+	public int countRestaurantList() {
+		return dao.countRestaurantList();
 	}
 	
 }

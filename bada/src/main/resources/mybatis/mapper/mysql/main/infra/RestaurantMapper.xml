@@ -19,6 +19,7 @@
 			,manager_id AS managerId
 		FROM
 			restaurant
+		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
 	</select>
 	
 	<select id="findRestaurantByTitle" resultMap="resultMapObj">
@@ -55,6 +56,13 @@
 			restaurant
 		WHERE
 			restaurant_id = #{restaurantId}
+	</select>
+	
+	<select id="countRestaurantList" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			restaurant
 	</select>
 	
 	<insert id="saveRestaurantApiResponse">

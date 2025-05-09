@@ -6,13 +6,15 @@
 	
 	<select id="seaList" resultMap="resultMapObj">
 		select
-			sea_id
-			,sareaDtlNm
-			,lat
-			,lot
+			a.sea_id
+			,a.sareaDtlNm
+			,a.lat
+			,a.lot
 		from
-			sea
-		where 1=1
+			sea a
+		
+		<!--LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}-->
+	
 	</select>
 	
 	
@@ -80,6 +82,53 @@
 	)
 	</insert>
 	
+	<update id="forecastUpdate">
+	update forecast set
+		avgArtmp = #{avgArtmp}
+		,avgWspd = #{avgWspd}
+		,avgWtem = #{avgWtem}
+		,avgWvhgt = #{avgWvhgt}
+		,avgCrsp = #{avgCrsp}
+		,weather = #{weather}
+		,totalIndex = #{totalIndex}
+	where 1=1
+		and sea_id =#{sea_id}
+		and predcNoonSeCd = #{predcNoonSeCd}
+		and predcYmd = #{predcYmd}
+	</update>
+	
+	
+	<select id="countSeaList" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			sea
+	</select>
+	
+	
+	<!--사용자 부분-->
+	<select id="seaUsrList" resultMap="resultMapObj">
+		select
+			a.sea_id
+			,a.sareaDtlNm
+			,a.lat
+			,a.lot
+		from
+			sea a
+		
+		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
+	</select>
+	
+	<select id="seaView" resultMap="resultMapObj">
+	select
+		a.sareaDtlNm
+		,a.lat
+		,a.lot
+	from
+		sea a
+	where 1=1
+	and sea_id = #{sea_id}
+	</select>
 	
 	
 </mapper>
