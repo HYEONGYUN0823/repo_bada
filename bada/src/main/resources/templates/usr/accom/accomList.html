@@ -101,7 +101,7 @@
 				    <nav>
 				        <ul class="pagination justify-content-center">
 				            <!-- 이전 페이지 -->
-				            <li class="page-item" th:if="${pageVo.thisPage > pageVo.pageNumToShow}">
+				            <li class="page-item" th:if="${pageVo.thisPage > pageVo.pageNumToShow}" style="cursor: pointer;">
 				                <a class="page-link"
 				                   th:attr="onclick=|goList('${pageVo.startPage - 1}')|">
 				                    <span>&laquo;</span>
@@ -111,7 +111,8 @@
 				            <!-- 페이지 번호 -->
 				            <li class="page-item"
 				                th:each="num : ${#numbers.sequence(pageVo.startPage, pageVo.endPage)}"
-				                th:classappend="${num == pageVo.thisPage} ? 'active' : ''">
+				                th:classappend="${num == pageVo.thisPage} ? 'active' : ''"
+				                style="cursor: pointer;">
 				                <a class="page-link"
 				                   th:attr="onclick=|goList('${num}')|"
 				                   th:text="${num}">
@@ -119,9 +120,10 @@
 				            </li>
 				
 				            <!-- 다음 페이지 -->
-				            <li class="page-item" th:if="${pageVo.endPage < pageVo.totalPages}">
+				            <li class="page-item" th:if="${pageVo.endPage < pageVo.totalPages}" style="cursor: pointer;">
 				                <a class="page-link"
-				                   th:attr="onclick=|goList('${pageVo.endPage + 1}')|">
+				                   th:attr="onclick=|goList('${pageVo.endPage + 1}')|"
+				                   >
 				                    <span>&raquo;</span>
 				                </a>
 				            </li>

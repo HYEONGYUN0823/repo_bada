@@ -87,7 +87,7 @@ public class AccomService {
 	}
 	
 	// 숙박업소 전체 개수
-	public int countAccomList() {
-		return dao.countAccomList();
+	public int countAccomList(PageVo pageVo, SearchVo searchVo) {
+		return dao.countAccomList(pageVo, searchVo);
 	}
 }

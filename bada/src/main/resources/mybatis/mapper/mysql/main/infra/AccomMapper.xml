@@ -22,7 +22,6 @@
 		WHERE
 			1=1
 			<choose>
-				<when test="searchVo.shOption == null"></when>
 				<when test="searchVo.shOption == 1">AND title LIKE CONCAT('%',#{searchVo.shValue},'%')</when>
 			</choose>
 		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
@@ -69,6 +68,12 @@
 			COUNT(*)
 		FROM
 			accommodation
+		WHERE
+			1=1
+			<choose>
+				<when test="searchVo.shOption == 1">AND title LIKE CONCAT('%',#{searchVo.shValue},'%')</when>
+			</choose>
+		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
 	</select>
 	
 	<insert id="saveAccomApiResponse">

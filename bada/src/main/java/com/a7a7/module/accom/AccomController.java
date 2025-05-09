@@ -40,7 +40,7 @@ public class AccomController {
 		// 검색
 		model.addAttribute("searchVo", searchVo);
 		// 페이징
-		pageVo.setParamsPaging(service.countAccomList());
+		pageVo.setParamsPaging(service.countAccomList(pageVo, searchVo));
 		model.addAttribute("pageVo", pageVo);
 		// DB에서 숙박업소 전체 출력
 		model.addAttribute("list", service.findAccomList(pageVo, searchVo));
