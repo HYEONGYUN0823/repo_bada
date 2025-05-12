@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.a7a7.module.common.PageVo;
+import com.a7a7.module.common.SearchVo;
 
 @Controller
 public class SeaController {
@@ -50,15 +51,15 @@ public class SeaController {
 	//사용자 부분//
 	//******************//
 	
-	@GetMapping("/bada/travel/list")
-	public String findUsrTravelList(@RequestParam(name = "page", defaultValue = "1") int page ,Model model) {	
+	@RequestMapping("/bada/travel/list")
+	public String findUsrTravelList(PageVo pageVo,SearchVo searchVo,Model model) {	
+		//검색기능.
+		model.addAttribute("searchVo", searchVo);
 		// 페이징
-		PageVo pageVo = new PageVo();
-		pageVo.setThisPage(page);
-		pageVo.setParamsPaging(service.countSeaList());
-		model.addAttribute("pageVo", pageVo);
+		pageVo.setParamsPaging(service.countSeaList(pageVo, searchVo));
+		model.addAttribute("pageVo", pageVo);;
 		// DB에서 숙박업소 전체 출력
-		model.addAttribute("list", service.seaUsrList(pageVo));
+		model.addAttribute("list", service.seaUsrList(pageVo,searchVo));
 		return "usr/travel/travelList";
 	}
 	

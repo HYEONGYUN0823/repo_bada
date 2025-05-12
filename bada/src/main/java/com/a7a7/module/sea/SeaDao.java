@@ -2,9 +2,11 @@ package com.a7a7.module.sea;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.a7a7.module.common.PageVo;
+import com.a7a7.module.common.SearchVo;
 
 @Repository
 public interface SeaDao {
@@ -16,9 +18,9 @@ public interface SeaDao {
 	public int forecastInsert(SeaDto dto); // api에서 바다여행지수 리스트
 	public int forecastUpdate(SeaDto dto);
 	
-	public int countSeaList(); // 바다여행지역 전체 개수
+	public int countSeaList(@Param("pageVo") PageVo pageVo, @Param("searchVo") SearchVo searchVo); // 바다여행지역 전체 개수
 	
 	//사용자부분
-	public List<SeaDto> seaUsrList(PageVo pageVo);
+	public List<SeaDto> seaUsrList(@Param("pageVo") PageVo pageVo, @Param("searchVo") SearchVo searchVo);
 	public SeaDto seaView(String sea_id);
 }

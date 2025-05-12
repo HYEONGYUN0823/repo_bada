@@ -12,11 +12,7 @@
 			,a.lot
 		from
 			sea a
-		
-		<!--LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}-->
-	
 	</select>
-	
 	
 	<insert id="seaInsert">
 	insert into sea(
@@ -103,20 +99,29 @@
 			COUNT(*)
 		FROM
 			sea
+		Where
+			1=1
+			<choose>
+				<when test="searchVo.shOption == 1">AND sareaDtlNm LIKE CONCAT('%',#{searchVo.shValue},'%')</when>
+			</choose>
+		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
 	</select>
 	
 	
 	<!--사용자 부분-->
 	<select id="seaUsrList" resultMap="resultMapObj">
 		select
-			a.sea_id
-			,a.sareaDtlNm
-			,a.lat
-			,a.lot
+			sea_id
+			,sareaDtlNm
+			,lat
+			,lot
 		from
-			sea a
-		
-		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
+			sea 
+		where 1=1
+			<choose>
+				<when test="searchVo.shOption == 1">AND sareaDtlNm LIKE CONCAT('%',#{searchVo.shValue},'%')</when>
+			</choose>
+		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
 	</select>
 	
 	<select id="seaView" resultMap="resultMapObj">

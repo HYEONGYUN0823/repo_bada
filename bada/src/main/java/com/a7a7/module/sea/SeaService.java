@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.a7a7.module.common.PageVo;
+import com.a7a7.module.common.SearchVo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -20,6 +21,7 @@ public class SeaService {
 
 	@Autowired
 	SeaDao dao;
+	
 	@Value("${sea_api_key}")
 	private String serviceKey;
 	
@@ -141,16 +143,16 @@ public class SeaService {
 	
 	
 	//사용자부분
-	public List<SeaDto> seaUsrList(PageVo pageVo){
-		return dao.seaUsrList(pageVo);
+	public List<SeaDto> seaUsrList(PageVo pageVo,SearchVo searchVo){
+		return dao.seaUsrList(pageVo,  searchVo);
 	}
 	
 	public SeaDto seaView(String sea_id) {
 		return dao.seaView(sea_id);
 	}
 	// 숙박업소 전체 개수
-	public int countSeaList() {
-		return dao.countSeaList();
+	public int countSeaList(PageVo pageVo, SearchVo searchVo) {
+		return dao.countSeaList(pageVo, searchVo);
 	}
 	
 	
