@@ -1,14 +1,19 @@
 package com.a7a7.module.userUi;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserUiController {
 	
+	@Value("${kakao_map_api}")
+	private String kakaoApiKey;
+	
 	@RequestMapping(value = "/index")
-	public String index() {
-		
+	public String index(Model model) {
+		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		return "usr/index/index";
 	}
 	
