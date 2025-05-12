@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.a7a7.module.review.ReviewDto">
+<mapper namespace="com.a7a7.module.review.ReviewDao">
 	
 	<resultMap id="resultMapObj" type="com.a7a7.module.review.ReviewDto"/>
 	
+	<select id="findAllReviewByParent" resultMap="resultMapObj">
+		SELECT
+			r.rating
+		    ,r.contents
+		    ,r.createdtime
+		    ,m.name
+		FROM
+			review r
+		    JOIN member m ON m.member_id = r.member_id
+		WHERE
+			1=1
+		    AND r.del_ny = 0
+		    AND r.parent_type = #{parentType}
+		    AND r.parent_id = #{parentId}
+	</select>
 	
 	
 </mapper>

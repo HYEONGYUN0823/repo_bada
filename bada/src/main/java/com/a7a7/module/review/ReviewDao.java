@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReviewDao {
 	
+	public ReviewDto findAllReviewByParent(ReviewDto dto); // Parent정보로 DB 검색
+	
 //	public void saveAccomApiResponse(AccomDto dto); // AccomApi 호출 값 DB 저장
 //	public AccomDto findAccomByTitle(String title); // 숙박업소명으로 DB 검색
 //	public AccomDto findAccomById(String accomId); // Id로 DB 검색

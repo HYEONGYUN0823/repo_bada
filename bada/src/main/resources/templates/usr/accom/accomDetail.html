@@ -45,6 +45,8 @@
 					        <div class="ps-lg-4">
 					          <div class="d-flex align-items-start justify-content-between mt-3 mb-2">
 					            <div class="mb-3">
+					              <input type="hidden" id="parentId" th:value="${item.accomId}">
+					              <input type="hidden" id="parentType" value="3">
 					              <h2 th:text="${item.title}"></h2>
 					              <span th:text="${item.tel}"></span>
 					            </div>
@@ -88,12 +90,14 @@
 
 
 					<!-- Review Start -->
-					<div class="mb-6">
+					<div class="mb-6" id="review">
+						<!-- Ajax -->
+					
+<!-- 					
 						<h3 class="fs-4 mb-6">9 comments</h3>
-						<div class="review">
+						<div>
 							<div class="d-flex gap-4 mb-6">
 								<div>
-								
 									<div class="d-flex align-items-md-center flex-md-row flex-column gap-md-3  gap-2 mb-2">
 										<h3 class="fs-6 mb-0">Anita parmar</h3>
 										<div class="d-flex flex-row gap-3">
@@ -123,6 +127,8 @@
 								</div>
 							</div>
 						</div>
+ -->						
+						
 					</div>
 					<!-- Review End -->
 					
@@ -178,7 +184,24 @@
 	
 	
 <script type="text/javascript">
-  
+
+	document.addEventListener("DOMContentLoaded", function () {
+	    loadReview();  // 첫 리뷰 로드
+	});
+	
+	// 리뷰 로드
+	function loadReview() {
+	    const parentId = document.getElementById('parentId').value;
+	    const parentType = document.getElementById('parentType').value;
+
+	    fetch(`/bada/reviewFragment?parentId=${parentId}&parentType=${parentType}`)
+	        .then(res => res.text())
+	        .then(html => {
+	            document.getElementById("review").innerHTML = html;
+// 	            bindStarEvents();  // 로드 후 별점 다시 바인딩
+	        })
+	        .catch(error => console.error("리뷰 로딩 실패: ", error));
+	}
   
 	
 </script>

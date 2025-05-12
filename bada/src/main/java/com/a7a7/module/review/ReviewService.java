@@ -9,5 +9,8 @@ public class ReviewService {
 	@Autowired
 	ReviewDao dao;
 	
+	public ReviewDto findAllReviewByParent(ReviewDto dto) {
+		return dao.findAllReviewByParent(dto);
+	}
 	
 }
