@@ -10,55 +10,39 @@
 			<div class="col-8 mx-auto">
 			  <div class="text-center">
 				<h1 class="display-5 fw-bold">식당</h1>
-				<div class="row mb-2 g-3">
-				  <div class="col">
-					<input type="text" class="form-control">
-				  </div>
-				  <div class="col">
-					<input type="text" class="form-control">
-				  </div>
-				</div>
-				<div class="row mb-2 g-3">
-				  <div class="col-3">
-					<!--default select-->
-					<select class="form-select" aria-label="Default select example">
-					  <option selected>Open this select menu</option>
-					  <option value="1">One</option>
-					  <option value="2">Two</option>
-					  <option value="3">Three</option>
-					</select>
-				  </div>
-				  <div class="col-3">
-					<!--default select-->
-					<select class="form-select" aria-label="Default select example">
-					  <option selected>Open this select menu</option>
-					  <option value="1">One</option>
-					  <option value="2">Two</option>
-					  <option value="3">Three</option>
-					</select>
-				  </div>
-				  <div class="col-4">
-					<input type="text" class="form-control">
-				  </div>
-				  <div class="col-lg-1 d-flex align-items-center">
-					<button type="button" class="btn btn-primary">
-					  <svg xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 512 512"
-						width="20" height="20"
-						fill="currentColor"
-						class="animate-target">
-						<path
-						  d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-					  </svg>
-					</button>
-				  </div>
-				</div>
-<!-- 				<p class="mb-0"> -->
-<!-- 				  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quis suscipit -->
-<!-- 				  recusandae saepe, illo -->
-<!-- 				  voluptates in quisquam provident sequi excepturi porro, laudantium error -->
-<!-- 				  repellendus consequatur! -->
-<!-- 				</p> -->
+				
+				<!-- Searching Start -->
+				<form action="/bada/restaurant/list" method="post">
+					<input type="hidden" name="thisPage" th:value="${pageVo.thisPage}">
+					<div class="row g-3 justify-content-center">
+					  <div class="col-2">
+						<!--default select-->
+						<select class="form-select" name="shOption">
+						  <option value="" th:selected="${searchVo.shOption == null}">선택</option>
+						  <option value="1" th:selected="${searchVo.shOption == 1}">식당명</option>
+						  <option value="2">Two</option>
+						  <option value="3">Three</option>
+						</select>
+					  </div>
+					  <div class="col-5">
+						<input type="text" class="form-control" name="shValue" th:value="${searchVo.shValue}">
+					  </div>
+					  <div class="col-lg-1 d-flex align-items-center">
+						<button type="button" class="btn btn-primary" id="btnSearch">
+						  <svg xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 512 512"
+							width="20" height="20"
+							fill="currentColor"
+							class="animate-target">
+							<path
+							  d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+						  </svg>
+						</button>
+					  </div>
+					</div>
+				</form>
+				<!-- Searching End -->
+				
 			  </div>
 			</div>
 		  </div>
@@ -112,28 +96,39 @@
 				</div>
 
 				<!-- Pagination Start -->
+				
 				<div class="mt-6">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
-							<li class="page-item" th:if="${pageVo.thisPage > pageVo.pageNumToShow}">
-								<a class="page-link" th:href="@{'/bada/restaurant/list?page=' + ${pageVo.startPage - 1}}">
-									<span>&laquo;</span>
-								</a>
-							</li>
-							
-							<li class="page-item" 
-								th:each="num : ${#numbers.sequence(pageVo.startPage, pageVo.endPage)}"
-								th:classappend="${num == pageVo.thisPage} ? 'active' : ''">
-								<a class="page-link" th:href="@{'/bada/restaurant/list?page=' + ${num}}" th:text="${num}"></a>
-							</li>
-							
-							<li class="page-item" th:if="${pageVo.endPage < pageVo.totalPages}">
-								<a class="page-link" th:href="@{'/bada/restaurant/list?page=' + ${pageVo.endPage + 1}}">
-									<span>&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
+				    <nav>
+				        <ul class="pagination justify-content-center">
+				            <!-- 이전 페이지 -->
+				            <li class="page-item" th:if="${pageVo.thisPage > pageVo.pageNumToShow}" style="cursor: pointer;">
+				                <a class="page-link"
+				                   th:attr="onclick=|goList('${pageVo.startPage - 1}')|">
+				                    <span>&laquo;</span>
+				                </a>
+				            </li>
+				
+				            <!-- 페이지 번호 -->
+				            <li class="page-item"
+				                th:each="num : ${#numbers.sequence(pageVo.startPage, pageVo.endPage)}"
+				                th:classappend="${num == pageVo.thisPage} ? 'active' : ''"
+				                style="cursor: pointer;">
+				                <a class="page-link"
+				                   th:attr="onclick=|goList('${num}')|"
+				                   th:text="${num}">
+				                </a>
+				            </li>
+				
+				            <!-- 다음 페이지 -->
+				            <li class="page-item" th:if="${pageVo.endPage < pageVo.totalPages}" style="cursor: pointer;">
+				                <a class="page-link"
+				                   th:attr="onclick=|goList('${pageVo.endPage + 1}')|"
+				                   >
+				                    <span>&raquo;</span>
+				                </a>
+				            </li>
+				        </ul>
+				    </nav>
 				</div>
 				<!-- Pagination End -->
 				
@@ -143,7 +138,19 @@
 	<!-- dd -->
 	<script type="text/javascript">
 		
-		
+		// 페이징
+		let form = document.querySelector('form');
+	
+		goList = function (thisPage) {
+		    document.querySelector("input[name=thisPage]").value = thisPage;
+		    form.submit();
+		}
+	
+		// 검색
+		document.getElementById("btnSearch").onclick = function () {
+			document.querySelector("input[name=thisPage]").value = 1;
+		    form.submit();
+		};
 		
 	</script>
 	

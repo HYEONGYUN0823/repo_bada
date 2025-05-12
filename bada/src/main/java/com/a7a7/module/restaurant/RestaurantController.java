@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.a7a7.module.common.PageVo;
+import com.a7a7.module.common.SearchVo;
 import com.a7a7.module.sea.SeaService;
 
 
 @Controller
 public class RestaurantController {
-	
-	private final SeaService seaService;
 	
 	@Autowired
 	RestaurantService service;
@@ -23,33 +22,29 @@ public class RestaurantController {
 	@Value("${kakao_map_api}")
 	private String kakaoApiKey;
 	
-	RestaurantController(SeaService seaService) {
-        this.seaService = seaService;
-    }
-	
 	// 관리자 식당 관리 화면
 	@RequestMapping("/xdm/restaurant/list")
-	public String findXdmRestaurantList(Model model, PageVo pageVo) throws Exception {
+	public String findXdmRestaurantList(Model model, PageVo pageVo, SearchVo searchVo) throws Exception {
 
 		// AccomApi 호출 값 DB 저장
 		service.saveRestaurantApiResponse();
 		// DB에서 식당 전체 출력
-		model.addAttribute("list", service.findRestaurantList(pageVo));
+		model.addAttribute("list", service.findRestaurantList(pageVo, searchVo));
 		
 		return "xdm/restaurant/restaurantList";
 	}
 	
 	// 사용자 식당 목록화면
-	@GetMapping("/bada/restaurant/list")
-	public String findUsrRestaurantList(@RequestParam(name = "page", defaultValue = "1") int page , Model model) {
+	@RequestMapping("/bada/restaurant/list")
+	public String findUsrRestaurantList(Model model, PageVo pageVo, SearchVo searchVo) {
 		
+		// 검색
+		model.addAttribute("searchVo", searchVo);
 		// 페이징
-		PageVo pageVo = new PageVo();
-		pageVo.setThisPage(page);
-		pageVo.setParamsPaging(service.countRestaurantList());
+		pageVo.setParamsPaging(service.countRestaurantList(pageVo, searchVo));
 		model.addAttribute("pageVo", pageVo);
 		// DB에서 식당 전체 출력
-		model.addAttribute("list", service.findRestaurantList(pageVo));
+		model.addAttribute("list", service.findRestaurantList(pageVo, searchVo));
 		
 		return "usr/restaurant/restaurantList";
 	}

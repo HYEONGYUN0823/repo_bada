@@ -19,7 +19,12 @@
 			,manager_id AS managerId
 		FROM
 			restaurant
-		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
+		WHERE
+			1=1
+			<choose>
+				<when test="searchVo.shOption == 1">AND title LIKE CONCAT('%',#{searchVo.shValue},'%')</when>
+			</choose>
+		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
 	</select>
 	
 	<select id="findRestaurantByTitle" resultMap="resultMapObj">
@@ -63,6 +68,12 @@
 			COUNT(*)
 		FROM
 			restaurant
+		WHERE
+			1=1
+			<choose>
+				<when test="searchVo.shOption == 1">AND title LIKE CONCAT('%',#{searchVo.shValue},'%')</when>
+			</choose>
+		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
 	</select>
 	
 	<insert id="saveRestaurantApiResponse">
