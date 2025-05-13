@@ -87,7 +87,7 @@
 		,mapy
 		,createdtime
 		,modifiedtime
-		,delNy
+		,del_ny
 		,manager_id
 		)
 		VALUES

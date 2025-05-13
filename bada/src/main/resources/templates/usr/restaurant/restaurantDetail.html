@@ -88,7 +88,7 @@
 
 
 					<!-- Review Start -->
-					<div class="mb-6">
+					<div class="mb-6" id="reviewList">
 						<h3 class="fs-4 mb-6">9 comments</h3>
 						<div>
 							<div class="d-flex gap-4 mb-6">
@@ -182,16 +182,16 @@
 							<div class="card-body p-md-6 p-5">
 								<h3 class="mb-2 h5">리뷰를 남겨주세요!</h3>
 								<p>모든 댓글은 게시되기 전에 검토됩니다.</p>
-								<form class="row g-3 needs-validation" novalidate="">
+								<form class="row g-3 needs-validation" id="reviewForm" novalidate="">
 									<div class="mb-3 col-12">
 										<h3 class="h6">귀하의 경험을 평가해 주세요 *</h3>
-										<div class="rater"></div>
+										<div class="rater" id="rating"></div>
 									</div>
 									<div class="col-12">
 										<label for="blogsingleFormmessages"
 											class="form-label visually-hidden">Comment</label>
-										<textarea class="form-control" id="blogsingleFormmessages" rows="4"
-											placeholder="메시지" required></textarea>
+										<textarea class="form-control" id="reviewContent" rows="4" placeholder="내용" required></textarea>
+<input type="hidden" name="restaurantId" th:value="${item.restaurantId}" />
 										<div class="invalid-feedback">Please write comment.</div>
 									</div>
 
@@ -228,6 +228,36 @@
   </div>
 </div>
 	
+	<script type="text/javascript">
+	  $('#reviewForm').submit(function (e) {
+		    e.preventDefault(); // 폼 전송 막기
+
+		    $.ajax({
+		      type: 'POST',
+		      url: '/restaurant/review/write', // 컨트롤러 경로
+		      data: $(this).serialize(), // 폼 데이터 직렬화
+		      success: function (response) {
+		        // 서버가 JSON 형식의 새 리뷰 객체를 보냈다고 가정
+		        let html = `
+		          <div class="d-flex gap-4 mb-6">
+		            <img src="/usr/assets/images/avatar/avatar-1.jpg" class="avatar avatar-lg rounded-circle" />
+		            <div>
+		              <h3 class="fs-6 mb-1">${response.nickname}</h3>
+		              <span class="small text-muted">${response.createdAt}</span>
+		              <p>${response.content}</p>
+		            </div>
+		          </div>
+		        `;
+
+		        $('#reviewList').prepend(html); // 가장 위에 새 리뷰 추가
+		        $('#reviewContent').val(''); // 입력창 비우기
+		      },
+		      error: function () {
+		        alert('리뷰 작성 중 오류가 발생했습니다.');
+		      }
+		    });
+		  });
+</script>
 	
 	<script type="text/javascript">
 		
