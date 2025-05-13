@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.a7a7.module.accom.AccomDto;
 import com.a7a7.module.accom.AccomService;
 import com.a7a7.module.restaurant.RestaurantDto;
 import com.a7a7.module.restaurant.RestaurantService;
@@ -27,12 +28,12 @@ public class ContactController {
 	    return "usr/contact/contact";
 	}
 	
-//	@RequestMapping(value = "/accom/contact")
-//	public String accomContact(@RequestParam("accomId") String accomId, Model model) {
-//		RestaurantDto accom = accomService.findByaccomId(accomId);
-//		model.addAttribute("item", accom);
-//		
-//		return "usr/contact/contact";
-//	}
+	@RequestMapping(value = "/accom/contact")
+	public String accomContact(@RequestParam("accomId") String accomId, Model model) {
+		AccomDto accom = accomService.findAccomById(accomId);
+		model.addAttribute("item", accom);
+		
+		return "usr/contact/contact";
+	}
 	
 }

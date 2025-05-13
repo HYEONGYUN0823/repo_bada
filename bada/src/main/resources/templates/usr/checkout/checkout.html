@@ -511,7 +511,15 @@
 											alt="product image" class="border" width="60" /></a>
 
 									<div class="mb-2">
-										<h3 class="fs-6 mb-1 text-link"><a th:text="${item.title}" th:href="'/bada/restaurant/' + ${item.restaurantId}">Stylish Wooden Table Lamp</a></h3>
+										<h3 class="fs-6 mb-1 text-link">
+										  <a th:if="${type == 'restaurant'}"
+										     th:text="${item.title}"
+										     th:href="'/bada/restaurant/' + ${item.restaurantId}"></a>
+										
+										  <a th:if="${type == 'accom'}"
+										     th:text="${item.title}"
+										     th:href="'/bada/accom/' + ${item.accomId}"></a>
+										</h3>
 
 <!-- 										<p class="mb-2 text-dark">Black</p> -->
 									</div>
