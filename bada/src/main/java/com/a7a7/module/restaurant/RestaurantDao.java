@@ -17,4 +17,5 @@ public interface RestaurantDao {
 	public List<RestaurantDto> findRestaurantList(@Param("pageVo") PageVo pageVo, @Param("searchVo") SearchVo searchVo); // 식당 전체 출력
 	public int countRestaurantList(@Param("pageVo") PageVo pageVo, @Param("searchVo") SearchVo searchVo); // 숙박업소 전체 개수
 	
+	public RestaurantDto findByRestaurantId(String restaurantId); // 1:1문의
 }

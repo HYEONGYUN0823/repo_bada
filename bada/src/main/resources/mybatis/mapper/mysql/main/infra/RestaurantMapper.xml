@@ -105,4 +105,11 @@
 		)
 	</insert>
 	
+	<select id="findByRestaurantId" resultMap="resultMapObj">
+		SELECT * FROM
+			restaurant
+		WHERE
+			restaurant_id = #{restaurantId}
+	</select>
+	
 </mapper>

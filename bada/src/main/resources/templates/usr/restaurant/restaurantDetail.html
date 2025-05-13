@@ -77,7 +77,7 @@
 					          <div class="d-flex flex-md-row flex-column gap-2">
 					          	<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">지도보기</button>
 					            <a href="#!" class="btn btn-dark">예약하기</a>
-					            <a href="/contact" class="btn btn-outline-dark">1:1문의</a>
+					            <a th:href="@{/restaurant/contact(restaurantId=${item.restaurantId})}" class="btn btn-outline-dark">1:1문의</a>
 					          </div>
 					        </div>
 					      </div>
