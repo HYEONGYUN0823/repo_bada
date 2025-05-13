@@ -8,7 +8,6 @@ public class MemberDto {
 	private String name;
 	private String createdtime;
 	private String modifiedtime;
-	private Integer delNy;
 	
 	
 	public String getMemberId() {
@@ -46,11 +45,5 @@ public class MemberDto {
 	}
 	public void setModifiedtime(String modifiedtime) {
 		this.modifiedtime = modifiedtime;
-	}
-	public Integer getDelNy() {
-		return delNy;
-	}
-	public void setDelNy(Integer delNy) {
-		this.delNy = delNy;
 	}
 }

@@ -31,5 +31,11 @@ public class MemberController {
 		return "usr/member/signUp";
 	}
 	
+	// 회원가입
+	@RequestMapping("/bada/saveMember")
+	public String saveMember() {
+		return "redirect:/index";
+	}
+	
 	
 }

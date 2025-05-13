@@ -21,7 +21,7 @@
 	<!-- Theme CSS -->
 	<link rel="stylesheet" href="/usr/assets/css/theme.min.css">
 
-	<title>Sign Up eCommerce HTML Template - FreshCart Furniture</title>
+	<title>바다어때 - 회원가입</title>
 </head>
 
 <body>
@@ -43,13 +43,13 @@
 								</div>
 
 								<!-- form -->
-								<form class="needs-validation" novalidate>
+								<form action="/bada/saveMember" class="needs-validation" novalidate>
 									<div class="row g-3">
 										<!-- col -->
 										<div class="col-12">
 											<!-- input -->
 											<label for="formSignupName" class="form-label visually-hidden">이름</label>
-											<input type="text" class="form-control" id="formSignupName"
+											<input type="text" class="form-control" id="formSignupName" name="name"
 												placeholder="이름" required />
 											<div class="invalid-feedback">이름을 입력해 주세요.</div>
 										</div>
@@ -57,7 +57,7 @@
 											<!-- input -->
 											<label for="formSignupEmail" class="form-label visually-hidden">Email
 												address</label>
-											<input type="email" class="form-control" id="formSignupEmail"
+											<input type="email" class="form-control" id="formSignupEmail" name="email"
 												placeholder="Email" required />
 											<div class="invalid-feedback">이메일을 입력해 주세요.</div>
 										</div>
@@ -66,7 +66,7 @@
 												<label for="formSignupPassword"
 													class="form-label visually-hidden">Password</label>
 												<div class="password-field position-relative">
-													<input type="password" class="form-control fakePassword"
+													<input type="password" class="form-control fakePassword" name="password"
 														id="formSignupPassword" placeholder="*****" required />
 													<span><i class="bi bi-eye-slash passwordToggler"></i></span>
 													<div class="invalid-feedback">비밀번호를 입력해 주세요.</div>
