@@ -97,18 +97,19 @@
 		and predcYmd = #{predcYmd}
 	</update>
 	
-	<!--<update id="forecastDelete">
+	<update id="forecastDelete">
     update forecast 
     set del_ny = 1
     where (
         predcYmd &lt; now()
         or
-        <if test="sea_id != null and predcYmd != null and predcNoonSeCd == '일'">
+        <if test="sea_id != null and predcYmd != null and predcNoonSeCd eq '일'">
             sea_id = #{sea_id}
             and predcYmd = #{predcYmd}
+            and predcNoonSeCd eq '일'
         </if>
     	)
-	</update>-->
+	</update>
 
 	
 	<select id="countSeaList" resultType="Integer">
@@ -148,8 +149,7 @@
 		,a.lot
 	from
 		sea a
-	where 1=1
-	and sea_id = #{sea_id}
+	where sea_id = #{sea_id}
 	</select>
 	
 	
@@ -170,7 +170,6 @@
 		forecast 
 	where 1=1
 	and	sea_id = #{sea_id}
-	and 
 	</select>
 	
 </mapper>
