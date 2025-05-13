@@ -21,7 +21,7 @@ public class ContactController {
 	
 	@RequestMapping(value = "/restaurant/contact")
 	public String restaurantContact(@RequestParam("restaurantId") String restaurantId, Model model) {
-	    RestaurantDto restaurant = restaurantService.findByRestaurantId(restaurantId);
+	    RestaurantDto restaurant = restaurantService.findRestaurantById(restaurantId);
 	    model.addAttribute("item", restaurant);
 	    
 	    return "usr/contact/contact";

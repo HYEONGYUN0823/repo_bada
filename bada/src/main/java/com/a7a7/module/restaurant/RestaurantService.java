@@ -91,8 +91,4 @@ public class RestaurantService {
 		return dao.countRestaurantList(pageVo, searchVo);
 	}
 	
-	public RestaurantDto findByRestaurantId(String restaurantId) {
-		return dao.findByRestaurantId(restaurantId);
-	}
-	
 }
