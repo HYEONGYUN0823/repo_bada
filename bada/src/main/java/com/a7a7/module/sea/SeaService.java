@@ -110,14 +110,14 @@ public class SeaService {
 	                    itemDTO.getPredcNoonSeCd().equals(checkDto.getPredcNoonSeCd())){
 	                    isExist = true;
 	                    dao.forecastUpdate(itemDTO);
-	                    dao.forecastDelete(itemDTO);
+	                    dao.forecastDelete1(itemDTO);
 	                    break;
 	                }
 	            }
 	            // 중복이 아니면 insert
 	            if (!isExist) {
 	                dao.forecastInsert(itemDTO);
-	                dao.forecastDelete(itemDTO);
+	                dao.forecastDelete2(itemDTO);
 	                confirmForecastList = dao.forecastList();  // DB에서 최신 예보 리스트를 다시 불러옵니다.
 	            }
 	                        

@@ -18,7 +18,8 @@ public interface SeaDao {
 	public int seaInsert(SeaDto dto); // api에서 바다여행지역 리스트
 	public int forecastInsert(SeaDto dto); // api에서 바다여행지수 리스트
 	public int forecastUpdate(SeaDto dto);
-	public int forecastDelete(SeaDto dto);
+	public int forecastDelete1(SeaDto dto);
+	public int forecastDelete2(SeaDto dto);
 	
 	public int countSeaList(@Param("pageVo") PageVo pageVo, @Param("searchVo") SearchVo searchVo); // 바다여행지역 전체 개수
 	

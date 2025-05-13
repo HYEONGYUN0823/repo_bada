@@ -97,18 +97,19 @@
 		and predcYmd = #{predcYmd}
 	</update>
 	
-	<update id="forecastDelete">
-    update forecast 
-    set del_ny = 1
-    where (
-        predcYmd &lt; now()
-        or
-        <if test="sea_id != null and predcYmd != null and predcNoonSeCd eq '일'">
-            sea_id = #{sea_id}
-            and predcYmd = #{predcYmd}
-            and predcNoonSeCd eq '일'
-        </if>
-    	)
+	<update id="forecastDelete1">
+    update forecast set 
+    	del_ny = 1
+    where predcYmd &lt; now()
+	</update>
+
+	<update id="forecastDelete2">
+    update forecast set 
+    	del_ny = 1
+    where 
+	and sea_id = #{sea_id}
+	and predcYmd = #{predcYmd}
+	and predcNoonSeCd ='일'
 	</update>
 
 	
