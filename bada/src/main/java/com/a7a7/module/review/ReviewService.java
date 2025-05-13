@@ -1,5 +1,7 @@
 package com.a7a7.module.review;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +11,8 @@ public class ReviewService {
 	@Autowired
 	ReviewDao dao;
 	
-	public ReviewDto findAllReviewByParent(ReviewDto dto) {
-		return dao.findAllReviewByParent(dto);
+	public List<ReviewDto> findReviewListByParent(ReviewDto dto) {
+		return dao.findReviewListByParent(dto);
 	}
 	
 }

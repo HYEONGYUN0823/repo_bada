@@ -203,6 +203,41 @@
 	        .catch(error => console.error("리뷰 로딩 실패: ", error));
 	}
   
+/* 	// 리뷰 저장
+	function saveReview() {
+	    const menuId = document.getElementById('menu_seq').value;
+	    const userId = document.getElementById('user_seq').value;
+	    const nickname = document.querySelector('input[type="text"]').value.trim();
+	    const content = document.querySelector('textarea').value.trim();
+	    const rate = parseInt(document.getElementById('reviewRate').value, 10);
+
+	    if (!content || rate <= 0) {
+	        alert("리뷰 내용과 평점을 모두 입력해주세요.");
+	        return;
+	    }
+
+	    const review = {
+	        menu_seq: menuId,
+	        user_seq: userId,
+	        nickname: nickname,
+	        reviewDescription: content,
+	        reviewRate: rate
+	    };
+
+	    fetch('/TableOrder/reviewInst', {
+	        method: 'POST',
+	        headers: { 'Content-Type': 'application/json' },
+	        body: JSON.stringify(review)
+	    })
+	    .then(res => res.json())
+	    .then(() => {
+	        loadReview();  // 저장 후 리뷰 다시 로드
+	    })
+	    .catch(err => {
+	        console.error(err);
+	        alert("저장 중 오류가 발생했습니다.");
+	    });
+	} */
 	
 </script>
 

@@ -14,7 +14,7 @@ public class ReviewController {
 	@GetMapping("/bada/reviewFragment")
 	public String reviewFragment(ReviewDto dto, Model model) {
 		System.out.println(dto);
-		model.addAttribute("reviewList", service.findAllReviewByParent(dto));
+		model.addAttribute("reviewList", service.findReviewListByParent(dto));
 		return "/usr/fragment/reviewFragment :: reviewFragment";
 	}
 	

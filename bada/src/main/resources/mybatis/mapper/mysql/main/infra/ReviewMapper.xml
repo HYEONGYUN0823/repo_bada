@@ -5,7 +5,7 @@
 	
 	<resultMap id="resultMapObj" type="com.a7a7.module.review.ReviewDto"/>
 	
-	<select id="findAllReviewByParent" resultMap="resultMapObj">
+	<select id="findReviewListByParent" resultMap="resultMapObj">
 		SELECT
 			r.rating
 		    ,r.contents

@@ -1,11 +1,13 @@
 package com.a7a7.module.review;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReviewDao {
 	
-	public ReviewDto findAllReviewByParent(ReviewDto dto); // Parent정보로 DB 검색
+	public List<ReviewDto> findReviewListByParent(ReviewDto dto); // Parent정보로 DB 검색
 	
 //	public void saveAccomApiResponse(AccomDto dto); // AccomApi 호출 값 DB 저장
 //	public AccomDto findAccomByTitle(String title); // 숙박업소명으로 DB 검색
