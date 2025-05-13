@@ -1608,7 +1608,8 @@
 	
 
 	<!-- kakaoMap -->
-<script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${kakaoApiKey}"></script>
+	<script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${kakaoApiKey}"></script>
+	<script th:inline="javascript">const locations = /*[[${items}]]*/ [];</script>	<!-- th:inline="javascript", Spring에서 넘긴 items가 자동으로 JSON처럼 직렬화돼서 JavaScript 변수, 마커를 위한 위도경도-->
 	<script type="text/javascript">
 		    // 지도의 중심좌표: 대한민국 중앙쯤
 		    var mapContainer = document.getElementById('map');
@@ -1616,9 +1617,26 @@
 		      center: new kakao.maps.LatLng(36.5, 127.5), // 위도, 경도 (대한민국 중심)
 		      level: 13 // 숫자가 작을수록 더 확대됨
 		    };
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+			
+			locations.forEach(loc => {
+			  const markerPosition = new kakao.maps.LatLng(loc.lat, loc.lot);
+			  const marker = new kakao.maps.Marker({
+			    position: markerPosition,
+			    map: map
+			  });
+			 // 마커 클릭 시 이름 출력 (선택)
+			   const infowindow = new kakao.maps.InfoWindow({
+			     content: `<div>${loc.sareaDtlNm}</div>`
+			  });
+
+			    kakao.maps.event.addListener(marker, 'click', function() {
+			      infowindow.open(map, marker);
+			    }); 
+			  
+			 });
 
 		    // 지도 생성
-		    var map = new kakao.maps.Map(mapContainer, mapOption);
 		    marker.setMap(map);	
 	</script>
 		
