@@ -110,12 +110,14 @@ public class SeaService {
 	                    itemDTO.getPredcNoonSeCd().equals(checkDto.getPredcNoonSeCd())){
 	                    isExist = true;
 	                    dao.forecastUpdate(itemDTO);
+						/* dao.forecastDelete(itemDTO); */
 	                    break;
 	                }
 	            }
 	            // 중복이 아니면 insert
 	            if (!isExist) {
 	                dao.forecastInsert(itemDTO);
+					/* dao.forecastDelete(itemDTO); */
 	                confirmForecastList = dao.forecastList();  // DB에서 최신 예보 리스트를 다시 불러옵니다.
 	            }
 	                        
@@ -153,6 +155,10 @@ public class SeaService {
 	// 숙박업소 전체 개수
 	public int countSeaList(PageVo pageVo, SearchVo searchVo) {
 		return dao.countSeaList(pageVo, searchVo);
+	}
+	
+	public List<SeaDto> localForecastList(String sea_id){
+		return dao.localForecastList(sea_id);
 	}
 	
 	

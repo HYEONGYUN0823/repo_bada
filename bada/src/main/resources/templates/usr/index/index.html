@@ -1625,14 +1625,11 @@
 			    position: markerPosition,
 			    map: map
 			  });
-			 // 마커 클릭 시 이름 출력 (선택)
-			   const infowindow = new kakao.maps.InfoWindow({
-			     content: `<div>${loc.sareaDtlNm}</div>`
-			  });
+			  
 
-			    kakao.maps.event.addListener(marker, 'click', function() {
-			      infowindow.open(map, marker);
-			    }); 
+			  kakao.maps.event.addListener(marker, 'click', function() {
+			    window.location.href = `/bada/travel/${loc.sea_id}`;
+			  }); 
 			  
 			 });
 

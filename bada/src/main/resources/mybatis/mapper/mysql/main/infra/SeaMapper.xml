@@ -20,7 +20,7 @@
 		,lat
 		,lot
 		,createdtime
-		,delNy
+		,del_ny
 		,manager_id
 	)values(
 		#{sareaDtlNm}
@@ -64,6 +64,8 @@
 		,weather
 		,totalIndex
 		,sea_id
+		,createdtime
+		,del_ny
 	)values(
 		#{predcYmd}
 		,#{predcNoonSeCd}
@@ -75,6 +77,8 @@
 		,#{weather}
 		,#{totalIndex}
 		,#{sea_id}
+		,now()
+		,0
 	)
 	</insert>
 	
@@ -88,11 +92,24 @@
 		,weather = #{weather}
 		,totalIndex = #{totalIndex}
 	where 1=1
-		and sea_id =#{sea_id}
+		and sea_id = #{sea_id}
 		and predcNoonSeCd = #{predcNoonSeCd}
 		and predcYmd = #{predcYmd}
 	</update>
 	
+	<!--<update id="forecastDelete">
+    update forecast 
+    set del_ny = 1
+    where (
+        predcYmd &lt; now()
+        or
+        <if test="sea_id != null and predcYmd != null and predcNoonSeCd == '일'">
+            sea_id = #{sea_id}
+            and predcYmd = #{predcYmd}
+        </if>
+    	)
+	</update>-->
+
 	
 	<select id="countSeaList" resultType="Integer">
 		SELECT
@@ -135,5 +152,25 @@
 	and sea_id = #{sea_id}
 	</select>
 	
+	
+	<!-- 날짜는 지금 시간으로부터 5일동안 보이는것만 하게.-->
+	<select id ="localForecastList" resultMap="resultMapObj">
+	select
+		predcYmd
+		,predcNoonSeCd
+		,avgArtmp
+		,avgWspd
+		,avgWtem
+		,avgWvhgt
+		,avgCrsp
+		,weather
+		,totalIndex
+		,sea_id
+	from
+		forecast 
+	where 1=1
+	and	sea_id = #{sea_id}
+	and 
+	</select>
 	
 </mapper>

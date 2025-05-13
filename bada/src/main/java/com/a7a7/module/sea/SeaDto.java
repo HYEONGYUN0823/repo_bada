@@ -17,6 +17,8 @@ public class SeaDto {
     private String avgCrsp;
     private String weather;
     private String totalIndex;
+    private Integer del_ny;
+    private String createdtime;
     private String sea_id;		//나중에 물어보기
     
     
@@ -106,6 +108,18 @@ public class SeaDto {
 	}
 	public void setManager_id(String manager_id) {
 		this.manager_id = manager_id;
+	}
+	public Integer getDel_ny() {
+		return del_ny;
+	}
+	public void setDel_ny(Integer del_ny) {
+		this.del_ny = del_ny;
+	}
+	public String getCreatedtime() {
+		return createdtime;
+	}
+	public void setCreatedtime(String createdtime) {
+		this.createdtime = createdtime;
 	}
 	
     
