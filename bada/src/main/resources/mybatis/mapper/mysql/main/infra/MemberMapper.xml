@@ -5,6 +5,30 @@
 	
 	<resultMap id="resultMapObj" type="com.a7a7.module.member.MemberDto"/>
 	
+	<insert id="saveMember">
+		INSERT INTO member(
+			email
+			,password
+			,name
+			,createdtime
+			,del_ny
+		) VALUES(
+			#{email}
+			,#{password}
+			,#{name}
+			,now()
+			,0
+		)
+	</insert>
+	
+	<select id="findPasswordByEmail" resultMap="resultMapObj">
+		SELECT
+			password
+		FROM 
+			member
+		WHERE
+			email = #{email}
+	</select>
 	
 	
 </mapper>

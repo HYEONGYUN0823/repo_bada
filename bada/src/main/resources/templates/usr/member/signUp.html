@@ -43,7 +43,7 @@
 								</div>
 
 								<!-- form -->
-								<form action="/bada/saveMember" class="needs-validation" novalidate>
+								<form action="/bada/saveMember" method="POST" class="needs-validation" novalidate>
 									<div class="row g-3">
 										<!-- col -->
 										<div class="col-12">
@@ -57,7 +57,7 @@
 											<!-- input -->
 											<label for="formSignupEmail" class="form-label visually-hidden">Email
 												address</label>
-											<input type="email" class="form-control" id="formSignupEmail" name="email"
+											<input type="text" class="form-control" id="formSignupEmail" name="email"
 												placeholder="Email" required />
 											<div class="invalid-feedback">이메일을 입력해 주세요.</div>
 										</div>

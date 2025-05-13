@@ -5,5 +5,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberDao {
 	
+	public int saveMember(MemberDto dto);
+	public MemberDto findPasswordByEmail(String email);
 	
 }
