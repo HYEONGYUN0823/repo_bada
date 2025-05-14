@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
+import com.a7a7.module.codegroup.CodeGroupController;
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -19,11 +19,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class SeaService {
 
+    private final CodeGroupController codeGroupController;
+
 	@Autowired
 	SeaDao dao;
 	
 	@Value("${sea_api_key}")
 	private String serviceKey;
+
+
+    SeaService(CodeGroupController codeGroupController) {
+        this.codeGroupController = codeGroupController;
+    }
 	
 	
 	public void seaApiResponse() throws Exception {		
@@ -55,7 +62,7 @@ public class SeaService {
 		
 		JsonNode itemsNode = node.path("response").path("body").path("items").path("item");  //이렇게 중첩된 구조에서 items는 객체이고, 그 안에 item 배열이 존재하기 때문에 items.get("item")으로 배열을 꺼내서 넘겨줘야 Thymeleaf에서 이를 순회하며 값을 출력할 수 있게 됩니다.
 		
-		List<SeaDto> itemList = new ArrayList<>(); //items 데이터가 JSON 배열 형식이라면, 이를 제대로 List 형태로 변환하여 모델에 전달하는 것이 좋습니다. JsonNode에서 직접 데이터를 추출할 때, JsonNode를 List나 DTO 객체로 변환하는 것이 중요
+		 List<SeaDto> itemList = new ArrayList<>(); //items 데이터가 JSON 배열 형식이라면, 이를 제대로 List 형태로 변환하여 모델에 전달하는 것이 좋습니다. JsonNode에서 직접 데이터를 추출할 때, JsonNode를 List나 DTO 객체로 변환하는 것이 중요
 		 List<SeaDto> confirmSeaList = dao.seaList(); 
 		 List<SeaDto> confirmForecastList = dao.forecastList();  
 		 
@@ -111,13 +118,14 @@ public class SeaService {
 	                    isExist = true;
 	                    dao.forecastUpdate(itemDTO);
 	                    dao.forecastDelete1(itemDTO);
+	                    dao.forecastDelete2(findForecastDeleteList(itemDTO));
 	                    break;
 	                }
 	            }
 	            // 중복이 아니면 insert
 	            if (!isExist) {
 	                dao.forecastInsert(itemDTO);
-	                dao.forecastDelete2(itemDTO);
+	                dao.forecastDelete2(findForecastDeleteList(itemDTO));
 	                confirmForecastList = dao.forecastList();  // DB에서 최신 예보 리스트를 다시 불러옵니다.
 	            }
 	                        
@@ -140,6 +148,18 @@ public class SeaService {
 	}
 	public int forecastInsert(SeaDto dto){
 		return dao.forecastInsert(dto);
+	}
+	
+	//delete
+	public String findForecastDeleteList(SeaDto dto){
+		List<SeaDto> Searchlist = new ArrayList<>(dao.forecastList());
+		for(SeaDto list: Searchlist){
+			if(list.getSea_id().equals(dto.getSea_id()) && list.getPredcYmd().equals(dto.getPredcYmd()) && list.getPredcNoonSeCd().equals("일")
+				&& (dto.getPredcNoonSeCd().equals("오전")|| dto.getPredcNoonSeCd().equals("오후"))){
+				return list.getForecast_id();
+			}
+		}
+		return null;
 	}
 	
 	

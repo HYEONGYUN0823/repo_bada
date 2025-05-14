@@ -6,12 +6,13 @@
 	
 	<select id="seaList" resultMap="resultMapObj">
 		select
-			a.sea_id
-			,a.sareaDtlNm
-			,a.lat
-			,a.lot
+			sea_id
+			,sareaDtlNm
+			,lat
+			,lot
 		from
-			sea a
+			sea 
+		where 1=1
 	</select>
 	
 	<insert id="seaInsert">
@@ -36,6 +37,7 @@
 	<select id="forecastList" resultMap="resultMapObj">
 		select
 			b.sareaDtlNm
+			,a.forecast_id
 			,a.predcYmd
 			,a.predcNoonSeCd
 			,a.avgArtmp
@@ -50,6 +52,7 @@
 		forecast a
 		join sea b on b.sea_id = a.sea_id
 		where 1=1
+		and	a.del_ny = 0
 	</select>
 	
 	<insert id="forecastInsert">
@@ -100,16 +103,14 @@
 	<update id="forecastDelete1">
     update forecast set 
     	del_ny = 1
-    where predcYmd &lt; now()
+    where predcYmd &lt; CURDATE() - INTERVAL 1 SECOND
 	</update>
 
 	<update id="forecastDelete2">
     update forecast set 
     	del_ny = 1
-    where 
-	and sea_id = #{sea_id}
-	and predcYmd = #{predcYmd}
-	and predcNoonSeCd ='일'
+    where 1=1
+    and forecast_id = #{forecast_id}
 	</update>
 
 	
@@ -171,6 +172,7 @@
 		forecast 
 	where 1=1
 	and	sea_id = #{sea_id}
+	and del_ny = 0
 	</select>
 	
 </mapper>

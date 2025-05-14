@@ -104,15 +104,15 @@
       						</tr>
     					</thead>
     					<tbody>
-      						<tr>
-        						<td>1</td>
-        						<td>Cell</td>
-        						<td>Cell</td>
-        						<td>Cell</td>
-        						<td>Cell</td>
-        						<td>Cell</td>
-       		 					<td>Cell</td>
-        						<td>Cell</td>
+      						<tr th:each="item:${items}">
+        						<td th:text="${item.predcYmd}">1</td>
+        						<td th:text="${item.predcNoonSeCd}">Cell</td>
+        						<td th:text="${item.avgArtmp}">Cell</td>
+        						<td th:text="${item.avgWtem}">Cell</td>
+        						<td th:text="${item.avgWvhgt}">Cell</td>
+        						<td th:text="${item.avgCrsp}">Cell</td>
+       		 					<td th:text="${item.weather}">Cell</td>
+        						<td th:text="${item.totalIndex}">Cell</td>
       						</tr>
    						</tbody>
   					</table>

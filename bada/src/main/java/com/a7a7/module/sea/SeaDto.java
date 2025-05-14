@@ -8,6 +8,7 @@ public class SeaDto {
     private String manager_id;
     
     //forecast table
+    private String forecast_id;
     private String predcYmd;
     private String predcNoonSeCd;
     private String avgArtmp;
@@ -27,6 +28,12 @@ public class SeaDto {
     
 	public String getSareaDtlNm() {
 		return sareaDtlNm;
+	}
+	public String getForecast_id() {
+		return forecast_id;
+	}
+	public void setForecast_id(String forecast_id) {
+		this.forecast_id = forecast_id;
 	}
 	public void setSareaDtlNm(String sareaDtlNm) {
 		this.sareaDtlNm = sareaDtlNm;

@@ -67,7 +67,7 @@ public class SeaController {
 	public String findUsrTravelView(@PathVariable("id") String sea_id,Model model){
 		model.addAttribute("list",service.seaView(sea_id));
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
-		model.addAttribute("item",service.localForecastList(sea_id));
+		model.addAttribute("items",service.localForecastList(sea_id));
 		return "usr/travel/travelView";
 	}
 }
