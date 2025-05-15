@@ -1,5 +1,8 @@
 package com.a7a7.module.userUi;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -7,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.a7a7.common.config.MemberDetails;
 import com.a7a7.module.sea.SeaService;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserUiController {
@@ -25,12 +25,12 @@ public class UserUiController {
 	@RequestMapping(value = "/index")
 	public String index(Model model, Authentication auth) {
 		
-//	  MemberDetails memberDetails = (MemberDetails) auth.getPrincipal();
-//	  System.out.println("@@@@@@@@@@@@@@@@@");
-//	  System.out.println(memberDetails.getUsername()); // 이메일
-//	  System.out.println(memberDetails.getLoginName()); // 유저이름
+		String day = "";
+		if (day == "" || day.trim().isEmpty()) {
+		       day = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		}
 		 		
-		model.addAttribute("items", seaService.userindexmap()); //여행지 위도,경도 값 자바스크립트에 보내기.
+		model.addAttribute("items", seaService.userindexmap(day)); //여행지 위도,경도 값 자바스크립트에 보내기.
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		return "usr/index/index";
 	}
