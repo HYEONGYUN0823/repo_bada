@@ -2,11 +2,15 @@ package com.a7a7.module.userUi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.a7a7.common.config.MemberDetails;
 import com.a7a7.module.sea.SeaService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserUiController {

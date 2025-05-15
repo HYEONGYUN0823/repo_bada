@@ -15,16 +15,16 @@ public class MemberController {
 	public String showSignIn() {
 		return "usr/member/signIn";
 	}
-	// 로그인
-	@PostMapping("/bada/processSignIn")
-	public String processSignIn(MemberDto dto) {
-		
-		if(service.processSignIn(dto)) {
-			return "redirect:/index";
-		} else {
-			return "redirect:/bada/signIn";
-		}
-	}
+//	// 로그인
+//	@PostMapping("/bada/processSignIn")
+//	public String processSignIn(MemberDto dto) {
+//		
+//		if(service.processSignIn(dto)) {
+//			return "redirect:/index";
+//		} else {
+//			return "redirect:/bada/signIn";
+//		}
+//	}
 
 	
 	// 회원가입 화면
