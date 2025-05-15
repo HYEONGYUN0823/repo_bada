@@ -23,7 +23,13 @@ public class UserUiController {
 	
 	
 	@RequestMapping(value = "/index")
-	public String index(Model model) {
+	public String index(Model model, Authentication auth) {
+		
+//	  MemberDetails memberDetails = (MemberDetails) auth.getPrincipal();
+//	  System.out.println("@@@@@@@@@@@@@@@@@");
+//	  System.out.println(memberDetails.getUsername()); // 이메일
+//	  System.out.println(memberDetails.getLoginName()); // 유저이름
+		 		
 		model.addAttribute("items", seaService.userindexmap()); //여행지 위도,경도 값 자바스크립트에 보내기.
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		return "usr/index/index";

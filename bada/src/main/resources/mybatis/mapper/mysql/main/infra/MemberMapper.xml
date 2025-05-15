@@ -25,6 +25,7 @@
 		SELECT
 			email
 			,password
+			,name
 		FROM 
 			member
 		WHERE
