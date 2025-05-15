@@ -25,6 +25,7 @@ public interface SeaDao {
 	public int countSeaList(@Param("pageVo") PageVo pageVo, @Param("searchVo") SearchVo searchVo); // 바다여행지역 전체 개수
 	
 	//사용자부분
+	public List<SeaDto> userindexmap();
 	public List<SeaDto> seaUsrList(@Param("pageVo") PageVo pageVo, @Param("searchVo") SearchVo searchVo);
 	public SeaDto seaView(String sea_id);
 }

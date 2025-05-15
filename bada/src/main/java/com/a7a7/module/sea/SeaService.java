@@ -165,6 +165,10 @@ public class SeaService {
 	
 	
 	//사용자부분
+	public List<SeaDto> userindexmap(){
+		return dao.userindexmap();
+	}
+	
 	public List<SeaDto> seaUsrList(PageVo pageVo,SearchVo searchVo){
 		return dao.seaUsrList(pageVo,  searchVo);
 	}
