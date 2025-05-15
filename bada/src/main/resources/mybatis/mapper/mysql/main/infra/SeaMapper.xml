@@ -55,6 +55,7 @@
 		join sea b on b.sea_id = a.sea_id
 		where 1=1
 		and	a.del_ny = 0
+		order by a.sea_id asc, a.predcYmd ASC
 	</select>
 	
 	
@@ -155,7 +156,35 @@
 	</select>
 	
 	
+	<!--***************-->
 	<!--사용자 부분-->
+	<!--***************-->
+	
+	<select id="userindexmap" resultMap="resultMapObj">
+		select
+			a.sea_id
+			,a.sareaDtlNm
+			,a.lat
+			,a.lot
+			,b.forecast_id
+			,b.predcYmd
+			,b.predcNoonSeCd
+			,b.avgArtmp
+			,b.avgWspd
+			,b.avgWtem
+			,b.avgWvhgt
+			,b.avgCrsp
+			,b.weather
+			,b.totalIndex
+			,b.sea_id
+		from
+		sea a
+		join forecast b on b.sea_id = a.sea_id
+		where 1=1
+	
+	</select>	
+	
+	<!-- /bada/travel/list -->
 	<select id="seaUsrList" resultMap="resultMapObj">
 		select
 			sea_id
@@ -171,6 +200,7 @@
 		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
 	</select>
 	
+	<!-- /bada/travel/id -->
 	<select id="seaView" resultMap="resultMapObj">
 	select
 		a.sareaDtlNm
@@ -182,7 +212,7 @@
 	</select>
 	
 	
-	<!-- 날짜는 지금 시간으로부터 5일동안 보이는것만 하게.-->
+<!-- /bada/travel/id에서 바다여행지수 -->
 	<select id ="localForecastList" resultMap="resultMapObj">
 	select
 		predcYmd
