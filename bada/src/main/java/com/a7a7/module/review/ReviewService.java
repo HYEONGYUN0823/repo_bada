@@ -15,4 +15,8 @@ public class ReviewService {
 		return dao.findReviewListByParent(dto);
 	}
 	
+	public int saveReview(ReviewDto dto) {
+		return dao.saveReview(dto);
+	}
+	
 }

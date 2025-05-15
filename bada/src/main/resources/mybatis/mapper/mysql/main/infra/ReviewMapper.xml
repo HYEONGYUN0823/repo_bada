@@ -21,5 +21,25 @@
 		    AND r.parent_id = #{parentId}
 	</select>
 	
+	<insert id="saveReview">
+		INSERT INTO review(
+			parent_type
+			,parent_id
+			,rating
+			,contents
+			,createdtime
+			,del_ny
+			,member_id
+		) VALUES(
+			#{parentType}
+			,#{parentId}
+			,#{rating}
+			,#{contents}
+			,now()
+			,0
+			,#{memberId}
+		)
+	</insert>
+	
 	
 </mapper>

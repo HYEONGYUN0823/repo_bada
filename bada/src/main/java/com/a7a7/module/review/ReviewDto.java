@@ -9,6 +9,7 @@ public class ReviewDto {
 	
 	private Integer parentType;
 	private String parentId;
+	private String memberId;
 	
 	
 	
@@ -47,6 +48,12 @@ public class ReviewDto {
 	}
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	@Override
 	public String toString() {
