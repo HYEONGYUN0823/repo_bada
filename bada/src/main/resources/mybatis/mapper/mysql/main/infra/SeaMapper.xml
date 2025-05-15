@@ -131,7 +131,6 @@
     update forecast set 
     	del_ny = 1
     where predcYmd &lt; CURDATE() - INTERVAL 1 SECOND
-    and sea_id = #{sea_id}
 	</update>
 
 	<update id="forecastDelete2">
