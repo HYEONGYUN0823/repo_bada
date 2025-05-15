@@ -169,11 +169,6 @@
 			,b.forecast_id
 			,b.predcYmd
 			,b.predcNoonSeCd
-			,b.avgArtmp
-			,b.avgWspd
-			,b.avgWtem
-			,b.avgWvhgt
-			,b.avgCrsp
 			,b.weather
 			,b.totalIndex
 			,b.sea_id
@@ -181,7 +176,7 @@
 		sea a
 		join forecast b on b.sea_id = a.sea_id
 		where 1=1
-	
+		and b.predcYmd = #{day}
 	</select>	
 	
 	<!-- /bada/travel/list -->

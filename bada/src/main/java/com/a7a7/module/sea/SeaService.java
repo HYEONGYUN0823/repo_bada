@@ -4,12 +4,15 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import com.a7a7.module.codegroup.CodeGroupController;
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
@@ -165,8 +168,8 @@ public class SeaService {
 	
 	
 	//사용자부분
-	public List<SeaDto> userindexmap(){
-		return dao.userindexmap();
+	public List<SeaDto> userindexmap(String day){
+		return dao.userindexmap(day);
 	}
 	
 	public List<SeaDto> seaUsrList(PageVo pageVo,SearchVo searchVo){
