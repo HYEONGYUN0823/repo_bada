@@ -1644,26 +1644,20 @@
 			   label.setMap(map);
 			
 			   const overlayContent = `
-			       <div style="background:white; border:1px solid #ccc; padding:5px; border-radius:5px;">
-			         <strong>${loc.sareaDtlNm}</strong><br/>
-			         ${loc.predcNoonSeCd}: ${loc.totalIndex}<br/>
-			       </div>
-			     `; 
-				 const overlay = new kakao.maps.CustomOverlay({
-				     content: overlayContent,
-				     position: marker.getPosition(),
-				     yAnchor: 1,
-				     zIndex: 3
-				   });
-				   // 마우스 올렸을 때
-				    kakao.maps.event.addListener(marker, 'mouseover', function () {
-				      overlay.setMap(map);
-				    });
+			      <div style="background:white; border:1px solid #ccc; padding:5px; border-radius:5px;">
+			        <strong>${loc.sareaDtlNm}</strong><br/>
+			        ${loc.dataList.map(item => `${item.predcNoonSeCd}: ${item.totalIndex}`).join('<br/>')}
+			      </div>
+			    `; 
+				const overlay = new kakao.maps.CustomOverlay({
+				   content: overlayContent,
+				   position: marker.getPosition(),
+				   yAnchor: 1,
+				   zIndex: 3
+				 });
 
-				    // 마우스 뗐을 때
-				    kakao.maps.event.addListener(marker, 'mouseout', function () {
-				      overlay.setMap(null);
-					});
+				 kakao.maps.event.addListener(marker, 'mouseover', () => overlay.setMap(map));
+				 kakao.maps.event.addListener(marker, 'mouseout', () => overlay.setMap(null));
 			   
 			   	
 			  kakao.maps.event.addListener(marker, 'click', function() {

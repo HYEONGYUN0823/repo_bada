@@ -4,10 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -167,6 +168,7 @@ public class SeaService {
 	
 	
 	
+	
 	//사용자부분
 	public List<SeaDto> userindexmap(String day){
 		return dao.userindexmap(day);
@@ -188,5 +190,31 @@ public class SeaService {
 		return dao.localForecastList(sea_id);
 	}
 	
-	
+
+	public List<Map<String, Object>> getGroupedData(List<SeaDto> rawData) {
+	    Map<String, Map<String, Object>> grouped = new LinkedHashMap<>();
+
+	    for (SeaDto dto : rawData) {
+	        String key = dto.getSareaDtlNm(); // 지역명으로 묶기 (필요하면 sea_id 같이 써도 됨)
+	        
+	        grouped.computeIfAbsent(key, k -> {
+	            Map<String, Object> newEntry = new HashMap<>();
+	            newEntry.put("sareaDtlNm", dto.getSareaDtlNm());
+	            newEntry.put("lat", dto.getLat());
+	            newEntry.put("lot", dto.getLot());
+	            newEntry.put("sea_id", dto.getSea_id());
+	            newEntry.put("dataList", new ArrayList<Map<String, Object>>());
+	            return newEntry;
+	        });
+
+	        List<Map<String, Object>> dataList = (List<Map<String, Object>>) grouped.get(key).get("dataList");
+	        Map<String, Object> data = new HashMap<>();
+	        data.put("predcYmd", dto.getPredcYmd());
+	        data.put("predcNoonSeCd", dto.getPredcNoonSeCd());
+	        data.put("totalIndex", dto.getTotalIndex());
+	        dataList.add(data);
+	    }
+
+	    return new ArrayList<>(grouped.values());
+	}
 }

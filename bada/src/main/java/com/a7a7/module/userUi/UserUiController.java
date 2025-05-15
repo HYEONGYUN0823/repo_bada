@@ -2,6 +2,8 @@ package com.a7a7.module.userUi;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,9 +30,9 @@ public class UserUiController {
 		String day = "";
 		if (day == "" || day.trim().isEmpty()) {
 		       day = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		}
-		 		
-		model.addAttribute("items", seaService.userindexmap(day)); //여행지 위도,경도 값 자바스크립트에 보내기.
+		} 		
+		List<Map<String, Object>> processed = seaService.getGroupedData(seaService.userindexmap(day));
+		model.addAttribute("items", processed); //여행지 위도,경도 값 자바스크립트에 보내기.
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		return "usr/index/index";
 	}
