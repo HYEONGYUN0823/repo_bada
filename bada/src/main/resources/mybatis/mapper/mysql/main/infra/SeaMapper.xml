@@ -230,6 +230,7 @@
 	where 1=1
 	and	sea_id = #{sea_id}
 	and del_ny = 0
+	order by sea_id asc, predcYmd ASC
 	</select>
 	
 </mapper>
