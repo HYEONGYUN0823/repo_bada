@@ -20,7 +20,7 @@ public class UserUiController {
 	
 	@RequestMapping(value = "/index")
 	public String index(Model model) {
-		model.addAttribute("items", seaService.seaList()); //여행지 위도,경도 값 자바스크립트에 보내기.
+		model.addAttribute("items", seaService.userindexmap()); //여행지 위도,경도 값 자바스크립트에 보내기.
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		return "usr/index/index";
 	}
