@@ -15,6 +15,8 @@
 		where 1=1
 	</select>
 	
+	
+	
 	<insert id="seaInsert">
 	insert into sea(
 		sareaDtlNm
@@ -54,6 +56,31 @@
 		where 1=1
 		and	a.del_ny = 0
 	</select>
+	
+	
+	<select id="forecastchecklist" resultMap="resultMapObj">
+		select
+			b.sareaDtlNm
+			,a.forecast_id
+			,a.predcYmd
+			,a.predcNoonSeCd
+			,a.avgArtmp
+			,a.avgWspd
+			,a.avgWtem
+			,a.avgWvhgt
+			,a.avgCrsp
+			,a.weather
+			,a.totalIndex
+			,a.sea_id
+		from
+		forecast a
+		join sea b on b.sea_id = a.sea_id
+		where 1=1
+		and a.sea_id = #{sea_id}
+	</select>
+	
+	
+	
 	
 	<insert id="forecastInsert">
 	insert into forecast(
@@ -104,6 +131,7 @@
     update forecast set 
     	del_ny = 1
     where predcYmd &lt; CURDATE() - INTERVAL 1 SECOND
+    and sea_id = #{sea_id}
 	</update>
 
 	<update id="forecastDelete2">

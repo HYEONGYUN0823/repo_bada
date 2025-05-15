@@ -152,7 +152,7 @@ public class SeaService {
 	
 	//delete
 	public String findForecastDeleteList(SeaDto dto){
-		List<SeaDto> Searchlist = new ArrayList<>(dao.forecastList());
+		List<SeaDto> Searchlist = new ArrayList<>(dao.forecastchecklist(dto));
 		for(SeaDto list: Searchlist){
 			if(list.getSea_id().equals(dto.getSea_id()) && list.getPredcYmd().equals(dto.getPredcYmd()) && list.getPredcNoonSeCd().equals("일")
 				&& (dto.getPredcNoonSeCd().equals("오전")|| dto.getPredcNoonSeCd().equals("오후"))){

@@ -64,7 +64,8 @@ public class SeaController {
 	}
 	
 	@GetMapping("/bada/travel/{id}")
-	public String findUsrTravelView(@PathVariable("id") String sea_id,Model model){
+	public String findUsrTravelView(@PathVariable("id") String sea_id,Model model) throws Exception{
+		service.seaApiResponse();
 		model.addAttribute("list",service.seaView(sea_id));
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		model.addAttribute("items",service.localForecastList(sea_id));

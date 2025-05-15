@@ -13,6 +13,7 @@ public interface SeaDao {
 
 	public List<SeaDto> seaList();		// 바다여행지역 리스트
 	public List<SeaDto> forecastList(); // 바다여행지역의 바다여행지수 리스트
+	public List<SeaDto> forecastchecklist(SeaDto dto); // API부분 리스트 체크 확인
 	public List<SeaDto> localForecastList(String sea_id);
 	
 	public int seaInsert(SeaDto dto); // api에서 바다여행지역 리스트
