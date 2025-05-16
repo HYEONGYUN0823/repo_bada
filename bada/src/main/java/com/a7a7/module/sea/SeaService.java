@@ -181,6 +181,9 @@ public class SeaService {
 	public SeaDto seaView(String sea_id) {
 		return dao.seaView(sea_id);
 	}
+	public SeaDto findSeaById(String sea_id) {
+		return dao.findSeaById(sea_id);
+	}
 	// 숙박업소 전체 개수
 	public int countSeaList(PageVo pageVo, SearchVo searchVo) {
 		return dao.countSeaList(pageVo, searchVo);

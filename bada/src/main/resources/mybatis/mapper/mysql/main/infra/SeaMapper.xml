@@ -198,12 +198,26 @@
 	<!-- /bada/travel/id -->
 	<select id="seaView" resultMap="resultMapObj">
 	select
-		a.sareaDtlNm
+		a.sea_id
+		,a.sareaDtlNm
 		,a.lat
 		,a.lot
 	from
 		sea a
 	where sea_id = #{sea_id}
+	</select>
+	
+	<!-- /bada/travel/id -->
+	<select id="findSeaById" resultMap="resultMapObj">
+	select
+		sea_id AS sea_id
+		,sareaDtlNm
+		,lat
+		,lot
+	from
+		sea
+	where 1=1
+		AND sea_id = #{sea_id}
 	</select>
 	
 	
