@@ -15,6 +15,10 @@ public class ReviewService {
 		return dao.findReviewListByParent(dto);
 	}
 	
+	public int countReviewByParent(ReviewDto dto) {
+		return dao.countReviewByParent(dto);
+	}
+	
 	public int saveReview(ReviewDto dto) {
 		return dao.saveReview(dto);
 	}

@@ -19,7 +19,7 @@ public class ReviewController {
 	// 리뷰 Ajax
 	@GetMapping("/bada/reviewFragment")
 	public String reviewFragment(ReviewDto dto, Model model) {
-		System.out.println(dto);
+		model.addAttribute("reviewCount", service.countReviewByParent(dto));
 		model.addAttribute("reviewList", service.findReviewListByParent(dto));
 		return "usr/fragment/reviewFragment :: reviewFragment";
 	}
@@ -27,7 +27,6 @@ public class ReviewController {
 	// 리뷰 추가 Ajax
 	@PostMapping("/bada/saveReview")
 	public ResponseEntity<Map<String, String>> saveReview(@RequestBody ReviewDto dto) {
-		System.out.println(dto);
 		service.saveReview(dto);
 	    Map<String, String> response = new HashMap<>();
 	    response.put("message", "리뷰 저장");

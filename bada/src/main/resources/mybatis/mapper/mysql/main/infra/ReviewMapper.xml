@@ -21,6 +21,18 @@
 		    AND r.parent_id = #{parentId}
 	</select>
 	
+	<select id="countReviewByParent" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			review
+		WHERE
+			1=1
+			AND del_ny = 0
+		    AND parent_type = #{parentType}
+		    AND parent_id = #{parentId}
+	</select>
+	
 	<insert id="saveReview">
 		INSERT INTO review(
 			parent_type

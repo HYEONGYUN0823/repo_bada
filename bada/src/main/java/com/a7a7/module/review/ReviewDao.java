@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface ReviewDao {
 	
 	public List<ReviewDto> findReviewListByParent(ReviewDto dto); // Parent정보로 DB 검색
+	public int countReviewByParent(ReviewDto dto); // 리뷰 개수
 	public int saveReview(ReviewDto dto); // 리뷰 저장
 	
 //	public void saveAccomApiResponse(AccomDto dto); // AccomApi 호출 값 DB 저장
