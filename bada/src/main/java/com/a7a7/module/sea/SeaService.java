@@ -191,25 +191,25 @@ public class SeaService {
 	}
 	
 
-	public List<Map<String, Object>> getGroupedData(List<SeaDto> rawData) {
-	    Map<String, Map<String, Object>> grouped = new LinkedHashMap<>();
+	public List<Map<String, Object>> getGroupedData(List<SeaDto> rawData) {  //SeaDto 객체들을 모아놓은 rawData 리스트를 받아서, 지역별로 데이터를 그룹화하여 정리한 결과를 List<Map<String, Object>> 형태로 반환 -datalist를 반환받기 위해서
+	   
+		Map<String, Map<String, Object>> grouped = new LinkedHashMap<>(); // LinkedHashMap을 쓰는 이유는 grouped는 지역 이름 순으로 계속 출력되거나 유지돼야 하기 때문에 **입력 순서를 유지하는 LinkedHashMap**을 선택
 
 	    for (SeaDto dto : rawData) {
 	        String key = dto.getSareaDtlNm(); // 지역명으로 묶기 (필요하면 sea_id 같이 써도 됨)
 	        
-	        grouped.computeIfAbsent(key, k -> {
-	            Map<String, Object> newEntry = new HashMap<>();
+	        grouped.computeIfAbsent(key, k -> {  //computeIfAbsent: "만약 key에 해당하는 값이 없으면, 이 함수를 실행해서 값을 넣고 리턴해줘."
+	            Map<String, Object> newEntry = new HashMap<>();  //Object는 **모든 클래스의 최상위 부모(최상위 타입)** value값이 다 달라서 Object로 묶는거.
 	            newEntry.put("sareaDtlNm", dto.getSareaDtlNm());
 	            newEntry.put("lat", dto.getLat());
+	            newEntry.put("predcYmd", dto.getPredcYmd());
 	            newEntry.put("lot", dto.getLot());
 	            newEntry.put("sea_id", dto.getSea_id());
 	            newEntry.put("dataList", new ArrayList<Map<String, Object>>());
 	            return newEntry;
 	        });
-
-	        List<Map<String, Object>> dataList = (List<Map<String, Object>>) grouped.get(key).get("dataList");
+	        List<Map<String, Object>> dataList = (List<Map<String, Object>>) grouped.get(key).get("dataList");  //grouped.get(key) Map에서 key에 해당하는 값을 꺼내는 거, grouped.get(key).get("dataList")의 리턴 타입이 Object이기에 (List<Map<String, Object>>) 타입
 	        Map<String, Object> data = new HashMap<>();
-	        data.put("predcYmd", dto.getPredcYmd());
 	        data.put("predcNoonSeCd", dto.getPredcNoonSeCd());
 	        data.put("totalIndex", dto.getTotalIndex());
 	        dataList.add(data);
