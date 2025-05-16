@@ -1,10 +1,14 @@
 package com.a7a7.module.review;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ReviewController {
@@ -22,9 +26,12 @@ public class ReviewController {
 	
 	// 리뷰 추가 Ajax
 	@PostMapping("/bada/saveReview")
-	public ResponseEntity<String> saveReview(ReviewDto dto) {
+	public ResponseEntity<Map<String, String>> saveReview(@RequestBody ReviewDto dto) {
+		System.out.println(dto);
 		service.saveReview(dto);
-		return ResponseEntity.ok("리뷰 저장");
+	    Map<String, String> response = new HashMap<>();
+	    response.put("message", "리뷰 저장");
+	    return ResponseEntity.ok(response);
 	}
 	
 }

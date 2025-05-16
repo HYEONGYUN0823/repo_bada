@@ -58,7 +58,7 @@ public class ReviewDto {
 	@Override
 	public String toString() {
 		return "ReviewDto [rating=" + rating + ", contents=" + contents + ", createdtime=" + createdtime + ", name="
-				+ name + ", parentType=" + parentType + ", parentId=" + parentId + "]";
+				+ name + ", parentType=" + parentType + ", parentId=" + parentId + ", memberId=" + memberId + "]";
 	}
 	
 	
