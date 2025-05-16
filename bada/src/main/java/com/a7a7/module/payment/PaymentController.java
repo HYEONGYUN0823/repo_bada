@@ -1,11 +1,24 @@
 package com.a7a7.module.payment;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PaymentController {
+	
+	
+//    @Value("${toss.payments.secret-key}")
+//    private String secretKey;
+//    
+//    @PostMapping("/request")
+//    public ResponseEntity<?> requestPayment(@RequestBody PaymentRequestDto requestDto) {
+//        // 결제 요청 로직
+//        return ResponseEntity.ok("결제 요청 성공");
+//    }
+	
 //
 //    @Autowired
 //    private TossPayService tossPayService;
