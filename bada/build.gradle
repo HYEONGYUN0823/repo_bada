@@ -33,6 +33,9 @@ dependencies {
 	
 	// Spring Boot Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail' , version: '3.2.5'
 	
 }
 

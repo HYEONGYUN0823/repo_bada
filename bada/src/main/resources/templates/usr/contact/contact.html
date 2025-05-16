@@ -19,21 +19,22 @@
 							<p class="lead mb-0">답변은 영업일 기준 최대 2일까지 소요될 수 있습니다. 양해 부탁드립니다.</p>
 						</div>
 						<!-- form -->
-						<form class="row needs-validation" novalidate>
+						<form class="row needs-validation" method="post" novalidate>
 						<div class="mb-4">
 							<!-- heading -->
 							<h1 class="h5" th:text="${item.title} + '에 대한 문의'"></h1>
 						</div>
 							<!-- input -->
-							<div class="col-md-12 mb-3">
-								<label class="form-label" for="contactFName">
-									이름
-									<span class="text-danger">*</span>
-								</label>
-								<input type="text" id="contactFName" class="form-control" name="contactFName"
-									placeholder="이름을 입력해주세요" required />
-								<div class="invalid-feedback">이름을 입력해주세요.</div>
-							</div>
+							<input type="hidden" id="itemTitle" th:value="${item.title}" />
+							<input type="hidden" id="memberEmail" th:value="${memberEmail}" />
+<div class="col-md-12 mb-3">
+	<label class="form-label" for="contactName">
+		이름 <span class="text-danger">*</span>
+	</label>
+	<input type="text" id="contactName" class="form-control" name="contactName"
+		    placeholder="이름을 입력해주세요"
+		    th:value="${memberName}" disabled required />
+</div>
 							<div class="col-md-12 mb-3">
 								<!-- input -->
 								<label class="form-label" for="contactCompanyName">
@@ -57,15 +58,14 @@
 									placeholder="제목" required />
 								<div class="invalid-feedback">Please enter title.</div>
 							</div>
-							<div class="col-md-6 mb-3">
-								<label class="form-label" for="contactEmail">
-									이메일
-									<span class="text-danger">*</span>
-								</label>
-								<input type="email" id="contactEmail" name="contactEmail" class="form-control"
-									placeholder="자동입력" disabled required />
-								<div class="invalid-feedback">이메일을 입력해주세요.</div>
-							</div>
+<div class="col-md-6 mb-3">
+	<label class="form-label" for="contactEmail">
+		이메일 <span class="text-danger">*</span>
+	</label>
+	<input type="email" id="contactEmail" name="contactEmail" class="form-control"
+	    placeholder="자동입력"
+	    th:value="${memberEmail}" disabled required />
+</div>
 							<div class="col-md-6 mb-3">
 								<!-- input -->
 								<label class="form-label" for="contactPhone">휴대전화번호</label>
@@ -92,9 +92,62 @@
 	</main>
 	
 	<script type="text/javascript">
-		
-		
-		
+	
+	document.querySelector("form").addEventListener("submit", function (e) {
+	    e.preventDefault();
+	
+	    // 값 가져오기
+	    
+	    const itemTitle = document.getElementById("itemTitle").value.trim();
+	    const memberEmail = document.getElementById("memberEmail").value.trim();
+	    const userTitle = document.getElementById("contactTitle").value.trim();
+	    const opinion = document.getElementById("contactTearea").value.trim();
+	    const phone = document.getElementById("contactPhone").value.trim();
+	    const typeSelect = document.getElementById("contactSubject");
+	    const type = typeSelect.options[typeSelect.selectedIndex].text;
+	
+	    // 유효성 체크
+	    if (!userTitle || !opinion || !typeSelect.value || !phone) {
+	        alert("모든 필수 항목을 입력해주세요.");
+	        return;
+	    }
+	
+	    // 제목 구성
+	    const subject = `[${itemTitle}에 대한 문의] ${userTitle}`;
+	
+	    // 내용 구성
+	    const message = `
+			<strong>문의내용 :</strong><br/>
+			${opinion}
+			`.trim();
+	
+	    const payload = {
+	        subject: subject,
+	        message: message,
+	        phone: phone,                  
+	        inquiryType: type              
+	    };
+	    
+	    fetch("/inquiry", {
+	        method: "POST",
+	        headers: {
+	            "Content-Type": "application/json"
+	        },
+	        body: JSON.stringify(payload)
+	    })
+	    .then(res => {
+	        if (res.ok) {
+	            alert("문의가 성공적으로 전송되었습니다.");
+	            location.reload();
+	        } else {
+	            alert("문의 전송 실패");
+	        }
+	    })
+	    .catch(err => {
+	        alert("오류 발생: " + err);
+	    });
+	});
+	
 	</script>
 
 	<!-- Footer -->
