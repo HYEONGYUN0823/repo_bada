@@ -28,4 +28,5 @@ public interface SeaDao {
 	public List<SeaDto> userindexmap(String day);
 	public List<SeaDto> seaUsrList(@Param("pageVo") PageVo pageVo, @Param("searchVo") SearchVo searchVo);
 	public SeaDto seaView(String sea_id);
+	public SeaDto findSeaById(String sea_id);
 }

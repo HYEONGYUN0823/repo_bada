@@ -507,18 +507,23 @@
 						<div class="card-body px-4">
 							<div class="d-flex justify-content-between mb-4">
 								<div class="d-flex align-items-start gap-3 flex-wrap">
-									<a href="#!"><img th:src="@{${item.image}}"
+									<a href="#!"><img th:src="@{${item.image}}" 
 											alt="product image" class="border" width="60" /></a>
+											<!-- 여행지는 이미지가 없어서 사이트가 안열림 -->
 
 									<div class="mb-2">
 										<h3 class="fs-6 mb-1 text-link">
 										  <a th:if="${type == 'restaurant'}"
-										     th:text="${item.title}"
+										     th:text="${title}"
 										     th:href="'/bada/restaurant/' + ${item.restaurantId}"></a>
 										
 										  <a th:if="${type == 'accom'}"
-										     th:text="${item.title}"
+										     th:text="${title}"
 										     th:href="'/bada/accom/' + ${item.accomId}"></a>
+										     
+										  <a th:if="${type == 'sea'}"
+										  	 th:text="${title}"
+										  	 th:href="'/bada/sea/' + ${item.sea_id}"></a>
 										</h3>
 
 <!-- 										<p class="mb-2 text-dark">Black</p> -->

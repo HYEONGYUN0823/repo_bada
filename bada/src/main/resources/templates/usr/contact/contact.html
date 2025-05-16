@@ -22,10 +22,10 @@
 						<form class="row needs-validation" method="post" novalidate>
 						<div class="mb-4">
 							<!-- heading -->
-							<h1 class="h5" th:text="${item.title} + '에 대한 문의'"></h1>
+							<h1 class="h5" th:text="${title} + '에 대한 문의'"></h1>
 						</div>
 							<!-- input -->
-							<input type="hidden" id="itemTitle" th:value="${item.title}" />
+							<input type="hidden" id="itemTitle" th:value="${title}" />
 							<input type="hidden" id="memberEmail" th:value="${memberEmail}" />
 <div class="col-md-12 mb-3">
 	<label class="form-label" for="contactName">

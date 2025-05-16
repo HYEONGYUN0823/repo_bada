@@ -20,6 +20,8 @@ import com.a7a7.module.member.MemberDto;
 import com.a7a7.module.member.MemberService;
 import com.a7a7.module.restaurant.RestaurantDto;
 import com.a7a7.module.restaurant.RestaurantService;
+import com.a7a7.module.sea.SeaDto;
+import com.a7a7.module.sea.SeaService;
 
 @Controller
 public class ContactController {
@@ -32,6 +34,8 @@ public class ContactController {
     EmailService emailService;
     @Autowired
     MemberService memberService;
+    @Autowired
+    SeaService seaService;
 
     @PostMapping("/inquiry")
     public ResponseEntity<String> sendInquiry(
@@ -58,6 +62,28 @@ public class ContactController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("메일 전송 실패");
         }
     }
+    
+    // 여행지 문의 페이지
+    @RequestMapping(value = "/sea/contact")
+    public String seaContact(@RequestParam("sea_id") String sea_id, Model model, Authentication auth) {
+    	if (auth == null || !auth.isAuthenticated()) {
+    		return "redirect:/bada/signIn";
+    	}
+    	
+    	MemberDetails memberDetails = (MemberDetails) auth.getPrincipal();
+    	model.addAttribute("memberName", memberDetails.getLoginName());
+    	model.addAttribute("memberEmail", memberDetails.getUsername());
+    	
+    	System.out.println("@@@@@@@@@@@@@@@@@@@@");
+    	System.out.println("sea_id");
+    	SeaDto sea = seaService.seaView(sea_id);
+    	System.out.println("@@@@@@@@@@@@@@@@@@@@");
+    	model.addAttribute("item", sea);
+    	model.addAttribute("title", sea.getSareaDtlNm());
+    	System.out.println("========================" + sea.getSareaDtlNm() + "================================================================");
+    	
+    	return "usr/contact/contact";
+    }
 
     // 식당 문의 페이지
     @RequestMapping(value = "/restaurant/contact")
@@ -72,7 +98,8 @@ public class ContactController {
 
         RestaurantDto restaurant = restaurantService.findRestaurantById(restaurantId);
         model.addAttribute("item", restaurant);
-
+        model.addAttribute("title", restaurant.getTitle());
+        
         return "usr/contact/contact";
     }
 
@@ -89,7 +116,8 @@ public class ContactController {
 
         AccomDto accom = accomService.findAccomById(accomId);
         model.addAttribute("item", accom);
-
+        model.addAttribute("title", accom.getTitle());
+        
         return "usr/contact/contact";
     }
 }
