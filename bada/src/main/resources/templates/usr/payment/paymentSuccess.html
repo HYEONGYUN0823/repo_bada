@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{usr/include/head :: head}"></div>
+
+<style>
+  .garo {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .checkmark-icon {
+    font-size: 80px;
+    color: #4CAF50;
+  }
+</style>
+
+<body>
+  <div class="container garo text-center py-5">
+    <div class="mb-4">
+      <i class="checkmark-icon">&#10004;</i> <!-- 유니코드 체크 아이콘 -->
+    </div>
+    <h1 class="mb-3">결제가 완료되었습니다!</h1>
+    <p class="lead mb-4">예약이 성공적으로 처리되었습니다.<br>마이페이지에서 상세 내용을 확인하실 수 있습니다.</p>
+
+    <a href="/wishlist" class="btn btn-primary">마이페이지로 이동</a>
+  </div>
+
+  <div th:replace="~{usr/include/footer :: footer}"></div>
+</html>

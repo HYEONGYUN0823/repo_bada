@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{usr/include/head :: head}"></div>
+
+<style>
+  .garo {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .fail-icon {
+    font-size: 80px;
+    color: #e74c3c;
+  }
+</style>
+
+<body>
+  <div class="container garo text-center py-5">
+    <div class="mb-4">
+      <i class="fail-icon">&#10060;</i> <!-- 유니코드 X 아이콘 -->
+    </div>
+    <h1 class="mb-3">결제에 실패했습니다</h1>
+    <p class="lead mb-4">죄송합니다. 결제 과정에서 오류가 발생했습니다.<br>다시 시도하거나 고객센터에 문의해 주세요.</p>
+
+    <div class="d-flex justify-content-center gap-3">
+      <a th:href="@{'/bada/' + ${type} + '/' + ${id}}" class="btn btn-primary" id="retryBtn">다시 시도하기</a>
+      <a href="/contact" class="btn btn-outline-danger">고객센터</a>
+    </div>
+  </div>
+  
+	<script type="text/javascript">
+	
+		document.getElementById("retryBtn").addEventListener("click", function (e) {
+		  
+		});
+		
+	</script>
+
+  <div th:replace="~{usr/include/footer :: footer}"></div>
+</html>

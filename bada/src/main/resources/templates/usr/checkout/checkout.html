@@ -182,6 +182,10 @@
 <script src="https://js.tosspayments.com/v2/standard"></script>
 
       <script>
+      
+      const productType = "restaurant";  // 실제로 결제하는 상품 타입으로 바꿔주세요
+      const productId = "12";           // 실제 상품 ID 값으로 바꿔주세요
+      
       // ------  SDK 초기화 ------
       // @docs https://docs.tosspayments.com/sdk/v2/js#토스페이먼츠-초기화
       const clientKey = "test_ck_nRQoOaPz8Lxz2KndYGEe8y47BMw6";
@@ -206,8 +210,8 @@
           },
           orderId: "n1CJ-fTjD3R4SkDDHoa8s", // 고유 주문번호
           orderName: "토스 티셔츠 외 2건",
-          successUrl: window.location.origin + "/success", // 결제 요청이 성공하면 리다이렉트되는 URL
-          failUrl: window.location.origin + "/fail", // 결제 요청이 실패하면 리다이렉트되는 URL
+          successUrl: window.location.origin + "/paymentSuccess", // 결제 요청이 성공하면 리다이렉트되는 URL,
+          failUrl: window.location.origin + "/fail/" + productType + "/" + productId, // 결제 요청이 실패하면 리다이렉트되는 URL,
           customerEmail: "customer123@gmail.com",
           customerName: "김토스",
           customerMobilePhone: "01012341234",
