@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import com.a7a7.module.codegroup.CodeGroupController;
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
+import com.a7a7.module.review.ReviewDao;
+import com.a7a7.module.review.ReviewDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,6 +29,9 @@ public class SeaService {
 
 	@Autowired
 	SeaDao dao;
+	
+	@Autowired
+	ReviewDao reviewdao;
 	
 	@Value("${sea_api_key}")
 	private String serviceKey;
@@ -178,6 +183,9 @@ public class SeaService {
 		return dao.seaUsrList(pageVo,  searchVo);
 	}
 	
+	
+	
+	//개별 리스트.
 	public SeaDto seaView(String sea_id) {
 		return dao.seaView(sea_id);
 	}
@@ -194,6 +202,10 @@ public class SeaService {
 	}
 	
 
+	
+	
+	
+	
 	public List<Map<String, Object>> getGroupedData(List<SeaDto> rawData) {  //SeaDto 객체들을 모아놓은 rawData 리스트를 받아서, 지역별로 데이터를 그룹화하여 정리한 결과를 List<Map<String, Object>> 형태로 반환 -datalist를 반환받기 위해서
 	   
 		Map<String, Map<String, Object>> grouped = new LinkedHashMap<>(); // LinkedHashMap을 쓰는 이유는 grouped는 지역 이름 순으로 계속 출력되거나 유지돼야 하기 때문에 **입력 순서를 유지하는 LinkedHashMap**을 선택

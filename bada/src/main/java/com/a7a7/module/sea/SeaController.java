@@ -6,11 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
+import com.a7a7.module.review.ReviewDto;
+import com.a7a7.module.review.ReviewService;
 
 @Controller
 public class SeaController {
@@ -18,8 +22,13 @@ public class SeaController {
 	@Autowired
 	SeaService service;
 	
+	@Autowired
+	ReviewService reviewService;
+	
 	@Value("${kakao_map_api}")
 	private String kakaoApiKey;
+	
+
 
 	 
 	//******************//
@@ -52,7 +61,7 @@ public class SeaController {
 	//******************//
 	
 	@RequestMapping("/bada/travel/list")
-	public String findUsrTravelList(PageVo pageVo,SearchVo searchVo,Model model) {	
+	public String findUsrTravelList(ReviewDto reviewDto, PageVo pageVo,SearchVo searchVo,Model model) {	
 		//검색기능.
 		model.addAttribute("searchVo", searchVo);
 		// 페이징
@@ -60,6 +69,7 @@ public class SeaController {
 		model.addAttribute("pageVo", pageVo);;
 		// DB에서 숙박업소 전체 출력
 		model.addAttribute("list", service.seaUsrList(pageVo,searchVo));
+		
 		return "usr/travel/travelList";
 	}
 	

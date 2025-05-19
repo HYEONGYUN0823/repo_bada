@@ -57,6 +57,8 @@
 				<div th:each="item : ${list}" class="col-lg-4 col-md-6">
 					<article class="">
 						<a th:href="'/bada/travel/' + ${item.sea_id}" class="position-relative d-flex">
+							<input type="hidden" id="parentId" th:value="${item.sea_id}">
+							<input type="hidden" id="parentType" value="1">
 							<figure class="img-hover mb-0">
 								<img src="/usr/assets/images/blog/blog-img-1.jpg" alt="blog image" class="img-fluid" />
 							</figure>
@@ -80,7 +82,7 @@
 
 									Jun 29, 2025
 								</span>
-								<span class="d-flex align-items-center gap-1 small">
+								<span class="d-flex align-items-center gap-1 small"  th:text="${reviewCount}">
 									<svg width="16" height="17" viewBox="0 0 16 17" fill="none"
 										xmlns="http://www.w3.org/2000/svg">
 										<path opacity="0.2"
@@ -142,11 +144,8 @@
 	
 	
 	
+	<script type="text/javascript">
 	
-	
-	
-	<script>
-
 	// 페이징
 	let form = document.querySelector('form');
 
