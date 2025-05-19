@@ -177,6 +177,7 @@
 		join forecast b on b.sea_id = a.sea_id
 		where 1=1
 		and b.predcYmd = #{day}
+		and b.del_ny =0
 	</select>	
 	
 	<!-- /bada/travel/list -->

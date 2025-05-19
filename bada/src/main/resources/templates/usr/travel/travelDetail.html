@@ -47,6 +47,8 @@
         <div class="ps-lg-4">
           <div class="d-flex align-items-start justify-content-between mt-3 mb-2">
             <div class="mb-3">
+				<input type="hidden" id="parentId" th:value="${item.sea_id}">
+				<input type="hidden" id="parentType" value="1">
               <h2 th:text ="${list.sareaDtlNm}">여행지</h2>
             </div>
 			<div class="text-success d-flex align-items-center gap-2 mt-2">
