@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.a7a7.module.sea.SeaService;
 
@@ -26,7 +27,7 @@ public class UserUiController {
 	
 	@RequestMapping(value = "/index")
 	public String index(Model model, Authentication auth) {
-		
+
 		String day = "";
 		if (day == "" || day.trim().isEmpty()) {
 		       day = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));

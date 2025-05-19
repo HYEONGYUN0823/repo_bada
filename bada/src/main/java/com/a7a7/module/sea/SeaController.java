@@ -70,6 +70,6 @@ public class SeaController {
 		model.addAttribute("list",service.seaView(sea_id));
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		model.addAttribute("items",service.localForecastList(sea_id));
-		return "usr/travel/travelView";
+		return "usr/travel/travelDetail";
 	}
 }
