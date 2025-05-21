@@ -5,63 +5,90 @@
 <div th:replace= "~{usr/include/informationSide :: informationSide}"></div>
 
         <!--Account sidebar end-->
-        <div class="col-lg-9 col-md-8">
+      <div class="col-lg-9 col-md-8">
+		<form action="/reservation" method="post">
+			<input type="hidden" name="thisPage" th:value="${pageVo.thisPage}">
           <div class="row g-3 mb-4 align-items-center">
             <div class="col-lg-9 col-md-6 col-4">
               <h1 class="mb-0 h2">예약내역</h1>
             </div>
-
-
-
-
           </div>
           <div class="row g-3 mb-4">
             <div class="col-lg-8 col-12">
             </div>
-
-
-
-
-
-          </div>
-          
+          </div>     
             <!--Product-->
              <!-- Hoverable rows -->
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">예약 유형</th>
-      <th scope="col">예약 장소</th>
-      <th scope="col">금액</th>
-      <th scope="col">예약 시작일</th>
-      <th scope="col">예약 종료일</th>
-      <th scope="col">예약 요청일</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="item:${items}">
-      <th scope="row" th:text ="${item?.reservation_id}">1</th>
-      <td th:text ="${item?.parent_type}">예약 유형</td>
-      <td th:text ="${item?.parent_id}">예약 장소</td>
-      <td th:text ="500">금액</td>
-      <td th:text ="${item?.start_time}">예약 시작일</td>
-      <td th:text ="${item?.end_time}">예약 종료일</td>
-      <td th:text ="${item?.createdtime}">예약 요청일</td>
-    </tr>
-  </tbody>
-</table>
-            <!--Product-->
-
-
-
-              </div>
+		<div class="container">
+			<table class="table table-hover">
+  				<thead>
+    				<tr>
+      					<th scope="col" style="text-align: center;">#</th>
+      					<th scope="col" style="text-align: center;">예약 유형</th>
+      					<th scope="col" style="text-align: center;">예약 장소</th>
+      					<th scope="col" style="text-align: center;">금액</th>
+      					<th scope="col" style="text-align: center;">예약 시작일</th>
+      					<th scope="col" style="text-align: center;">예약 종료일</th>
+      					<th scope="col" style="text-align: center;">예약 요청일</th>
+    				</tr>
+  				</thead>
+  				<tbody>
+    				<tr th:each="item:${items}">
+      					<th scope="row" th:text ="${item?.reservation_id}" style="text-align: center;">1</th>
+      					<td th:text ="${item?.parent_type}" style="text-align: center;">예약 유형</td>
+      					<td th:text ="${item?.parent_id}" style= "text-align: center;" >예약 장소</td>
+      					<td th:text ="500" style="text-align: center;">금액</td>
+      					<td th:text ="${item?.start_time}" style="text-align: center;">예약 시작일</td>
+      					<td th:text ="${item?.end_time}" style="text-align: center;">예약 종료일</td>
+      					<td th:text ="${item?.createdtime}" style="text-align: center;">예약 요청일</td>
+    				</tr>
+  				</tbody>
+			</table>
+			<!-- Pagination Start -->
+				<div class="mt-6">
+					<nav>
+						<ul class="pagination justify-content-center">
+							<!-- 이전 페이지 -->
+							 <li class="page-item" th:if="${pageVo.thisPage > pageVo.pageNumToShow}" style="cursor: pointer;">
+								<a class="page-link" th:attr="onclick=|goList('${pageVo.startPage - 1}')|">
+										<span>&laquo;</span>
+								</a>
+							</li>
+										
+							 <!-- 페이지 번호 -->
+							<li class="page-item" th:each="num : ${#numbers.sequence(pageVo.startPage, pageVo.endPage)}"
+										  th:classappend="${num == pageVo.thisPage} ? 'active' : ''"
+										  style="cursor: pointer;">
+								<a class="page-link"
+										th:attr="onclick=|goList('${num}')|"
+										th:text="${num}">
+								</a>
+							</li>
+										
+								<!-- 다음 페이지 -->
+							<li class="page-item" th:if="${pageVo.endPage < pageVo.totalPages}" style="cursor: pointer;">
+								<a class="page-link" th:attr="onclick=|goList('${pageVo.endPage + 1}')|">
+										<span>&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			<!-- Pagination End -->
+		</div>
+		</form>
+     </div>
 
 
 
 
 	<script type="text/javascript">
-		
+		// 페이징
+		let form = document.querySelector('form');
+		goList = function (thisPage) {
+			  document.querySelector("input[name=thisPage]").value = thisPage;
+			  form.submit();
+		}
 		
 		
 	</script>

@@ -17,7 +17,17 @@
 		<!--join member b on b.member_id = a.member_id-->
 		where 1=1
 		and a.del_ny = 0
+		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
 	</select>
 	
-	
+	<select id="countReservationList" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			reservation a
+		<!--join member b on b.member_id = a.member_id-->
+		Where
+			1=1
+		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
+	</select>
 </mapper>

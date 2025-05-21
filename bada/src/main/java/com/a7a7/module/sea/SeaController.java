@@ -66,7 +66,7 @@ public class SeaController {
 		model.addAttribute("searchVo", searchVo);
 		// 페이징
 		pageVo.setParamsPaging(service.countSeaList(pageVo, searchVo));
-		model.addAttribute("pageVo", pageVo);;
+		model.addAttribute("pageVo", pageVo);
 		// DB에서 숙박업소 전체 출력
 		model.addAttribute("list", service.seaUsrList(pageVo,searchVo));
 		
