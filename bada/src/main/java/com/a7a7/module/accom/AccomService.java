@@ -63,6 +63,7 @@ public class AccomService {
 				}
 				dto.setImage(item.getFirstimage());
 				dto.setTel(item.getTel());
+				dto.setPrice(10000);
 				dto.setAddress(item.getAddr1());
 				dto.setMapx(item.getMapx());
 				dto.setMapy(item.getMapy());

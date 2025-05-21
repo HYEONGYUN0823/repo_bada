@@ -7,8 +7,7 @@
 	
 	<select id="findReviewListByParent" resultMap="resultMapObj">
 		SELECT
-			r.rating
-		    ,r.contents
+		    r.contents
 		    ,r.createdtime
 		    ,m.name
 		FROM
@@ -37,7 +36,6 @@
 		INSERT INTO review(
 			parent_type
 			,parent_id
-			,rating
 			,contents
 			,createdtime
 			,del_ny
@@ -45,7 +43,6 @@
 		) VALUES(
 			#{parentType}
 			,#{parentId}
-			,#{rating}
 			,#{contents}
 			,now()
 			,0

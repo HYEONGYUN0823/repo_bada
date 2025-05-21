@@ -4,11 +4,15 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.a7a7.common.config.MemberDetails;
 
 @Controller
 public class ReviewController {
@@ -26,6 +30,7 @@ public class ReviewController {
 	
 	// 리뷰 추가 Ajax
 	@PostMapping("/bada/saveReview")
+	@ResponseBody
 	public ResponseEntity<Map<String, String>> saveReview(@RequestBody ReviewDto dto) {
 		service.saveReview(dto);
 	    Map<String, String> response = new HashMap<>();

@@ -5,6 +5,7 @@ public class AccomDto {
 	private String accomId;
 	private String image;
 	private String title;
+	private Integer price;
 	private String tel;
 	private String address;
 	private String mapx;
@@ -19,6 +20,12 @@ public class AccomDto {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public Integer getPrice() {
+		return price;
+	}
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 	public String getImage() {
 		return image;
