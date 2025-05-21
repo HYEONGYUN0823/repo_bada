@@ -142,18 +142,7 @@
 	</update>
 
 	
-	<select id="countSeaList" resultType="Integer">
-		SELECT
-			COUNT(*)
-		FROM
-			sea
-		Where
-			1=1
-			<choose>
-				<when test="searchVo.shOption == 1">AND sareaDtlNm LIKE CONCAT('%',#{searchVo.shValue},'%')</when>
-			</choose>
-		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
-	</select>
+	
 	
 	
 	<!--***************-->
@@ -195,6 +184,23 @@
 			</choose>
 		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
 	</select>
+	
+	
+	
+	<select id="countSeaList" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			sea
+		Where
+			1=1
+			<choose>
+				<when test="searchVo.shOption == 1 ">AND sareaDtlNm LIKE CONCAT('%',#{searchVo.shValue},'%')</when>
+			</choose>
+		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
+	</select>
+	
+	
 	
 	<!-- /bada/travel/id -->
 	<select id="seaView" resultMap="resultMapObj">
