@@ -107,6 +107,7 @@
     <!-- 값 서버로 넘길 거면 hidden input 유지 -->
     <input type="hidden" id="checkin">
     <input type="hidden" id="checkout">
+	<input type="hidden" id="calendarType" th:value="${type}">
   </div>
 <!-- </div> -->
 
@@ -235,31 +236,43 @@
 	<script type="text/javascript">
 	
 	// 달력
-	$(function () {
-		  const reservedRanges = [
-		    { from: "2025-05-01", to: "2025-05-07" },
-		    { from: "2025-05-15", to: "2025-05-17" }
-		  ];
+	// 달력
+		$(function () {
+			  const reservedRanges = [
+			    { from: "2025-05-01", to: "2025-05-07" },
+			    { from: "2025-05-15", to: "2025-05-17" }
+			  ];
+			  const type = $('#calendarType').val();
+			  alert(type);
+			  const calendar = flatpickr("#calendar", {
+			    inline: true,  //달력이 항상 페이지에 표시됨 
+				mode: (type === "restaurant") ? "single" : "range", // ✅ 여기가 핵심!
+			    dateFormat: "Y-m-d", //날짜 포맷을 2025-05-21처럼 설정
+			    minDate: "today", //오늘 이전 날짜는 선택 불가능
+			    locale: "ko",
+			    disable: reservedRanges, //예약된 날짜 범위는 선택 불가로 표시됨
+			    showMonths: 2,  // 📌 여기 추가!
+			    onChange: function(selectedDates) {
+					const type = $('#calendarType').val();
+					if(type === "restaurant"){
+						if (selectedDates.length === 1) {
+						       const dateStr = flatpickr.formatDate(selectedDates[0], "Y-m-d");
+						       $('#checkin').val(dateStr);
+						       $('#selected-checkin').text(dateStr);
+						       $('#selected-checkout').text(dateStr);
+						}
+					}else{ 
+						if(selectedDates.length === 2) {
+			       		$('#checkin').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+			        	$('#checkout').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
 
-		  const calendar = flatpickr("#calendar", {
-		    inline: true,
-		    mode: "range",
-		    dateFormat: "Y-m-d",
-		    minDate: "today",
-		    locale: "ko",
-		    disable: reservedRanges,
-		    showMonths: 2,  // 📌 여기 추가!
-		    onChange: function(selectedDates) {
-		      if (selectedDates.length === 2) {
-		        $('#checkin').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-		        $('#checkout').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
-
-		        $('#selected-checkin').text(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-		        $('#selected-checkout').text(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
-		      }
-		    }
-		  });
-		});
+			        	$('#selected-checkin').text(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
+			        	$('#selected-checkout').text(flatpickr.formatDate(selectedDates[1], "Y-m-d"));
+			      		}
+					}
+			    }
+			  });
+			});
 
 	</script>
     
