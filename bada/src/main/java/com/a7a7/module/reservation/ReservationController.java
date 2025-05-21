@@ -11,10 +11,10 @@ public class ReservationController {
 	@Autowired
 	ReservationService service;
 	
-	@RequestMapping(value = "/order")
+	@RequestMapping(value = "/reservation")
 	public String order(Model model){
 		model.addAttribute("items", service.reservationList());
-		return "usr/information/order";
+		return "usr/information/reservation";
 	}
 	
 }

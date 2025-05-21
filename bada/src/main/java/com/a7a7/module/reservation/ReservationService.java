@@ -12,6 +12,8 @@ public class ReservationService {
 	ReservationDao dao;
 	
 	public List<ReservationDto> reservationList(){
+		
+		
 		return dao.reservationList();
 	}
 }
