@@ -243,7 +243,6 @@
 			    { from: "2025-05-15", to: "2025-05-17" }
 			  ];
 			  const type = $('#calendarType').val();
-			  alert(type);
 			  const calendar = flatpickr("#calendar", {
 			    inline: true,  //달력이 항상 페이지에 표시됨 
 				mode: (type === "restaurant") ? "single" : "range", // ✅ 여기가 핵심!
