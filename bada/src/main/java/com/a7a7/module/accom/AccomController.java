@@ -1,6 +1,7 @@
 package com.a7a7.module.accom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,8 +50,9 @@ public class AccomController {
 	
 	// 사용자 숙박업소 상세화면
 	@GetMapping("/bada/accom/{id}")
-	public String findUsrAccomDetail(@PathVariable("id") String accomId, Model model) {
-		
+	public String findUsrAccomDetail(@PathVariable("id") String accomId, Model model, Authentication auth) {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(auth);
 		// 숙박업소 검색
 		model.addAttribute("item", service.findAccomById(accomId));
 		// kakao api
