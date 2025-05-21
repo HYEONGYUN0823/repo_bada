@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.a7a7.module.reservation.ReservationDao">
+	
+	<resultMap id="resultMapObj" type="com.a7a7.module.reservation.ReservationDto"/>
+	
+	<select id="reservationList" resultMap="resultMapObj">
+		SELECT
+			a.reservation_id
+			,a.parent_type
+			,a.parent_id
+			,a.start_time
+			,a.createdtime
+		FROM
+			reservation a
+		<!--join member b on b.member_id = a.member_id-->
+		where 1=1
+		and a.del_ny = 0
+	</select>
+	
+	
+</mapper>
