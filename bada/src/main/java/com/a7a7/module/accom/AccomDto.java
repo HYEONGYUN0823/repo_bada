@@ -14,6 +14,8 @@ public class AccomDto {
 	private String modifiedtime;
 	private String managerId;
 	
+	private String reviewCount;
+	
 
 	public String getTitle() {
 		return title;
@@ -80,6 +82,12 @@ public class AccomDto {
 	}
 	public void setManagerId(String managerId) {
 		this.managerId = managerId;
+	}
+	public String getReviewCount() {
+		return reviewCount;
+	}
+	public void setReviewCount(String reviewCount) {
+		this.reviewCount = reviewCount;
 	}
 	
 }
