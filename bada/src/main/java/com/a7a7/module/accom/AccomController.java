@@ -36,7 +36,6 @@ public class AccomController {
 	// 사용자 숙박업소 목록 화면
 	@RequestMapping("/bada/accom/list")
 	public String findUsrAccomList(Model model, PageVo pageVo, SearchVo searchVo) {
-		
 		// 검색
 		model.addAttribute("searchVo", searchVo);
 		// 페이징

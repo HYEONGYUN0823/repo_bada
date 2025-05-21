@@ -59,4 +59,8 @@ public class MemberDetails implements UserDetails {
     public String getLoginName() {
 		return memberDto.getName();
 	}
+    
+    public String getMemberId() {
+		return memberDto.getMemberId();
+	}
 }

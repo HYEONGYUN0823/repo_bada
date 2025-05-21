@@ -31,7 +31,7 @@ public class SecurityConfig {
                     .defaultSuccessUrl("/index", true)                // 로그인 성공 후 이동할 페이지
                     .failureUrl("/bada/signIn?error")            // 로그인 실패 시 이동할 페이지
                     .permitAll()          // 로그인 페이지는 모두 접근 가능
-                );
+            );
 
         return http.build();
     }
