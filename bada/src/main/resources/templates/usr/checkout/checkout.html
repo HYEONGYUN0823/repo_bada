@@ -104,10 +104,7 @@
 <!--     <div class="search-item-title">체크인 & 체크아웃</div> -->
     <!-- 달력 위치 여기 -->
     <div id="calendar"></div>
-    <!-- 값 서버로 넘길 거면 hidden input 유지 -->
-    <input type="hidden" id="checkin">
-    <input type="hidden" id="checkout">
-	<input type="hidden" id="calendarType" th:value="${type}">
+    
   </div>
 <!-- </div> -->
 
@@ -121,7 +118,15 @@
 <!-- 						</div> -->
 <!-- 					</div> -->
 					<!--Order summary-->
-					<form action="#" method="post">
+					<form action="/bada/saveReservation" method="post">
+						<!-- 값 서버로 넘길 거면 hidden input 유지 -->
+					    <input type="hidden" id="checkin" name="startTime">
+					    <input type="hidden" id="checkout" name="endTime">
+						<input type="hidden" id="calendarType" name="parentType" th:value="${type}">
+						
+						<input th:if="${type == '2'}" type="hidden" name="parentId" th:value="${item.restaurantId}">
+						<input th:if="${type == '3'}" type="hidden" name="parentId" th:value="${item.accomId}">
+						
 						<div class="card bg-light bg-opacity-25 mb-4">
 							<div class="card-header px-4 py-3">
 								<h3 class="fs-5 mb-0">예약 요약</h3>
@@ -135,19 +140,18 @@
 	
 										<div class="mb-2">
 											<h3 class="fs-6 mb-1 text-link">
-											  <a th:if="${type == 'restaurant'}"
+											  <a th:if="${type == '2'}"
 											     th:text="${title}"
-											     th:href="'/bada/restaurant/' + ${item.restaurantId}"></a>
+											     th:href="'/bada/restaurant/' + ${item.restaurantId}">
+											  	  	   
+											  </a>
 											
-											  <a th:if="${type == 'accom'}"
+											  <a th:if="${type == '3'}"
 											     th:text="${title}"
-											     th:href="'/bada/accom/' + ${item.accomId}"></a>
-											     
-											  <a th:if="${type == 'sea'}"
-											  	 th:text="${title}"
-											  	 th:href="'/bada/sea/' + ${item.sea_id}"></a>
+											     th:href="'/bada/accom/' + ${item.accomId}">
+											      
+											  </a>
 											</h3>
-	
 	<!-- 										<p class="mb-2 text-dark">Black</p> -->
 										</div>
 									</div>
@@ -245,12 +249,12 @@
 			  const type = $('#calendarType').val();
 			  const calendar = flatpickr("#calendar", {
 			    inline: true,  //달력이 항상 페이지에 표시됨 
-				mode: (type === "restaurant") ? "single" : "range", // ✅ 여기가 핵심!
+				mode: (type === "restaurant") ? "single" : "range",
 			    dateFormat: "Y-m-d", //날짜 포맷을 2025-05-21처럼 설정
 			    minDate: "today", //오늘 이전 날짜는 선택 불가능
 			    locale: "ko",
 			    disable: reservedRanges, //예약된 날짜 범위는 선택 불가로 표시됨
-			    showMonths: 2,  // 📌 여기 추가!
+			    showMonths: 2,
 			    onChange: function(selectedDates) {
 					const type = $('#calendarType').val();
 					if(type === "restaurant"){

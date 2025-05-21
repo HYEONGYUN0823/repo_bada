@@ -13,4 +13,5 @@ public interface ReservationDao {
 	public List<ReservationDto> reservationList(@Param("pageVo") PageVo pageVo);
 	
 	public int countReservationList(@Param("pageVo") PageVo pageVo);
+	public int saveReservation(ReservationDto dto);
 }

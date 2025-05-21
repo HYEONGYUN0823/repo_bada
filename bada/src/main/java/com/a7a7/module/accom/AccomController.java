@@ -51,8 +51,6 @@ public class AccomController {
 	// 사용자 숙박업소 상세화면
 	@GetMapping("/bada/accom/{id}")
 	public String findUsrAccomDetail(@PathVariable("id") String accomId, Model model, Authentication auth) {
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(auth);
 		// 숙박업소 검색
 		model.addAttribute("item", service.findAccomById(accomId));
 		// kakao api

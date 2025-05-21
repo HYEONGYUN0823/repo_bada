@@ -24,4 +24,9 @@ public class ReservationService {
 		pageVo.setRowNumToShow(limit);
 		return dao.reservationList(pageVo);
 	}
+	
+	public int saveReservation(ReservationDto dto) {
+		return dao.saveReservation(dto);
+	}
+	
 }

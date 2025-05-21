@@ -2,23 +2,16 @@ package com.a7a7.module.review;
 
 public class ReviewDto {
 	
-	private Integer rating;
 	private String contents;
 	private String createdtime;
 	private String name;
 	
-	private Integer parentType;
+	private String parentType;
 	private String parentId;
 	private String memberId;
 	
 	
 	
-	public Integer getRating() {
-		return rating;
-	}
-	public void setRating(Integer rating) {
-		this.rating = rating;
-	}
 	public String getContents() {
 		return contents;
 	}
@@ -37,10 +30,10 @@ public class ReviewDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getParentType() {
+	public String getParentType() {
 		return parentType;
 	}
-	public void setParentType(Integer parentType) {
+	public void setParentType(String parentType) {
 		this.parentType = parentType;
 	}
 	public String getParentId() {
@@ -55,11 +48,5 @@ public class ReviewDto {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	@Override
-	public String toString() {
-		return "ReviewDto [rating=" + rating + ", contents=" + contents + ", createdtime=" + createdtime + ", name="
-				+ name + ", parentType=" + parentType + ", parentId=" + parentId + ", memberId=" + memberId + "]";
-	}
-	
 	
 }

@@ -7,11 +7,11 @@
 	
 	<select id="reservationList" resultMap="resultMapObj">
 		SELECT
-			a.reservation_id
-			,a.parent_type
-			,a.parent_id
-			,a.start_time
-			,a.createdtime
+			a.reservation_id AS reservationId
+			,a.parent_type AS parentType
+			,a.parent_id AS parentId
+			,a.start_time AS startTime
+			,a.createdtime AS createdtime
 		FROM
 			reservation a
 		<!--join member b on b.member_id = a.member_id-->
@@ -30,4 +30,25 @@
 			1=1
 		LIMIT #{pageVo.rowNumToShow} OFFSET #{pageVo.startRnumForMysql}
 	</select>
+	
+	<insert id="saveReservation">
+	INSERT INTO reservation(
+		parent_type
+		,parent_id
+		,start_time
+		,end_time
+		,createdtime
+		,del_ny
+		,member_id
+	)VALUES (
+		#{parentType}
+		,#{parentId}
+		,#{startTime}
+		,#{endTime}
+		,now()
+		,0
+		,#{memberId}
+	)
+	</insert>
+	
 </mapper>

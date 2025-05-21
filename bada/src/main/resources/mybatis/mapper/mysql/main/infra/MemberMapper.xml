@@ -23,7 +23,8 @@
 	
 	<select id="findPasswordByEmail" resultMap="resultMapObj">
 		SELECT
-			email
+			member_id AS memberId
+			,email
 			,password
 			,name
 		FROM 
