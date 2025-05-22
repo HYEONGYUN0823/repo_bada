@@ -92,7 +92,6 @@
 	title
 	,image
 	,tel
-	,price
 	,address
 	,mapx
 	,mapy
@@ -106,7 +105,6 @@
 	#{title}
 	,#{image}
 	,#{tel}
-	,#{price}
 	,#{address}
 	,#{mapx}
 	,#{mapy}
