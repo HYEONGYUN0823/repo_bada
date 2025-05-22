@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.a7a7.module.code.CodeDao">
+	
+	<resultMap id="resultMapObj" type="com.a7a7.module.code.CodeDto"/>
+	
+	<select id="findAllCodes" resultMap="resultMapObj">
+		SELECT
+			cd.code_id AS codeId
+			,cd.name
+			,cd.codegroup_id AS codegroupId
+			,cg.name AS codegroupName
+		FROM 
+			code cd
+			JOIN codegroup cg ON cg.codegroup_id = cd.codegroup_id
+		WHERE
+			1=1
+			AND is_used = 1
+			AND is_deleted = 0
+		ORDER BY
+			codegroup_id ASC, code_id ASC
+	</select>
+	
+</mapper>
