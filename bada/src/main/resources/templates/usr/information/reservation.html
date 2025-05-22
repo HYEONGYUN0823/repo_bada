@@ -34,12 +34,12 @@
   				</thead>
   				<tbody>
     				<tr th:each="item:${items}">
-      					<th scope="row" th:text ="${item?.reservation_id}" style="text-align: center;">1</th>
-      					<td th:text ="${item?.parent_type}" style="text-align: center;">예약 유형</td>
-      					<td th:text ="${item?.parent_id}" style= "text-align: center;" >예약 장소</td>
+      					<th scope="row" th:text ="${item?.reservationId}" style="text-align: center;">1</th>
+      					<td th:text ="${item?.parentType}" style="text-align: center;">예약 유형</td>
+      					<td th:text ="${item?.parentId}" style= "text-align: center;" >예약 장소</td>
       					<td th:text ="500" style="text-align: center;">금액</td>
-      					<td th:text ="${item?.start_time}" style="text-align: center;">예약 시작일</td>
-      					<td th:text ="${item?.end_time}" style="text-align: center;">예약 종료일</td>
+      					<td th:text ="${item?.startTime}" style="text-align: center;">예약 시작일</td>
+      					<td th:text ="${item?.endTime}" style="text-align: center;">예약 종료일</td>
       					<td th:text ="${item?.createdtime}" style="text-align: center;">예약 요청일</td>
     				</tr>
   				</tbody>
