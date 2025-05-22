@@ -16,10 +16,9 @@
 			JOIN codegroup cg ON cg.codegroup_id = cd.codegroup_id
 		WHERE
 			1=1
-			AND is_used = 1
-			AND is_deleted = 0
+			AND cd.del_ny = 0
 		ORDER BY
-			codegroup_id ASC, code_id ASC
+			cd.codegroup_id ASC, cd.code_id ASC
 	</select>
 	
 </mapper>
