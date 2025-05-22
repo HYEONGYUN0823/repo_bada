@@ -65,16 +65,6 @@
 	<!--Breadcrumb start-->
 	<div class="container">
 		<div class="row">
-<!-- 			<div class="col-12 py-4"> -->
-<!-- 				<nav aria-label="breadcrumb"> -->
-<!-- 					<ol class="breadcrumb mb-0"> -->
-<!-- 						<li class="breadcrumb-item"><a href="#!">Home</a></li> -->
-<!-- 						<li class="breadcrumb-item"><a href="#!">Shop</a></li> -->
-<!-- 						<li class="breadcrumb-item"><a href="#!">Shopping Cart</a></li> -->
-<!-- 						<li class="breadcrumb-item active" aria-current="page">Checkout</li> -->
-<!-- 					</ol> -->
-<!-- 				</nav> -->
-<!-- 			</div> -->
 			<div class="col-12">
 				<!--Heading-->
 				<div class="my-5 garo">
@@ -92,31 +82,20 @@
 				<div class="col-lg-8">
 					<div class="">
 						<div class="d-flex justify-content-center align-items-center mb-2">
-<!-- <div class="search-box"> -->
-<!--   <div class="search-item"> -->
-<!--     <div class="search-item-title">여행지</div> -->
-<!--     <input type="text" placeholder="자동입력" disabled> -->
-<!--   </div> -->
 
-  <div class="divider"></div>
-
-  <div class="search-item">
-<!--     <div class="search-item-title">체크인 & 체크아웃</div> -->
-    <!-- 달력 위치 여기 -->
-    <div id="calendar"></div>
-    
-  </div>
-<!-- </div> -->
+							<div class="divider"></div>
+							
+							<div class="search-item">
+							  <!-- 달력 위치 여기 -->
+							  <div id="calendar"></div>
+							  
+							</div>
 
 						</div>
 
 					</div>
 				</div>
 				<div class="col-lg-4">
-<!-- 					<div class="mb-4"> -->
-<!-- 						<div class="alert alert-success small">Congratulations 🎉 You are eligible for free shipping. -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 					<!--Order summary-->
 					<form action="/bada/saveReservation" method="post">
 						<!-- 값 서버로 넘길 거면 hidden input 유지 -->
@@ -124,8 +103,8 @@
 					    <input type="hidden" id="checkout" name="endTime">
 						<input type="hidden" id="calendarType" name="parentType" th:value="${type}">
 						
-						<input th:if="${type == '2'}" type="hidden" name="parentId" th:value="${item.restaurantId}">
-						<input th:if="${type == '3'}" type="hidden" name="parentId" th:value="${item.accomId}">
+						<input th:if="${type == 'restaurant'}" type="hidden" id="parentId" name="parentId" th:value="${item.restaurantId}">
+						<input th:if="${type == 'accommodation'}" type="hidden" id="parentId" name="parentId" th:value="${item.accomId}">
 						
 						<div class="card bg-light bg-opacity-25 mb-4">
 							<div class="card-header px-4 py-3">
@@ -139,43 +118,45 @@
 												<!-- 여행지는 이미지가 없어서 사이트가 안열림 -->
 	
 										<div class="mb-2">
+											<input type="hidden" id="title" th:value="${title}">
 											<h3 class="fs-6 mb-1 text-link">
-											  <a th:if="${type == '2'}"
+											  <a th:if="${type == 'restaurant'}"
 											     th:text="${title}"
-											     th:href="'/bada/restaurant/' + ${item.restaurantId}">
-											  	  	   
+											     th:href="'/bada/restaurant/' + ${item.restaurantId}">  
 											  </a>
 											
-											  <a th:if="${type == '3'}"
+											  <a th:if="${type == 'accommodation'}"
 											     th:text="${title}"
 											     th:href="'/bada/accom/' + ${item.accomId}">
-											      
 											  </a>
 											</h3>
-	<!-- 										<p class="mb-2 text-dark">Black</p> -->
 										</div>
 									</div>
 								</div>
-	<div class="mb-2 border-top pt-3 mb-2">
-	  <div class="d-flex align-items-center justify-content-between mb-2">
-	    <span><b>체크인</b></span>
-	    <span id="selected-checkin">-</span>
-	  </div>
-	  <div class="d-flex align-items-center justify-content-between mb-2">
-	    <span><b>체크아웃</b></span>
-	    <span id="selected-checkout">-</span>
-	  </div>
-								
+								<div class="mb-2 border-top pt-3 mb-2">
+								    <div class="d-flex align-items-center justify-content-between mb-2">
+								    	<span><b>체크인</b></span>
+								    	<span id="selected-checkin">-</span>
+								    </div>
+								    <div class="d-flex align-items-center justify-content-between mb-2">
+								    	<span><b>체크아웃</b></span>
+								    	<span id="selected-checkout">-</span>
+								    </div>
+								</div>
+								<div class="mb-2 border-top pt-3 mb-2">
+								    <div class="d-flex align-items-center justify-content-between mb-2">
+								    	<span><b>예약보증금</b></span>
+								    	<span>10,000원</span>
+								    </div>
 	
-							    <!-- 결제하기 버튼 -->
-	    						<button type="button" class="button btn btn-primary" style="margin-top: 30px" onclick="requestPayment()">결제하기</button>
-								<!-- 예약 요청 버튼 -->
-	  							<button type="submit" class="button btn btn-primary" style="margin-top: 30px">예약 요청</button>
+							   		<!-- 결제하기 버튼 -->
+	    							<button type="button" class="button btn btn-primary" style="margin-top: 30px" onclick="requestPayment()">결제하기</button>
 	  			
+								</div>
 							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -184,8 +165,8 @@
 
 <script>
 
-const productType = "restaurant";  // 실제로 결제하는 상품 타입으로 바꿔주세요
-const productId = "12";           // 실제 상품 ID 값으로 바꿔주세요
+
+
 
 // ------  SDK 초기화 ------
 // @docs https://docs.tosspayments.com/sdk/v2/js#토스페이먼츠-초기화
@@ -201,6 +182,13 @@ const payment = tossPayments.payment({ customerKey });
 // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
 // @docs https://docs.tosspayments.com/sdk/v2/js#paymentrequestpayment
 async function requestPayment() {
+
+	const parentType = document.getElementById("calendarType").value;  // 실제로 결제하는 상품 타입으로 바꿔주세요
+	const parentId = document.getElementById("parentId").value;           // 실제 상품 ID 값으로 바꿔주세요
+	const orderId = 'ORDER-' + Date.now() + '-' + Math.floor(Math.random() * 1000000);
+	const orderName = document.getElementById("title").value;
+	const startTime = document.getElementById("checkin").value;
+	const endTime = document.getElementById("checkout").value;
   // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
   // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
   await payment.requestPayment({
@@ -209,13 +197,15 @@ async function requestPayment() {
       currency: "KRW",
       value: 1,
     },
-    orderId: "n1CJ-fTjD3R4SkDDHoa8s", // 고유 주문번호
-    orderName: "토스 티셔츠 외 2건",
-    successUrl: window.location.origin + "/paymentSuccess", // 결제 요청이 성공하면 리다이렉트되는 URL,
-    failUrl: window.location.origin + "/fail/" + productType + "/" + productId, // 결제 요청이 실패하면 리다이렉트되는 URL,
-    customerEmail: "customer123@gmail.com",
-    customerName: "김토스",
-    customerMobilePhone: "01012341234",
+    orderId: orderId, // 고유 주문번호
+    orderName: orderName,
+    successUrl: window.location.origin + 
+    			"/bada/saveReservation?parentType=" + parentType + 
+    			"&parentId=" + parentId + 
+    			"&startTime=" + startTime + 
+    			"&endTime=" + endTime,
+//     successUrl: window.location.origin + "/paymentSuccess", // 결제 요청이 성공하면 리다이렉트되는 URL,
+    failUrl: window.location.origin + "/fail/" + parentType + "/" + parentId, // 결제 요청이 실패하면 리다이렉트되는 URL
     // 카드 결제에 필요한 정보
     card: {
       useEscrow: false,
@@ -248,7 +238,7 @@ $(function () {
 	  const type = $('#calendarType').val();
 	  const calendar = flatpickr("#calendar", {
 	    inline: true,  //달력이 항상 페이지에 표시됨 
-		mode: (type === "2") ? "single" : "range",
+		mode: (type === "restaurant") ? "single" : "range",
 	    dateFormat: "Y-m-d", //날짜 포맷을 2025-05-21처럼 설정
 	    minDate: "today", //오늘 이전 날짜는 선택 불가능
 	    locale: "ko",
@@ -256,7 +246,7 @@ $(function () {
 	    showMonths: 2,
 	    onChange: function(selectedDates) {
 			const type = $('#calendarType').val();
-			if(type === "2"){
+			if(type === "restaurant"){
 				if (selectedDates.length === 1) {
 				       const dateStr = flatpickr.formatDate(selectedDates[0], "Y-m-d");
 				       $('#checkin').val(dateStr);

@@ -36,7 +36,7 @@ public class CheckoutController {
 	public String restaurantCheckout(@RequestParam("restaurantId") String restaurantId, Model model) {
 	    RestaurantDto restaurant = restaurantService.findRestaurantById(restaurantId);
 	    model.addAttribute("item", restaurant);
-	    model.addAttribute("type", "2");
+	    model.addAttribute("type", "restaurant");
 	    model.addAttribute("title", restaurant.getTitle());
 	    return "usr/checkout/checkout";
 	}
@@ -45,7 +45,7 @@ public class CheckoutController {
 	public String accomContact(@RequestParam("accomId") String accomId, Model model) {
 		AccomDto accom = accomService.findAccomById(accomId);
 		model.addAttribute("item", accom);
-		model.addAttribute("type", "3");
+		model.addAttribute("type", "accommodation");
 		model.addAttribute("title", accom.getTitle());
 		
 		return "usr/checkout/checkout";

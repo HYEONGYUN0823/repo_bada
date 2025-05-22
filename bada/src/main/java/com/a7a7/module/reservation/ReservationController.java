@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.a7a7.common.config.MemberDetails;
 import com.a7a7.module.common.PageVo;
@@ -26,12 +27,20 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/bada/saveReservation")
-	public String saveReservation(ReservationDto dto, Authentication auth){
+	public String saveReservation(@RequestParam("parentType") String parentType,
+								  @RequestParam("parentId") String parentId,
+								  @RequestParam("startTime") String startTime,
+								  @RequestParam("endTime") String endTime,
+								  Authentication auth){
+		ReservationDto dto = new ReservationDto();
 		MemberDetails memberDetails = (MemberDetails) auth.getPrincipal();
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(memberDetails);
 		dto.setMemberId(memberDetails.getMemberId());
+		dto.setParentType(parentType);
+		dto.setParentId(parentId);
+		dto.setStartTime(startTime);
+		dto.setEndTime(endTime);
 		service.saveReservation(dto);
-		return "redirect:/bada/mypage/reservation";
+		return "redirect:/paymentSuccess";
 	}
+	
 }
