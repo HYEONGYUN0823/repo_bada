@@ -187,26 +187,26 @@ public class SeaService {
 	
 	
 	//개별 리스트.
-	public SeaDto seaView(String sea_id) {
-		return dao.seaView(sea_id);
+	public SeaDto seaView(String seaId) {
+		return dao.seaView(seaId);
 	}
-	public SeaDto findSeaById(String sea_id) {
-		return dao.findSeaById(sea_id);
+	public SeaDto findSeaById(String seaId) {
+		return dao.findSeaById(seaId);
 	}
 	// 숙박업소 전체 개수
 	public int countSeaList(PageVo pageVo, SearchVo searchVo) {
 		return dao.countSeaList(pageVo, searchVo);
 	}
 	
-	public List<SeaDto> localForecastList(String sea_id){
-		return dao.localForecastList(sea_id);
+	public List<SeaDto> localForecastList(String seaId){
+		return dao.localForecastList(seaId);
 	}
 	
 
 	
 	
 	
-	
+	//index 지도 보여주기.
 	public List<Map<String, Object>> getGroupedData(List<SeaDto> rawData) {  //SeaDto 객체들을 모아놓은 rawData 리스트를 받아서, 지역별로 데이터를 그룹화하여 정리한 결과를 List<Map<String, Object>> 형태로 반환 -datalist를 반환받기 위해서
 	   
 		Map<String, Map<String, Object>> grouped = new LinkedHashMap<>(); // LinkedHashMap을 쓰는 이유는 grouped는 지역 이름 순으로 계속 출력되거나 유지돼야 하기 때문에 **입력 순서를 유지하는 LinkedHashMap**을 선택

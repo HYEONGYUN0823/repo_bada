@@ -22,6 +22,7 @@ public class SeaDto {
     private String createdtime;
     private String seaId;		//나중에 물어보기
     
+    private String reviewCount;
     
     //favorite
     private String memberId;
@@ -148,6 +149,14 @@ public class SeaDto {
 
 	public void setSeaId(String seaId) {
 		this.seaId = seaId;
+	}
+
+	public String getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(String reviewCount) {
+		this.reviewCount = reviewCount;
 	}
 	
     

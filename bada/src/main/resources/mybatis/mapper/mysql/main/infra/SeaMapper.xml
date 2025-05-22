@@ -6,7 +6,7 @@
 	
 	<select id="seaList" resultMap="resultMapObj">
 		select
-			sea_id as seaId
+			sea_id AS seaId
 			,sareaDtlNm
 			,lat
 			,lot
@@ -24,7 +24,7 @@
 		,lot
 		,createdtime
 		,del_ny as delNy
-		,manager_id as mangerId
+		,manager_id 
 	)values(
 		#{sareaDtlNm}
 		,#{lat}
@@ -39,7 +39,7 @@
 	<select id="forecastList" resultMap="resultMapObj">
 		select
 			b.sareaDtlNm
-			,a.forecast_id as forecastId
+			,a.forecast_id AS forecastId
 			,a.predcYmd
 			,a.predcNoonSeCd
 			,a.avgArtmp
@@ -49,7 +49,7 @@
 			,a.avgCrsp
 			,a.weather
 			,a.totalIndex
-			,a.sea_id as seaId
+			,a.sea_id AS seaId
 		from
 		forecast a
 		join sea b on b.sea_id = a.sea_id
@@ -94,9 +94,9 @@
 		,avgCrsp
 		,weather
 		,totalIndex
-		,sea_id as seaId
+		,sea_id 
 		,createdtime
-		,del_ny as delNy
+		,del_ny 
 	)values(
 		#{predcYmd}
 		,#{predcNoonSeCd}
@@ -151,11 +151,11 @@
 	
 	<select id="userindexmap" resultMap="resultMapObj">
 		select
-			a.sea_id as seaId
+			a.sea_id AS seaId
 			,a.sareaDtlNm
 			,a.lat
 			,a.lot
-			,b.forecast_id as forecastId
+			,b.forecast_id AS forecastId
 			,b.predcYmd
 			,b.predcNoonSeCd
 			,b.weather
@@ -171,12 +171,21 @@
 	<!-- /bada/travel/list -->
 	<select id="seaUsrList" resultMap="resultMapObj">
 		select
-			sea_id as seaId
-			,sareaDtlNm
-			,lat
-			,lot
+			a.sea_id AS seaId
+			,a.sareaDtlNm
+			,a.lat
+			,a.lot
+			,(
+			SELECT
+				COUNT(*)
+			FROM
+				review rw
+			WHERE 1=1
+				AND rw.parent_Type = 1
+				AND rw.parent_id = a.sea_id
+			)AS reviewCount
 		from
-			sea 
+			sea a
 		where 1=1
 			<choose>
 				<when test="searchVo.shOption == 1">AND sareaDtlNm LIKE CONCAT('%',#{searchVo.shValue},'%')</when>
@@ -204,7 +213,7 @@
 	<!-- /bada/travel/id -->
 	<select id="seaView" resultMap="resultMapObj">
 	select
-		a.sea_id as seaId
+		a.sea_id AS seaId
 		,a.sareaDtlNm
 		,a.lat
 		,a.lot
@@ -242,7 +251,7 @@
 		,avgCrsp
 		,weather
 		,totalIndex
-		,sea_id as SeaId
+		,sea_id AS seaId
 	from
 		forecast 
 	where 1=1

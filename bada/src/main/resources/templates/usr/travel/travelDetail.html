@@ -126,73 +126,10 @@
 <!-- Review Start -->
 					<div class="mb-6" id="review">
 						<!-- Ajax -->
-					
-<!-- 					
-						<h3 class="fs-4 mb-6">9 comments</h3>
-						<div>
-							<div class="d-flex gap-4 mb-6">
-								<div>
-									<div class="d-flex align-items-md-center flex-md-row flex-column gap-md-3  gap-2 mb-2">
-										<h3 class="fs-6 mb-0">Anita parmar</h3>
-										<div class="d-flex flex-row gap-3">
-											<span class="small d-flex align-items-center gap-1">
-												<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-													fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-													<path
-														d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
-													<path
-														d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
-												</svg>
-												2 days ago
-											</span>
-										</div>
-									</div>
-									
-									<div class="rater star-value" style="background-size: 20px; width: 100%;" title="5/5" data-rating="5"></div>
-									
-									<p class="mb-4">
-										There are many variations of passages of Lorem Ipsum available, but the majority
-										have suffered
-										alteration in some form, by injected humour, or randomised words which don't
-										look
-										even slightly believable.by injected humour, or randomised.
-									</p>
-									
-								</div>
-							</div>
-						</div>
- -->						
-						
 					</div>
 					<!-- Review End -->
 					
-					<!-- Review Form Start -->
-					<div class="mb-6">
-						<div class="card">
-							<div class="card-body p-md-6 p-5">
-								<h3 class="mb-3 h5">리뷰를 남겨주세요!</h3>
-								<form class="row g-3 needs-validation" novalidate="">
-									<div class="mb-3 col-12">
-										<input type="hidden" id="memberId" value="1">
-										<input type="hidden" id="rating" value="3">
-										<div class="rater"></div>
-									</div>
-									<div class="col-12">
-										<label for="blogsingleFormmessages"
-											class="form-label visually-hidden">Comment</label>
-										<textarea class="form-control" id="contents" rows="4"
-											placeholder="내용" required></textarea>
-										<div class="invalid-feedback">Please write comment.</div>
-									</div>
-
-									<div class="col-12">
-										<button type="button" id="btnSubmit" class="btn btn-primary">제출</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-					<!-- Review Form End -->
+					
 					
 				</article>
 			</div>
@@ -239,53 +176,54 @@
 		});
 		
 		// 리뷰 로드
-		function loadReview() {
-		    const parentId = document.getElementById('parentId').value;
-		    const parentType = document.getElementById('parentType').value;
+		// 리뷰 로드
+			function loadReview() {
+			    const parentId = document.getElementById('parentId').value;
+			    const parentType = document.getElementById('parentType').value;
 
-		    fetch(`/bada/reviewFragment?parentId=${parentId}&parentType=${parentType}`)
-		        .then(res => res.text())
-		        .then(html => {
-		            document.getElementById("review").innerHTML = html;
-	// 	            bindStarEvents();  // 로드 후 별점 다시 바인딩
-		        })
-		        .catch(error => console.error("리뷰 로딩 실패: ", error));
-		}
-	  
-	 	// 리뷰 저장
-		function saveReview() {
+			    fetch(`/bada/reviewFragment?parentId=${parentId}&parentType=${parentType}`)
+			        .then(res => res.text())
+			        .then(html => {
+			            document.getElementById("review").innerHTML = html;
+		// 	            bindStarEvents();  // 로드 후 별점 다시 바인딩
 
-	// 	    if (!content || rate <= 0) {
-	// 	        alert("리뷰 내용과 평점을 모두 입력해주세요.");
-	// 	        return;
-	// 	    }
+			            document.querySelector('.btnSubmit').addEventListener('click', () => {
+			    	    	saveReview();
+			    	    });
+			        })
+			        .catch(error => console.error("리뷰 로딩 실패: ", error));
+			}
+		  
+		 	// 리뷰 저장
+			function saveReview() {
+				const content = document.getElementById('contents');
 
-		    const review = {
-		    	parentType: document.getElementById('parentType').value,
-		    	parentId: document.getElementById('parentId').value,
-		    	rating: document.getElementById('rating').value,
-		    	contents: document.getElementById('contents').value,
-		    	memberId: document.getElementById('memberId').value
-		    };
+			    if (!content || content.value.trim() === '') {
+			        alert("리뷰 내용을 입력해주세요.");
+			        return;
+			    }
 
-		    fetch('/bada/saveReview', {
-		        method: 'POST',
-		        headers: { 'Content-Type': 'application/json' },
-		        body: JSON.stringify(review)
-		    })
-		    .then(res => res.json())
-		    .then(() => {
-		        loadReview();  // 저장 후 리뷰 다시 로드
-		    })
-		    .catch(err => {
-		        console.error(err);
-		        alert("저장 중 오류가 발생했습니다.");
-		    });
-		}
-		
-		document.getElementById('btnSubmit').onclick = function() {
-		    saveReview();
-		};
+			    const review = {
+			    	parentType: document.getElementById('parentType').value,
+			    	parentId: document.getElementById('parentId').value,
+			    	contents: content.value,
+			    	memberId: document.getElementById('memberId').value
+			    };
+
+			    fetch('/bada/saveReview', {
+			        method: 'POST',
+			        headers: { 'Content-Type': 'application/json' },
+			        body: JSON.stringify(review)
+			    })
+			    .then(res => res.json())
+			    .then(() => {
+			        loadReview();  // 저장 후 리뷰 다시 로드
+			    })
+			    .catch(err => {
+			        console.error(err);
+			        alert("저장 중 오류가 발생했습니다.");
+			    });
+			}
 
 	</script>
 	
