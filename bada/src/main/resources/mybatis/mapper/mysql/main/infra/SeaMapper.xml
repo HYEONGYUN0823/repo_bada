@@ -6,7 +6,7 @@
 	
 	<select id="seaList" resultMap="resultMapObj">
 		select
-			sea_id
+			sea_id as seaId
 			,sareaDtlNm
 			,lat
 			,lot
@@ -23,8 +23,8 @@
 		,lat
 		,lot
 		,createdtime
-		,del_ny
-		,manager_id
+		,del_ny as delNy
+		,manager_id as mangerId
 	)values(
 		#{sareaDtlNm}
 		,#{lat}
@@ -39,7 +39,7 @@
 	<select id="forecastList" resultMap="resultMapObj">
 		select
 			b.sareaDtlNm
-			,a.forecast_id
+			,a.forecast_id as forecastId
 			,a.predcYmd
 			,a.predcNoonSeCd
 			,a.avgArtmp
@@ -49,7 +49,7 @@
 			,a.avgCrsp
 			,a.weather
 			,a.totalIndex
-			,a.sea_id
+			,a.sea_id as seaId
 		from
 		forecast a
 		join sea b on b.sea_id = a.sea_id
@@ -62,7 +62,7 @@
 	<select id="forecastchecklist" resultMap="resultMapObj">
 		select
 			b.sareaDtlNm
-			,a.forecast_id
+			,a.forecast_id as forecastId
 			,a.predcYmd
 			,a.predcNoonSeCd
 			,a.avgArtmp
@@ -72,12 +72,12 @@
 			,a.avgCrsp
 			,a.weather
 			,a.totalIndex
-			,a.sea_id
+			,a.sea_id as seaId
 		from
 		forecast a
 		join sea b on b.sea_id = a.sea_id
 		where 1=1
-		and a.sea_id = #{sea_id}
+		and a.sea_id = #{seaId}
 	</select>
 	
 	
@@ -94,9 +94,9 @@
 		,avgCrsp
 		,weather
 		,totalIndex
-		,sea_id
+		,sea_id as seaId
 		,createdtime
-		,del_ny
+		,del_ny as delNy
 	)values(
 		#{predcYmd}
 		,#{predcNoonSeCd}
@@ -107,7 +107,7 @@
 		,#{avgCrsp}
 		,#{weather}
 		,#{totalIndex}
-		,#{sea_id}
+		,#{seaId}
 		,now()
 		,0
 	)
@@ -123,7 +123,7 @@
 		,weather = #{weather}
 		,totalIndex = #{totalIndex}
 	where 1=1
-		and sea_id = #{sea_id}
+		and sea_id = #{seaId}
 		and predcNoonSeCd = #{predcNoonSeCd}
 		and predcYmd = #{predcYmd}
 	</update>
@@ -138,7 +138,7 @@
     update forecast set 
     	del_ny = 1
     where 1=1
-    and forecast_id = #{forecast_id}
+    and forecast_id = #{forecastId}
 	</update>
 
 	
@@ -151,16 +151,15 @@
 	
 	<select id="userindexmap" resultMap="resultMapObj">
 		select
-			a.sea_id
+			a.sea_id as seaId
 			,a.sareaDtlNm
 			,a.lat
 			,a.lot
-			,b.forecast_id
+			,b.forecast_id as forecastId
 			,b.predcYmd
 			,b.predcNoonSeCd
 			,b.weather
 			,b.totalIndex
-			,b.sea_id
 		from
 		sea a
 		join forecast b on b.sea_id = a.sea_id
@@ -172,7 +171,7 @@
 	<!-- /bada/travel/list -->
 	<select id="seaUsrList" resultMap="resultMapObj">
 		select
-			sea_id
+			sea_id as seaId
 			,sareaDtlNm
 			,lat
 			,lot
@@ -205,26 +204,29 @@
 	<!-- /bada/travel/id -->
 	<select id="seaView" resultMap="resultMapObj">
 	select
-		a.sea_id
+		a.sea_id as seaId
 		,a.sareaDtlNm
 		,a.lat
 		,a.lot
+		,b.del_ny
 	from
 		sea a
-	where sea_id = #{sea_id}
+	left join favorite b on b.sea_id = a.sea_id   <!--처음에 favorite 값이 안들어있는 상황이 있기에 left join 사용-->
+	<!--left join member c on b.member_id = c.member_id-->
+	where a.sea_id = #{seaId}
 	</select>
 	
 	<!-- /bada/travel/id -->
 	<select id="findSeaById" resultMap="resultMapObj">
 	select
-		sea_id AS sea_id
+		sea_id AS seaId
 		,sareaDtlNm
 		,lat
 		,lot
 	from
 		sea
 	where 1=1
-		AND sea_id = #{sea_id}
+		AND sea_id = #{seaId}
 	</select>
 	
 	
@@ -240,11 +242,11 @@
 		,avgCrsp
 		,weather
 		,totalIndex
-		,sea_id
+		,sea_id as SeaId
 	from
 		forecast 
 	where 1=1
-	and	sea_id = #{sea_id}
+	and	sea_id = #{seaId}
 	and del_ny = 0
 	order by sea_id asc, predcYmd ASC
 	</select>

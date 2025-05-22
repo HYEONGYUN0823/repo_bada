@@ -249,7 +249,7 @@
 			  const type = $('#calendarType').val();
 			  const calendar = flatpickr("#calendar", {
 			    inline: true,  //달력이 항상 페이지에 표시됨 
-				mode: (type === "restaurant") ? "single" : "range",
+				mode: (type === "2") ? "single" : "range",
 			    dateFormat: "Y-m-d", //날짜 포맷을 2025-05-21처럼 설정
 			    minDate: "today", //오늘 이전 날짜는 선택 불가능
 			    locale: "ko",
@@ -257,7 +257,7 @@
 			    showMonths: 2,
 			    onChange: function(selectedDates) {
 					const type = $('#calendarType').val();
-					if(type === "restaurant"){
+					if(type === "2"){
 						if (selectedDates.length === 1) {
 						       const dateStr = flatpickr.formatDate(selectedDates[0], "Y-m-d");
 						       $('#checkin').val(dateStr);

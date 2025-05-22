@@ -114,14 +114,14 @@ public class SeaService {
 	         // 먼저 정확한 sea_id를 설정 (forecastList 비교 전에)
 	            for (SeaDto check : confirmSeaList) {
 	                if (check.getSareaDtlNm().equals(itemDTO.getSareaDtlNm())) {
-	                    itemDTO.setSea_id(check.getSea_id());
+	                    itemDTO.setSeaId(check.getSeaId());
 	                    break;
 	                }
 	            }
 	            // 그 다음 중복 여부 확인
 	            boolean isExist = false;
 	            for (SeaDto checkDto : confirmForecastList) {
-	                if (itemDTO.getSea_id().equals(checkDto.getSea_id()) &&
+	                if (itemDTO.getSeaId().equals(checkDto.getSeaId()) &&
 	                    itemDTO.getPredcYmd().equals(checkDto.getPredcYmd()) &&
 	                    itemDTO.getPredcNoonSeCd().equals(checkDto.getPredcNoonSeCd())){
 	                    isExist = true;
@@ -146,6 +146,7 @@ public class SeaService {
 	public List<SeaDto> seaList(){
 		return dao.seaList();
 	}
+	
 	public List<SeaDto> forecastList(){
 		return dao.forecastList();
 	}
@@ -163,9 +164,9 @@ public class SeaService {
 	public String findForecastDeleteList(SeaDto dto){
 		List<SeaDto> Searchlist = new ArrayList<>(dao.forecastchecklist(dto));
 		for(SeaDto list: Searchlist){
-			if(list.getSea_id().equals(dto.getSea_id()) && list.getPredcYmd().equals(dto.getPredcYmd()) && list.getPredcNoonSeCd().equals("일")
+			if(list.getSeaId().equals(dto.getSeaId()) && list.getPredcYmd().equals(dto.getPredcYmd()) && list.getPredcNoonSeCd().equals("일")
 				&& (dto.getPredcNoonSeCd().equals("오전")|| dto.getPredcNoonSeCd().equals("오후"))){
-				return list.getForecast_id();
+				return list.getForecastId();
 			}
 		}
 		return null;
@@ -219,7 +220,7 @@ public class SeaService {
 	            newEntry.put("lat", dto.getLat());
 	            newEntry.put("predcYmd", dto.getPredcYmd());
 	            newEntry.put("lot", dto.getLot());
-	            newEntry.put("sea_id", dto.getSea_id());
+	            newEntry.put("sea_id", dto.getSeaId());
 	            newEntry.put("dataList", new ArrayList<Map<String, Object>>());
 	            return newEntry;
 	        });

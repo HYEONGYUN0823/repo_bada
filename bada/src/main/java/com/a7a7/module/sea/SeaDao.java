@@ -14,13 +14,13 @@ public interface SeaDao {
 	public List<SeaDto> seaList();		// 바다여행지역 리스트
 	public List<SeaDto> forecastList(); // 바다여행지역의 바다여행지수 리스트
 	public List<SeaDto> forecastchecklist(SeaDto dto); // API부분 리스트 체크 확인
-	public List<SeaDto> localForecastList(String sea_id);
+	public List<SeaDto> localForecastList(String seaId);
 	
 	public int seaInsert(SeaDto dto); // api에서 바다여행지역 리스트
 	public int forecastInsert(SeaDto dto); // api에서 바다여행지수 리스트
 	public int forecastUpdate(SeaDto dto);
 	public int forecastDelete1(SeaDto dto);
-	public int forecastDelete2(@Param("forecast_id") String forecast_id);
+	public int forecastDelete2(@Param("forecastId") String forecastId);
 	
 	public int countSeaList(@Param("pageVo") PageVo pageVo, @Param("searchVo") SearchVo searchVo); // 바다여행지역 전체 개수
 	

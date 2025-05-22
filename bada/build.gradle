@@ -37,6 +37,11 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail' , version: '3.2.5'
 	
+	
+	/*엑셀 실험*/
+	implementation 'org.apache.poi:poi:5.2.3'    /*기본적인 Excel 기능 제공*/
+	implementation 'org.apache.poi:poi-ooxml:5.2.3' 	/* .xlsx를 만들거나 열려면 반드시 필요*/
+	
 }
 
 tasks.named('test') {

@@ -5,10 +5,10 @@ public class SeaDto {
     private String sareaDtlNm;
     private Double lat;
     private Double lot;
-    private String manager_id;
+    private String managerId;
     
     //forecast table
-    private String forecast_id;
+    private String forecastId;
     private String predcYmd;
     private String predcNoonSeCd;
     private String avgArtmp;
@@ -18,9 +18,14 @@ public class SeaDto {
     private String avgCrsp;
     private String weather;
     private String totalIndex;
-    private Integer del_ny;
+    private Integer delNy;
     private String createdtime;
-    private String sea_id;		//나중에 물어보기
+    private String seaId;		//나중에 물어보기
+    
+    
+    //favorite
+    private String memberId;
+    
     
     
 	
@@ -29,12 +34,7 @@ public class SeaDto {
 	public String getSareaDtlNm() {
 		return sareaDtlNm;
 	}
-	public String getForecast_id() {
-		return forecast_id;
-	}
-	public void setForecast_id(String forecast_id) {
-		this.forecast_id = forecast_id;
-	}
+	
 	public void setSareaDtlNm(String sareaDtlNm) {
 		this.sareaDtlNm = sareaDtlNm;
 	}
@@ -104,29 +104,50 @@ public class SeaDto {
 	public void setTotalIndex(String totalIndex) {
 		this.totalIndex = totalIndex;
 	}
-	public String getSea_id() {
-		return sea_id;
-	}
-	public void setSea_id(String sea_id) {
-		this.sea_id = sea_id;
-	}
-	public String getManager_id() {
-		return manager_id;
-	}
-	public void setManager_id(String manager_id) {
-		this.manager_id = manager_id;
-	}
-	public Integer getDel_ny() {
-		return del_ny;
-	}
-	public void setDel_ny(Integer del_ny) {
-		this.del_ny = del_ny;
-	}
+	
 	public String getCreatedtime() {
 		return createdtime;
 	}
 	public void setCreatedtime(String createdtime) {
 		this.createdtime = createdtime;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getManagerId() {
+		return managerId;
+	}
+
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
+	}
+
+	public String getForecastId() {
+		return forecastId;
+	}
+
+	public void setForecastId(String forecastId) {
+		this.forecastId = forecastId;
+	}
+
+	public Integer getDelNy() {
+		return delNy;
+	}
+
+	public void setDelNy(Integer delNy) {
+		this.delNy = delNy;
+	}
+
+	public String getSeaId() {
+		return seaId;
+	}
+
+	public void setSeaId(String seaId) {
+		this.seaId = seaId;
 	}
 	
     

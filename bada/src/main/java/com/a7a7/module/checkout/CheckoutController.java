@@ -38,7 +38,6 @@ public class CheckoutController {
 	    model.addAttribute("item", restaurant);
 	    model.addAttribute("type", "2");
 	    model.addAttribute("title", restaurant.getTitle());
-	    
 	    return "usr/checkout/checkout";
 	}
 	

@@ -32,7 +32,7 @@
 	</select>
 	
 	<insert id="saveReservation">
-	INSERT INTO reservation(
+	INSERT INTO reservation( <!--db값-->
 		parent_type
 		,parent_id
 		,start_time
@@ -40,7 +40,7 @@
 		,createdtime
 		,del_ny
 		,member_id
-	)VALUES (
+	)VALUES (			<!--dto값-->
 		#{parentType}
 		,#{parentId}
 		,#{startTime}
