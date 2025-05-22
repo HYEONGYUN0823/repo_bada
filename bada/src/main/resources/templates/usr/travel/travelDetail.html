@@ -47,12 +47,12 @@
         <div class="ps-lg-4">
           <div class="d-flex align-items-start justify-content-between mt-3 mb-2">
             <div class="mb-3">
-				<input type="hidden" id="parentId" th:value="${item.sea_id}">
+				<input type="hidden" id="parentId" th:value="${item.seaId}">
 				<input type="hidden" id="parentType" value="1">
               <h2 th:text ="${list.sareaDtlNm}">여행지</h2>
             </div>
 			<!-- 즐겨찾기 버튼 -->
-			<button id="favoriteBtn" class="btn p-0 border-0 bg-transparent d-flex align-items-center gap-2 mt-2 " data-sea-id="${item?.sea_id}">
+			<button id="favoriteBtn" class="btn p-0 border-0 bg-transparent d-flex align-items-center gap-2 mt-2 " data-sea-id="${item?.seaId}">
 			  <svg id="heartIcon" xmlns="http://www.w3.org/2000/svg" width="23" height="20"
 			       stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 			       class="feather feather-heart">
@@ -80,7 +80,7 @@
           <hr class="my-3" />
           <div class="d-flex flex-md-row flex-column gap-2">
 			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">지도보기</button>
-            <a th:href="@{/sea/contact(sea_id=${item.sea_id})}" class="btn btn-outline-dark">1:1문의</a>
+            <a th:href="@{/sea/contact(seaId=${item.seaId})}" class="btn btn-outline-dark">1:1문의</a>
           </div>
         </div>
       </div>
@@ -295,9 +295,9 @@
 		   const heartPath = document.getElementById('heartPath');
 		   const favoriteBtn = document.getElementById('favoriteBtn');
 
-		   const delNy = "${item?.del_ny}";
+		   const delNy = "${item?.delNy}";
 		   const seaId = favoriteBtn.dataset.seaId;       // 버튼에 sea_id 데이터 속성 필요
-		   const memberId = "${member_id}"; 
+		   const memberId = "${memberId}"; 
 		   let isFavorited = (delNy == "1");
 
 		   // ✅ 초기 색상 세팅
