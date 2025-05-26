@@ -42,6 +42,9 @@ dependencies {
 	implementation 'org.apache.poi:poi:5.2.3'    /*기본적인 Excel 기능 제공*/
 	implementation 'org.apache.poi:poi-ooxml:5.2.3' 	/* .xlsx를 만들거나 열려면 반드시 필요*/
 	
+	/* 챗봇 만들기 위한 과정 mono */
+	implementation 'io.projectreactor:reactor-core'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 }
 
 tasks.named('test') {

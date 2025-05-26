@@ -2,27 +2,75 @@
 <html lang="kor" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace= "~{usr/include/head :: head}"></div>
+
+<style>
+    #chat-messages {
+        border: 1px solid #eee;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #f9f9f9;
+    }
+    .message {
+        padding: 8px 12px;
+        border-radius: 15px;
+        margin-bottom: 8px;
+        max-width: 80%;
+    }
+    .user-message {
+        background-color: #dcf8c6; /* 연한 초록색 */
+        align-self: flex-end;
+        margin-left: auto; /* 오른쪽 정렬 */
+    }
+    .bot-message {
+        background-color: #e0e0e0; /* 연한 회색 */
+        align-self: flex-start;
+        margin-right: auto; /* 왼쪽 정렬 */
+    }
+</style>
 	
 
 	<!--Hero slider start-->
 	<form>
-	<div class="swiper-container swiper" id="swiper-5" data-pagination-type="" data-speed="800" data-space-between="100"
-		data-pagination="false" data-navigation="true" data-autoplay="true" data-effect="fade"
-		data-autoplay-delay="3000"
-		data-breakpoints='{"480": {"slidesPerView": 2}, "768": {"slidesPerView": 3}, "1024": {"slidesPerView": 1}}'>
-		<div class="swiper-wrapper pb-lg-8">
-			<!--Swiper-->
-			<div class="swiper-slide w-100 bg-light bg-opacity-50 border-bottom">
-				<div class="container d-flex flex-column justify-content-center h-100">
-					<div class="row align-items-center py-md-8 py-6">
-						<div class="col-lg-5">
-							<div class="">
-								<span class="badge bg-info">AI 정보 들어가는 장소</span>
-								<h1 class="mb-3 mt-4 display-5 fw-bold">AI가 추천하는 장소</h1>
-								<p class="mb-4 pe-lg-6">AI가 추천하는 여행지, 식당, 숙박업소 등등 이라고 우선은
-								적어놓고 정확한 내용은 추가하는 방향</p>
+<div class="swiper-container swiper" id="swiper-5" data-pagination-type="" data-speed="800" data-space-between="100"
+	data-pagination="false" data-navigation="true" data-autoplay="true" data-effect="fade"
+	data-autoplay-delay="3000"
+	data-breakpoints='{"480": {"slidesPerView": 2}, "768": {"slidesPerView": 3}, "1024": {"slidesPerView": 1}}'>
+	<div class="swiper-wrapper pb-lg-8">
+		<!--Swiper-->
+		<div class="swiper-slide w-100 bg-light bg-opacity-50 border-bottom">
+			<div class="container d-flex flex-column justify-content-center h-100">
+				<div class="row align-items-start py-md-8 py-6">
+					<div class="col-lg-5">
+						<div>
+							<span class="badge bg-info">AI 정보 들어가는 장소</span>
+							<h1 class="mb-3 mt-4 display-5 fw-bold">AI가 추천하는 장소</h1>
+							<p class="mb-4 pe-lg-6">
+								AI가 추천하는 여행지, 식당, 숙박업소 등등 이라고 우선은 적어놓고 정확한 내용은 추가하는 방향
+							</p>
+
+							<!-- ✨ Chatbot moved here -->
+							<div id="chatbot-container" class="p-3 border rounded shadow-sm bg-white mx-auto"
+								style="height: 317px; max-width: 500px; width: 100%; display: flex; flex-direction: column;">
+								
+								<!-- 채팅 메시지 출력 영역 -->
+								<div id="chat-messages"
+									style="flex-grow: 1; overflow-y: auto; margin-bottom: 10px; background-color: #f9f9f9; padding: 10px;">
+									<div class="message bot-message">안녕하세요! 무엇을 도와드릴까요?</div>
+								</div>
+
+								<!-- 입력창과 버튼 -->
+								<div class="d-flex align-items-center">
+									<input type="text" id="user-input" class="form-control me-2"
+										placeholder="메시지를 입력하세요..."
+										style="height: 50px; font-size: 14px;">
+									<button id="send-button" class="btn btn-primary"
+										style="height: 50px; font-size: 14px; white-space: nowrap; min-width: 70px;">
+										전송
+									</button>
+								</div>
 							</div>
 						</div>
+					</div>
 						<div class="offset-lg-1 col-lg-6">
 							<div class="position-relative">
 								<h2></h2>
@@ -1694,7 +1742,102 @@
 		});
 
 	</script>
+	
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const chatMessages = document.getElementById('chat-messages');
 
+        console.log("DEBUG: HTML elements loaded:");
+        console.log("DEBUG: userInput element:", userInput);
+        console.log("DEBUG: sendButton element:", sendButton);
+        console.log("DEBUG: chatMessages element:", chatMessages);
+
+        const CHATBOT_API_URL = 'http://localhost:8080/chat';
+
+        // sendMessage 함수에 event 객체를 매개변수로 받도록 수정
+        function sendMessage(event) { // <-- 여기에 event 추가
+            // 기본 제출 동작 방지 (가장 중요!)
+            if (event) { // event 객체가 있을 때만 호출 (Enter 키의 keypress 이벤트는 event 객체를 가짐)
+                event.preventDefault();
+            }
+
+            const message = userInput.value.trim();
+            console.log("DEBUG: 1. sendMessage function called.");
+            console.log("DEBUG: 1.1. Raw user input value:", userInput.value);
+            console.log("DEBUG: 1.2. Trimmed message variable:", message);
+
+            if (message === '') {
+                console.log("DEBUG: 2. Message is empty. Stopping sendMessage.");
+                return;
+            }
+
+            appendMessage(message, 'user-message');
+            userInput.value = '';
+            console.log("DEBUG: 3. User message appended to screen and input cleared.");
+
+            const requestBody = JSON.stringify({ message: message });
+            console.log("DEBUG: 4. JSON request body string prepared:", requestBody);
+
+            fetch(CHATBOT_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: requestBody
+            })
+            .then(response => {
+                console.log("DEBUG: 5. Received HTTP response:", response);
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        console.error("DEBUG: 5.1. Server error response details:", err);
+                        throw new Error(err.response || `HTTP 오류 발생: ${response.status} ${response.statusText}`);
+                    }).catch(() => {
+                        throw new Error(`HTTP 오류 발생: ${response.status} ${response.statusText}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("DEBUG: 6. Parsed JSON data from bot:", data);
+                if (data && data.response) {
+                    appendMessage(data.response, 'bot-message');
+                } else {
+                    appendMessage('챗봇이 예상치 못한 응답을 보냈습니다.', 'bot-message error-message');
+                    console.warn('DEBUG: 6.1. Unexpected bot response format:', data);
+                }
+            })
+            .catch(error => {
+                console.error('DEBUG: 7. Chatbot API call error (fetch .catch):', error);
+                appendMessage('죄송합니다. 챗봇과 연결하는 데 문제가 발생했습니다: ' + error.message, 'bot-message error-message');
+            });
+        }
+
+        function appendMessage(message, className) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', className);
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            console.log(`DEBUG: appendMessage called. Message: "${message}", Class: "${className}"`);
+        }
+
+        // 전송 버튼 클릭 이벤트 리스너
+        // 여기도 event 객체를 전달하도록 수정 (화살표 함수로 변경)
+        sendButton.addEventListener('click', (event) => sendMessage(event)); // <-- 수정
+        console.log("DEBUG: Event listener added for sendButton.");
+
+        // Enter 키 입력 이벤트 리스너
+        userInput.addEventListener('keypress', function(event) { // <-- 여기에 event 추가
+            if (event.key === 'Enter') {
+                sendMessage(event); // <-- event 전달
+            }
+        });
+        console.log("DEBUG: Event listener added for userInput (keypress Enter).");
+    });
+</script>
+	
 		
 <div th:replace= "~{usr/include/footer :: footer}"></div>
 </html>
