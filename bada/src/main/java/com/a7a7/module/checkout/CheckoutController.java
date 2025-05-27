@@ -28,7 +28,6 @@ public class CheckoutController {
 		model.addAttribute("item", sea);
 		model.addAttribute("type", "sea");
 		model.addAttribute("title", sea.getSareaDtlNm());
-		
 		return "usr/checkout/checkout";
 	}
 	
