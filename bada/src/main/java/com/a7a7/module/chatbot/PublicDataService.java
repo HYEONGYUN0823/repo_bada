@@ -188,6 +188,8 @@ public class PublicDataService {
         CITY_TO_AREA_CODE_MAP.put("홍성", "34"); CITY_TO_AREA_CODE_MAP.put("홍성군", "34");
         CITY_TO_AREA_CODE_MAP.put("예산", "34"); CITY_TO_AREA_CODE_MAP.put("예산군", "34");
         CITY_TO_AREA_CODE_MAP.put("태안", "34"); CITY_TO_AREA_CODE_MAP.put("태안군", "34");
+        CITY_TO_AREA_CODE_MAP.put("태안남부", "34"); CITY_TO_AREA_CODE_MAP.put("태안군", "34");
+        CITY_TO_AREA_CODE_MAP.put("태안북부", "34"); CITY_TO_AREA_CODE_MAP.put("태안군", "34");
 
         // 경북 (35)
         CITY_TO_AREA_CODE_MAP.put("포항", "35"); CITY_TO_AREA_CODE_MAP.put("포항시", "35");
