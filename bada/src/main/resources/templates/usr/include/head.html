@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="head">
 
@@ -25,7 +26,7 @@
 	<link rel="stylesheet" href="/usr/assets/css/theme.min.css">
 	<link fetchpriority="high" rel="preload" href="/usr/assets/images/slider/slider-img-1.png" as="image">
 
-	<title>Homepage eCommerce HTML Template - FreshCart Furniture</title>
+	<title>바다 어때?</title>
 	
 	
 	
@@ -121,10 +122,14 @@
 						        </svg>
 						      </a>
 						      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						        <li><a href="/bada/signIn" class="dropdown-item" >로그인</a></li>
-						        <li><a href="/bada/signUp" class="dropdown-item" >회원가입</a></li>
-						        <li><a href="/bada/mypage/reservation" class="dropdown-item">마이페이지</a></li>
-						        <li><a href="#"class="dropdown-item">로그아웃</a></li>
+								<div sec:authorize="isAnonymous()">
+							        <li><a href="/bada/signIn" class="dropdown-item" >로그인</a></li>
+							        <li><a href="/bada/signUp" class="dropdown-item" >회원가입</a></li>
+								</div>
+								<div sec:authorize="isAuthenticated()">
+							        <li><a href="/bada/mypage/reservation" class="dropdown-item">마이페이지</a></li>
+							        <li><a href="#"class="dropdown-item">로그아웃</a></li>
+								</div>
 						      </ul>
 						    </div>
 						<a href="#!" id="quickBuyBtn" class="position-relative" data-bs-toggle="offcanvas"
