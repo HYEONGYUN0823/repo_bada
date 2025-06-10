@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="informationSide">
 
@@ -13,8 +14,8 @@
 					<div class="mb-4 text-center text-md-start">
 						<div class="d-lg-flex align-items-center gap-3 border p-3 ">
 							<div class="mt-2 mt-lg-0 overflow-hidden">
-								<h3 class="mb-0 fs-5">Susan Gardner</h3>
-								<p class="mb-0 small text-truncate">exampleprofile@gmail.com</p>
+								<h3 class="mb-0 fs-5" sec:authentication="principal.loginName"></h3>
+								<p class="mb-0 small text-truncate" sec:authentication="name"></p>
 							</div>
 						</div>
 					</div>
