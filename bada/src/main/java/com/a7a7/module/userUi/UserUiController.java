@@ -99,19 +99,19 @@ public class UserUiController {
 //               마이페이지
 //  ---------------------------------
 	
-	@RequestMapping(value = "/changePassword")
+	@RequestMapping(value = "/bada/mypage/changePassword")
 	public String changePassword() {
 		
 		return "usr/information/changePassword";
 	}
 	
-	@RequestMapping(value = "/newPassword")
+	@RequestMapping(value = "/bada/mypage/newPassword")
 	public String newPassword() {
 		
 		return "usr/information/newPassword";
 	}
 	
-	@RequestMapping(value = "/wishlist")
+	@RequestMapping(value = "/bada/mypage/wishlist")
 	public String wishlist() {
 		
 		return "usr/information/wishlist";
