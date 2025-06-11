@@ -1,0 +1,80 @@
+name: Deploy Spring Boot (Gradle) to EC2
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: 'gradle'
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./bada/gradlew
+    - name: Build with Gradle
+      working-directory: ./bada
+      run: ./gradlew bootJar
+    - name: Deploy to EC2
+      uses: easingthemes/ssh-deploy@v4.1.8
+      with:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        REMOTE_HOST: ${{ secrets.EC2_HOST }}
+        REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        SOURCE: bada/build/libs/
+        TARGET: /home/ec2-user/bada
+        ARGS: "--exclude='.git*' --exclude='Jenkinsfile' --exclude='.github/' --exclude='bada/build/tmp/' --exclude='bada/build/reports/'"
+        SCRIPT_AFTER: |
+          cd /home/ec2-user/bada
+          APP_PORT=8888
+          echo "Attempting to stop any process on port ${APP_PORT}..."
+          PID=$(sudo lsof -t -i:${APP_PORT})
+          if [ -n "$PID" ]; then
+            echo "Stopping process on port ${APP_PORT} (PID: $PID)"
+            sudo kill -9 $PID
+          else
+            echo "No process found running on port ${APP_PORT}."
+          fi
+          JAR_FILE_TO_EXECUTE="bada-0.0.1-SNAPSHOT.jar"
+          if [ -f "$JAR_FILE_TO_EXECUTE" ]; then
+            echo "Starting Spring Boot application: $JAR_FILE_TO_EXECUTE"
+            export mysql_main_jdbc_url="${{ secrets.mysql_main_jdbc_url }}"
+            export mysql_main_username="${{ secrets.mysql_main_username }}"
+            export mysql_main_password="${{ secrets.mysql_main_password }}"
+            export google_mail_username="${{ secrets.google_mail_username }}"
+            export google_app_password="${{ secrets.google_app_password }}"
+            export TOSS_SECRET_KEY="${{ secrets.TOSS_SECRET_KEY }}"
+            export GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}"
+            export GOOGLE_CLIENT_SECRET="${{ secrets.GOOGLE_CLIENT_SECRET }}"
+            export sea_api_key="${{ secrets.sea_api_key }}"
+            export sea_api_dcokey="${{ secrets.sea_api_dcokey }}"
+            export accom_api_key="${{ secrets.accom_api_key }}"
+            export accom_api_dcokey="${{ secrets.accom_api_dcokey }}"
+            export restaurant_api_key="${{ secrets.restaurant_api_key }}"
+            export restaurant_api_dcokey="${{ secrets.restaurant_api_dcokey }}"
+            export kakao_map_api="${{ secrets.kakao_map_api }}"
+            export tossPay_api="${{ secrets.tossPay_api }}"
+            export gemini_api_key="${{ secrets.gemini_api_key }}"
+            echo "--- DEBUG: Environment Variables from Secrets ---"
+            echo "Secrets - mysql_main_jdbc_url: [${{ secrets.mysql_main_jdbc_url }}]"
+            echo "Secrets - mysql_main_username: [${{ secrets.mysql_main_username }}]"
+            echo "Secrets - GOOGLE_CLIENT_ID: [${{ secrets.GOOGLE_CLIENT_ID }}]"
+            echo "Secrets - kakao_map_api: [${{ secrets.kakao_map_api }}]"
+            echo "--- DEBUG: Exported Environment Variables ---"
+            echo "Exported - mysql_main_jdbc_url: [$mysql_main_jdbc_url]"
+            echo "Exported - mysql_main_username: [$mysql_main_username]"
+            echo "Exported - GOOGLE_CLIENT_ID: [$GOOGLE_CLIENT_ID]"
+            echo "Exported - kakao_map_api: [$kakao_map_api]"
+            echo "-------------------------------------------------"
+            nohup java -jar $JAR_FILE_TO_EXECUTE > /home/ec2-user/bada/app.log 2>&1 &
+            echo "Spring Boot application started. Check logs at /home/ec2-user/bada/app.log"
+          else
+            echo "ERROR: Specified JAR file '$JAR_FILE_TO_EXECUTE' not found in /home/ec2-user/bada."
+            ls -la /home/ec2-user/bada
+            exit 1
+          fi
