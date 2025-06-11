@@ -46,6 +46,9 @@ dependencies {
 	/* 챗봇 만들기 위한 과정 mono */
 	implementation 'io.projectreactor:reactor-core'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	
+	/*구글 OAuth2 로그인*/
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 tasks.named('test') {

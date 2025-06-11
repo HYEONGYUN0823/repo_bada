@@ -21,7 +21,7 @@
 		)
 	</insert>
 	
-	<select id="findPasswordByEmail" resultMap="resultMapObj">
+	<select id="findMemberByEmail" resultMap="resultMapObj">
 		SELECT
 			member_id AS memberId
 			,email

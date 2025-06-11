@@ -22,7 +22,7 @@ public class MemberService {
 	// 로그인
 	public boolean processSignIn(MemberDto dto) {
 		
-		MemberDto result = dao.findPasswordByEmail(dto.getEmail());
+		MemberDto result = dao.findMemberByEmail(dto.getEmail());
 		
 		if(result == null) {
 			return false;
