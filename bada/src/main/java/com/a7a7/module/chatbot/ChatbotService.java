@@ -27,54 +27,66 @@ public class ChatbotService {
     }
 
     public Mono<String> processUserMessage(String userMessage) {
-        // 날짜 관련 로직 제거, 숙소 추천에 날짜 불필요
-        // String todayDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-        // Gemini 프롬프트 수정: 날씨 의도 제외, 숙소 추천 기본 우선, 의도 배열로 처리
+        // ✨ [수정됨] AI가 의도를 더 잘 파악하도록 프롬프트를 대폭 강화합니다. (Few-shot 예시 추가)
         String intentPrompt = String.format("""
+            # 지침
             사용자의 질문을 분석하여 JSON 형식으로 응답해 주세요.
-            응답에는 'intents' (의도: ['여행지_추천', '식당_추천', '숙소_추천', '상세_정보_요청', '인사', '기타'] 중 하나 또는 여러 개),
-            'entities' (핵심 정보: '장소', '음식_유형', '테마', '가격대' 등),
-            그리고 'api_params' (공공데이터 API 호출에 필요한 파라미터)를 포함해 주세요.
-            'api_params'는 key-value 쌍으로, 'location' 같은 지역 정보는 반드시 포함해 주세요.
-            사용자가 지역명만 입력하거나 의도가 불명확하면 'intents'를 ['숙소_추천']으로 설정하고, 'api_params'에 'location'을 포함해 주세요.
-            날씨 정보는 요청되지 않으므로 '날씨_정보_요청' 의도는 포함시키지 마세요.
-            이해하지 못하는 질문이면 'intents'를 ['기타']로 설정하고 'response_text'에 "어떤 지역의 숙소를 추천해 드릴까요?"라고 답변해 주세요.
+            응답에는 'intents' (의도 배열), 'entities' (핵심 정보 객체), 'api_params' (API 호출용 파라미터 객체)를 포함해야 합니다.
+            - 'intents'는 ['숙소_추천', '식당_추천', '날씨_정보_요청', '상세_정보_요청', '인사', '기타'] 중에서 선택하세요.
+            - 'api_params'에는 'location' 키가 존재하면 반드시 지역 정보를 포함해야 합니다.
+            
+            # 규칙
+            1. 사용자가 지역명만 언급하거나 의도가 불분명하면 'intents'를 ['숙소_추천']으로 설정하세요.
+            2. 사용자가 명확히 '날씨'에 대해 물으면, 다른 의도를 포함하지 말고 **오직 'intents'를 ['날씨_정보_요청']으로만 설정**해야 합니다. 이것이 가장 중요한 규칙입니다.
+            3. 이해할 수 없는 질문은 'intents'를 ['기타']로 설정하고, 'response_text'에 "어떤 지역의 숙소를 추천해 드릴까요?"라고 답변하세요.
 
-            사용자 질문: "%s"
+            # 예시
+            - 사용자 질문: "서울 날씨 어때?"
+            - JSON 응답: {"intents": ["날씨_정보_요청"], "api_params": {"location": "서울"}}
 
-            JSON 응답:
+            - 사용자 질문: "강남 맛집 찾아줘"
+            - JSON 응답: {"intents": ["식당_추천"], "api_params": {"location": "강남"}}
+
+            - 사용자 질문: "제주도 숙소"
+            - JSON 응답: {"intents": ["숙소_추천"], "api_params": {"location": "제주도"}}
+            
+            - 사용자 질문: "부산"
+            - JSON 응답: {"intents": ["숙소_추천"], "api_params": {"location": "부산"}}
+
+            - 사용자 질문: "안녕"
+            - JSON 응답: {"intents": ["인사"]}
+
+            # 처리할 사용자 질문
+            "%s"
+
+            # JSON 응답:
             """, userMessage);
 
         return geminiService.askGemini(intentPrompt)
                 .flatMap(geminiResponseJson -> {
                     String cleanGeminiResponseJson = cleanJsonString(geminiResponseJson);
+                    
+                    // ✨ 디버깅을 위해 AI의 원본 응답을 로그로 출력합니다.
+                    System.out.println("DEBUG: Gemini Raw JSON Response: " + cleanGeminiResponseJson);
 
                     try {
                         Map<String, Object> geminiParsed = objectMapper.readValue(cleanGeminiResponseJson, Map.class);
-                        // 의도를 List<String>으로 받음
-                        List<String> intents = (List<String>) geminiParsed.getOrDefault("intents", Collections.singletonList("숙소_추천")); // 기본 의도를 숙소_추천으로 변경
+                        List<String> intents = (List<String>) geminiParsed.getOrDefault("intents", Collections.singletonList("숙소_추천"));
                         Map<String, String> apiParams = (Map<String, String>) geminiParsed.getOrDefault("api_params", new HashMap<>());
                         String responseTextFallback = (String) geminiParsed.getOrDefault("response_text", "어떤 지역의 숙소를 추천해 드릴까요?");
                         String location = apiParams.get("location");
 
-                        // 최종 응답을 위한 StringBuilder
                         StringBuilder finalResponseBuilder = new StringBuilder();
 
-                        // 의도가 비어있거나 기타일 경우 숙소 추천으로 기본 처리
                         if (intents.isEmpty() || intents.contains("기타")) {
                             intents = Collections.singletonList("숙소_추천");
                         }
 
-                        // 여러 의도를 처리하기 위한 Mono 리스트
                         List<Mono<String>> responseMonos = new ArrayList<>();
 
-                        // 각 의도에 따라 API 호출 및 응답 생성
                         for (String currentIntent : intents) {
                             switch (currentIntent) {
                                 case "여행지_추천":
-                                    // 여행지 추천은 숙소 추천으로 대체
-                                    // 의도적 낙찰
                                 case "숙소_추천":
                                     if (location != null && !location.isEmpty()) {
                                         System.out.println("DEBUG: ChatbotService - 숙소 추천 요청. Location: " + location + ", apiParams: " + apiParams);
@@ -83,20 +95,17 @@ public class ChatbotService {
                                                     if (!dataList.isEmpty()) {
                                                         String dataJson;
                                                         try {
-                                                            // 응답 크기를 줄이기 위해 처음 5개 항목만 사용
                                                             List<Map<String, String>> top5Items = dataList.stream().limit(5).collect(Collectors.toList());
                                                             dataJson = objectMapper.writeValueAsString(top5Items);
                                                         } catch (JsonProcessingException e) {
                                                             System.err.println("ERROR: ChatbotService - 숙소 데이터를 JSON으로 변환 중 오류: " + e.getMessage());
                                                             dataJson = "[]";
                                                         }
-
                                                         String recommendationPrompt = String.format("""
                                                             사용자가 요청한 '%s'에 대한 숙소 추천 데이터가 있습니다: %s.
                                                             이 정보를 바탕으로 사용자에게 친근하고 매력적인 숙소 추천 답변을 5개 이내로 생성해 주세요.
                                                             정보는 간결하게 제공하고, 너무 많은 내용을 담지 마세요.
                                                             """, location, dataJson);
-
                                                         return geminiService.askGemini(recommendationPrompt);
                                                     } else {
                                                         return Mono.just(String.format("죄송합니다. '%s' 지역에 대한 숙소 정보를 찾을 수 없습니다.", location));
@@ -119,20 +128,17 @@ public class ChatbotService {
                                                     if (!dataList.isEmpty()) {
                                                         String dataJson;
                                                         try {
-                                                            // 응답 크기를 줄이기 위해 처음 5개 항목만 사용
                                                             List<Map<String, String>> top5Items = dataList.stream().limit(5).collect(Collectors.toList());
                                                             dataJson = objectMapper.writeValueAsString(top5Items);
                                                         } catch (JsonProcessingException e) {
                                                             System.err.println("ERROR: ChatbotService - 식당 데이터를 JSON으로 변환 중 오류: " + e.getMessage());
                                                             dataJson = "[]";
                                                         }
-
                                                         String recommendationPrompt = String.format("""
                                                             사용자가 요청한 '%s'에 대한 식당 추천 데이터가 있습니다: %s.
                                                             이 정보를 바탕으로 사용자에게 친근하고 매력적인 식당 추천 답변을 5개 이내로 생성해 주세요.
                                                             정보는 간결하게 제공하고, 너무 많은 내용을 담지 마세요.
                                                             """, location, dataJson);
-
                                                         return geminiService.askGemini(recommendationPrompt);
                                                     } else {
                                                         return Mono.just(String.format("죄송합니다. '%s' 지역에 대한 식당 정보를 찾을 수 없습니다.", location));
@@ -145,6 +151,10 @@ public class ChatbotService {
                                     } else {
                                         responseMonos.add(Mono.just("어떤 지역의 식당을 추천해 드릴까요?"));
                                     }
+                                    break;
+                                    
+                                case "날씨_정보_요청":
+                                    responseMonos.add(Mono.just("날씨 정보는 현재 준비 중인 기능이에요. 곧 멋진 날씨 정보를 알려드릴 수 있도록 준비할게요!"));
                                     break;
 
                                 case "인사":
@@ -161,14 +171,13 @@ public class ChatbotService {
                             }
                         }
 
-                        // 모든 응답 Mono를 합쳐서 최종 응답 생성
                         return Mono.zip(responseMonos, objects -> {
                             for (Object obj : objects) {
                                 if (obj instanceof String) {
                                     finalResponseBuilder.append(obj).append("\n\n");
                                 }
                             }
-                            return finalResponseBuilder.toString().trim(); // 마지막 개행 제거
+                            return finalResponseBuilder.toString().trim();
                         }).onErrorResume(e -> {
                             System.err.println("ERROR: ChatbotService - 최종 응답 조합 중 오류 발생: " + e.getMessage());
                             return Mono.just("죄송합니다. 여러 정보를 동시에 처리하는 중 오류가 발생했습니다.");
@@ -188,7 +197,6 @@ public class ChatbotService {
                 });
     }
 
-    // Gemini 응답 JSON 문자열에서 코드 블록 마크다운을 제거하는 헬퍼 메서드
     private String cleanJsonString(String json) {
         String cleanJson = json.trim();
         if (cleanJson.startsWith("```json")) {
