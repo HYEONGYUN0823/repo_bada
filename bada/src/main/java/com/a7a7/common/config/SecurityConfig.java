@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -31,7 +32,16 @@ public class SecurityConfig {
                     .defaultSuccessUrl("/index", true)                // 로그인 성공 후 이동할 페이지
                     .failureUrl("/bada/signIn?error")            // 로그인 실패 시 이동할 페이지
                     .permitAll()          // 로그인 페이지는 모두 접근 가능
-            );
+            )
+            .logout(logout -> logout
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/index") // 로그아웃 후 이동할 URL
+                    .deleteCookies("JSESSIONID")   // 쿠키 삭제
+            )
+            .sessionManagement(session -> session
+            		.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // 기본값, 세션 생성됨
+            )
+        ;
 
         return http.build();
     }
