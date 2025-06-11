@@ -11,14 +11,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.a7a7.common.config.ApiKeysConfig;
 import com.a7a7.module.codegroup.CodeGroupController;
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
 import com.a7a7.module.review.ReviewDao;
-import com.a7a7.module.review.ReviewDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -33,8 +32,11 @@ public class SeaService {
 	@Autowired
 	ReviewDao reviewdao;
 	
-	@Value("${sea_api_key}")
-	private String serviceKey;
+	@Autowired
+	ApiKeysConfig apiKeysConfig;
+	
+//	@Value("${sea_api_key}")
+//	private String serviceKey;
 
 
     SeaService(CodeGroupController codeGroupController) {
@@ -44,6 +46,7 @@ public class SeaService {
 	
 	public void seaApiResponse() throws Exception {		
 		// api 호출
+		String serviceKey = apiKeysConfig.getSeaApiKey();
 		String apiUrl = "https://apis.data.go.kr/1192136/fcstSeaTrip/GetFcstSeaTripApiService?&type=json&reqDate=&pageNo=1&numOfRows=300&include=lastScr,sareaDtlNm,lat,lot,predcYmd,predcNoonSeCd,avgArtmp,avgWspd,avgWtem,avgWvhgt,avgCrsp,weather,totalIndex&serviceKey=" + serviceKey;
 		URL url = new URL(apiUrl);
 		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection(); //openConnection() : 해당 URL로 연결을 여는 거야.

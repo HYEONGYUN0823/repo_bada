@@ -9,11 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.a7a7.common.config.ApiKeysConfig;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -22,11 +24,14 @@ import reactor.core.publisher.Mono;
 @Service
 public class PublicDataService {
 
-    @Value("${restaurant_api_key}")
-    private String restaurantApiKey;
-
-    @Value("${accom_api_key}")
-    private String accommodationApiKey;
+//    @Value("${restaurant_api_key}")
+//    private String restaurantApiKey;
+//
+//    @Value("${accom_api_key}")
+//    private String accommodationApiKey;
+    
+    @Autowired
+    ApiKeysConfig apiKeysConfig;
 
     private final WebClient webClient;
     private final ObjectMapper objectMapper;
@@ -404,7 +409,8 @@ public class PublicDataService {
 
         apiParams.put("numOfRows", params.getOrDefault("numOfRows", "10"));
         apiParams.put("arrange", params.getOrDefault("arrange", "B"));
-
+        
+        String restaurantApiKey = apiKeysConfig.getRestaurantApiKey();
         System.out.println("DEBUG: getRestaurantInfo params: " + apiParams);
         return callApi(baseUrl, restaurantApiKey, apiParams, "item");
     }
@@ -426,6 +432,7 @@ public class PublicDataService {
         apiParams.put("arrange", params.getOrDefault("arrange", "B"));
 
         System.out.println("DEBUG: getAccommodationInfo params: " + apiParams);
+        String accommodationApiKey = apiKeysConfig.getAccomApiKey();
         return callApi(baseUrl, accommodationApiKey, apiParams, "item");
     }
 

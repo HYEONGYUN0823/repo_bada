@@ -1,22 +1,26 @@
 package com.a7a7.module.chatbot;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
-
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import com.a7a7.common.config.ApiKeysConfig;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import reactor.core.publisher.Mono;
 
 @Service
 public class GeminiService {
 
-    @Value("${gemini_api_key}") // application.properties에서 Gemini API 키를 가져와요.
-    private String geminiApiKey;
+//    @Value("${gemini_api_key}") // application.properties에서 Gemini API 키를 가져와요.
+//    private String geminiApiKey;
+	
+	@Autowired
+	ApiKeysConfig apiKeysConfig;
 
     private final WebClient webClient;
 
@@ -38,6 +42,7 @@ public class GeminiService {
         requestBody.put("contents", Collections.singletonList(content));
 
         // API 호출을 위한 URI (모델 이름과 API 키 포함)
+        String geminiApiKey = apiKeysConfig.getGeminiApiKey();
         String uri = String.format("/models/gemini-2.0-flash:generateContent?key=%s", geminiApiKey);
 
         // WebClient를 사용하여 Gemini API에 POST 요청을 보내고 응답을 받아요.

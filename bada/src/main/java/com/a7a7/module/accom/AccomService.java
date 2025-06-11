@@ -7,9 +7,9 @@ import java.net.URL;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.a7a7.common.config.ApiKeysConfig;
 import com.a7a7.module.accom.AccomApiDto.Response.Body.Items.Item;
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
@@ -21,11 +21,15 @@ public class AccomService {
 	@Autowired
 	AccomDao dao;
 	
-	@Value("${accom_api_key}")
-	private String serviceKey;
+//	@Value("${accom_api_key}")
+//	private String serviceKey;
+	
+	@Autowired
+	ApiKeysConfig apiKeysConfig;
 
 	public void saveAccomApiResponse() throws Exception {	
 		// AccomApi 호출
+		String serviceKey = apiKeysConfig.getAccomApiKey();
 		String apiUrl = "http://apis.data.go.kr/B551011/KorService1/searchStay1?listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=100&pageNo=1&_type=json&ServiceKey=" + serviceKey;
 		
 		URL url = new URL(apiUrl);

@@ -1,12 +1,12 @@
 package com.a7a7.module.restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.a7a7.common.config.ApiKeysConfig;
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
 
@@ -17,8 +17,11 @@ public class RestaurantController {
 	@Autowired
 	RestaurantService service;
 	
-	@Value("${kakao_map_api}")
-	private String kakaoApiKey;
+	@Autowired
+    ApiKeysConfig apiKeysConfig;
+	
+//	@Value("${kakao_map_api}")
+//	private String kakaoApiKey;
 	
 	// 관리자 식당 관리 화면
 	@RequestMapping("/xdm/restaurant/list")
@@ -54,6 +57,7 @@ public class RestaurantController {
 		// DB에서 식당 전체 출력
 		model.addAttribute("item", service.findRestaurantById(restaurantId));
 		// kakao api
+		String kakaoApiKey = apiKeysConfig.getKakaoMapApiKey();
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		
 		return "usr/restaurant/restaurantDetail";

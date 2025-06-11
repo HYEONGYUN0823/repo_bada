@@ -39,4 +39,8 @@ public class ApiKeysConfig {
     public String getGeminiApiKey() {
         return System.getenv("GEMINI_API_KEY");
     }
+    
+    public String getGmailApiKey() {
+    	return System.getenv("GOOGLE_MAIL_USERNAME");
+    }
 }

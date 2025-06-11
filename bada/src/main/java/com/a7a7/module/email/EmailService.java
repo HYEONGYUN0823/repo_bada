@@ -1,11 +1,11 @@
 package com.a7a7.module.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.a7a7.common.config.ApiKeysConfig;
 import com.a7a7.module.member.MemberDto;
 
 import jakarta.mail.internet.MimeMessage;
@@ -15,13 +15,18 @@ public class EmailService {
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
-	@Value("${google_mail_username}")
-	private String email;
+	@Autowired
+	ApiKeysConfig apiKeysConfig;
+	
+//	@Value("${google_mail_username}")
+//	private String email;
 	
 	public void sendMailInquiryToAdmin(MemberDto memberDto, EmailDto emailDto, String phone, String inquiryType) throws Exception {
 	    MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 	    MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
-
+	    
+	    String email = apiKeysConfig.getGmailApiKey();
+	    
 	    helper.setTo(email); // 관리자 이메일 주소
 	    helper.setSubject(emailDto.getSubject());
 

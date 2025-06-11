@@ -1,6 +1,5 @@
 package com.a7a7.module.accom;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.a7a7.common.config.ApiKeysConfig;
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
 
@@ -17,8 +17,11 @@ public class AccomController {
 	@Autowired
 	AccomService service;
 	
-	@Value("${kakao_map_api}")
-	private String kakaoApiKey;
+//	@Value("${kakao_map_api}")
+//	private String kakaoApiKey;
+	
+	@Autowired
+	ApiKeysConfig apiKeysConfig;
 	
 	// 관리자 숙박업소 관리 화면
 	@RequestMapping("/xdm/accom/list")
@@ -52,6 +55,7 @@ public class AccomController {
 		// 숙박업소 검색
 		model.addAttribute("item", service.findAccomById(accomId));
 		// kakao api
+		String kakaoApiKey = apiKeysConfig.getKakaoMapApiKey();
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		
 		return "usr/accom/accomDetail";

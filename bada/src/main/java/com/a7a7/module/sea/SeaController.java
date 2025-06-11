@@ -1,16 +1,13 @@
 package com.a7a7.module.sea;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.a7a7.common.config.ApiKeysConfig;
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
 import com.a7a7.module.review.ReviewDto;
@@ -25,8 +22,11 @@ public class SeaController {
 	@Autowired
 	ReviewService reviewService;
 	
-	@Value("${kakao_map_api}")
-	private String kakaoApiKey;
+	@Autowired
+	ApiKeysConfig apiKeysConfig;
+	
+//	@Value("${kakao_map_api}")
+//	private String kakaoApiKey;
 	
 
 
@@ -75,7 +75,9 @@ public class SeaController {
 	
 	@GetMapping("/bada/travel/{id}")
 	public String findUsrTravelView(@PathVariable("id") String seaId,Model model) throws Exception{
-		service.seaApiResponse();
+//		service.seaApiResponse();
+		
+		String kakaoApiKey = apiKeysConfig.getKakaoMapApiKey();
 		model.addAttribute("item", service.seaView(seaId));
 		model.addAttribute("list",service.seaView(seaId));
 		model.addAttribute("kakaoApiKey", kakaoApiKey);

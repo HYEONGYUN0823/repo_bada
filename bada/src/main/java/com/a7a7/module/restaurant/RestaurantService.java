@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.a7a7.common.config.ApiKeysConfig;
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
 import com.a7a7.module.restaurant.RestaurantApiDto.Response.Body.Items.Item;
@@ -21,11 +22,15 @@ public class RestaurantService {
 	@Autowired
 	RestaurantDao dao;
 	
-	@Value("${restaurant_api_key}")
-	private String serviceKey;
+	@Autowired
+    ApiKeysConfig apiKeysConfig;
+	
+//	@Value("${restaurant_api_key}")
+//	private String serviceKey;
 
 	public void saveRestaurantApiResponse() throws Exception {	
 		// AccomApi 호출
+		String serviceKey = apiKeysConfig.getRestaurantApiKey();
 		String apiUrl = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=AppTest&listYN=Y&arrange=A&contentTypeId=39&areaCode=1&_type=json&ServiceKey=" + serviceKey;
 		
 		URL url = new URL(apiUrl);
