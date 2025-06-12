@@ -236,4 +236,26 @@ public class SeaService {
 
 	    return new ArrayList<>(grouped.values());
 	}
+	
+	
+	
+	
+	// 즐겨찾기.
+	
+	public int FavoriteD(SeaDto dto) {
+		return dao.FavoriteD(dto);
+	}
+	
+	public int seaFavoriteView(SeaDto dto) {
+		return dao.seaFavoriteView(dto);
+	}
+	public int seaFavoriteAdd(SeaDto dto) {
+		return dao.seaFavoriteAdd(dto);
+	}
+	public int seaFavoriteUpdate(SeaDto dto) {
+		return dao.seaFavoriteUpdate(dto);
+	}
+	public int favoriteDelete(SeaDto dto) {
+		return dao.favoriteDelete(dto);
+	}
 }

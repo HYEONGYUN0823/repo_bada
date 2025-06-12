@@ -260,4 +260,58 @@
 	order by sea_id asc, predcYmd ASC
 	</select>
 	
+	
+	
+	
+	<!-- 즐겨찾기 -->
+	<select id="FavoriteD" resultType="Integer">
+		select
+			del_ny
+		from
+		 	favorite
+	where 1=1
+	and sea_id = #{seaId}
+	and member_id = #{memberId}
+	</select>
+	
+	
+	<select id="seaFavoriteView" resultType="Integer">
+	select
+		COUNT(*)
+	from
+		favorite
+	where 1=1
+	and sea_id = #{seaId}
+	and member_id = #{memberId}
+	</select>
+	
+	<insert id="seaFavoriteAdd">
+	insert into favorite(
+		del_ny
+		,member_id
+		,sea_id
+	)values(
+		0
+		,#{memberId}
+		,#{seaId}
+	)
+	</insert>
+	
+	<update id="seaFavoriteUpdate">
+	update favorite set
+		del_ny = 0
+	where sea_id = #{seaId}
+	and member_id = #{memberId}
+	
+	</update>
+	
+	<update id="favoriteDelete">
+	update favorite set
+		del_ny = 1
+	where sea_id = #{seaId}
+	and member_id = #{memberId}
+	
+	</update>
+	
+	
 </mapper>

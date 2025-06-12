@@ -26,6 +26,8 @@ public class SeaDto {
     
     //favorite
     private String memberId;
+    private String favoriteId;
+    private Integer count;
     
     
     
@@ -157,6 +159,22 @@ public class SeaDto {
 
 	public void setReviewCount(String reviewCount) {
 		this.reviewCount = reviewCount;
+	}
+
+	public String getFavoriteId() {
+		return favoriteId;
+	}
+
+	public void setFavoriteId(String favoriteId) {
+		this.favoriteId = favoriteId;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 	
     

@@ -49,10 +49,11 @@
             <div class="mb-3">
 				<input type="hidden" id="parentId" th:value="${item.seaId}">
 				<input type="hidden" id="parentType" value="1">
+				<input type="hidden" id="favorite"  th:value="${fav}"> <!-- 즐겨찾기여부 -->
               <h2 th:text ="${list.sareaDtlNm}">여행지</h2>
             </div>
 			<!-- 즐겨찾기 버튼 -->
-			<button id="favoriteBtn" class="btn p-0 border-0 bg-transparent d-flex align-items-center gap-2 mt-2 " data-sea-id="${item?.seaId}">
+			<button id="favoriteBtn" class="btn p-0 border-0 bg-transparent d-flex align-items-center gap-2 mt-2 " th:data-sea-id="${item.seaId}">
 			  <svg id="heartIcon" xmlns="http://www.w3.org/2000/svg" width="23" height="20"
 			       stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 			       class="feather feather-heart">
@@ -233,11 +234,12 @@
 		   const heartPath = document.getElementById('heartPath');
 		   const favoriteBtn = document.getElementById('favoriteBtn');
 
-		   const delNy = "${item?.delNy}";
 		   const seaId = favoriteBtn.dataset.seaId;       // 버튼에 sea_id 데이터 속성 필요
-		   const memberId = "${memberId}"; 
-		   let isFavorited = (delNy == "1");
-
+		   const fav = document.getElementById('favorite');
+		
+		   
+		   let isFavorited = fav.value === "0"? true:false; 
+		   
 		   // ✅ 초기 색상 세팅
 		   heartPath.style.fill = isFavorited ? '#dc3545' : '#fff';
 
@@ -245,7 +247,19 @@
 		   favoriteBtn.addEventListener('click', function () {
 		     isFavorited = !isFavorited;
 		     heartPath.style.fill = isFavorited ? '#dc3545' : '#fff';
-		   });
+		     
+		     const url = isFavorited ? '/favoriteAdd' : '/favoriteDelete';
+		     
+		     fetch(url, {
+		         method: 'POST',
+		         headers: {
+		           'Content-Type': 'application/json',
+		         },
+		         body: JSON.stringify({
+		           seaId: seaId,
+		         }),
+		       })
+		     });
 		 });
 	</script>
 	

@@ -29,4 +29,14 @@ public interface SeaDao {
 	public List<SeaDto> seaUsrList(@Param("pageVo") PageVo pageVo, @Param("searchVo") SearchVo searchVo);
 	public SeaDto seaView(String seaId);
 	public SeaDto findSeaById(String seaId);
+	
+	
+	//즐겨찾기
+	public int FavoriteD(SeaDto dto);
+	
+	public int seaFavoriteView(SeaDto dto);
+	public int seaFavoriteAdd(SeaDto dto);
+	public int seaFavoriteUpdate(SeaDto dto);
+	public int favoriteDelete(SeaDto dto);
+	
 }

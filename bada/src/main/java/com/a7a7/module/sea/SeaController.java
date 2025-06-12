@@ -1,17 +1,22 @@
 package com.a7a7.module.sea;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.a7a7.common.config.ApiKeysConfig;
+import com.a7a7.common.config.MemberDetails;
 import com.a7a7.module.common.PageVo;
 import com.a7a7.module.common.SearchVo;
 import com.a7a7.module.review.ReviewDto;
 import com.a7a7.module.review.ReviewService;
+
 
 @Controller
 public class SeaController {
@@ -74,8 +79,19 @@ public class SeaController {
 	}
 	
 	@GetMapping("/bada/travel/{id}")
-	public String findUsrTravelView(@PathVariable("id") String seaId,Model model) throws Exception{
+	public String findUsrTravelView(@PathVariable("id") String seaId, SeaDto dto,Model model, Authentication auth) throws Exception{
 //		service.seaApiResponse();
+		
+		 if (auth == null) {
+		        System.out.println("로그인하지 않은 사용자입니다.");
+		 }else {
+			 MemberDetails details = (MemberDetails) auth.getPrincipal();
+				dto.setMemberId(details.getMemberId());
+				dto.setSeaId(seaId);
+				int result = service.FavoriteD(dto);
+				model.addAttribute("fav", result);		 
+		 }
+		
 		
 		String kakaoApiKey = apiKeysConfig.getKakaoMapApiKey();
 		model.addAttribute("item", service.seaView(seaId));
@@ -84,4 +100,42 @@ public class SeaController {
 		model.addAttribute("items",service.localForecastList(seaId));
 		return "usr/travel/travelDetail";
 	}
+	
+	// 즐겨찾기
+	@PostMapping("/favoriteAdd")
+	public void favoriteAdd(@RequestBody SeaDto dto, Authentication auth) {
+		
+		
+		
+		 if (auth == null){
+		 }else {
+			 MemberDetails details = (MemberDetails) auth.getPrincipal();
+			dto.setMemberId(details.getMemberId());
+		}
+		
+		int result = service.seaFavoriteView(dto);
+
+		if (result == 0) {
+		    service.seaFavoriteAdd(dto);
+		} else {
+		    service.seaFavoriteUpdate(dto);
+		}
+		
+	}
+	
+	@PostMapping("/favoriteDelete")
+	
+	public void favoriteDelete(@RequestBody SeaDto dto, Authentication auth) {
+		
+		 if (auth == null){
+		 }else {
+			 MemberDetails details = (MemberDetails) auth.getPrincipal();
+			dto.setMemberId(details.getMemberId());
+		}
+		service.favoriteDelete(dto);
+
+	}
+	
+	
+	
 }
