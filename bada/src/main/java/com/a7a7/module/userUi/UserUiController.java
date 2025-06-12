@@ -12,13 +12,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.a7a7.common.config.ApiKeysConfig;
 import com.a7a7.module.sea.SeaService;
 
 @Controller
 public class UserUiController {
 	
-	@Value("${kakao_map_api}")
-	private String kakaoApiKey;
+//	@Value("${kakao_map_api}")
+//	private String kakaoApiKey;
+	
+	@Autowired
+	ApiKeysConfig apiKeysConfig;
 	
 	@Autowired
 	SeaService seaService;	//홈페이지화면에서 DB에 있는 여행지 위도경도값 받기 위해서 불러옴.
@@ -33,6 +37,7 @@ public class UserUiController {
 		} 		
 		List<Map<String, Object>> processed = seaService.getGroupedData(seaService.userindexmap(day));
 		model.addAttribute("items", processed); //여행지 위도,경도 값 자바스크립트에 보내기.
+		String kakaoApiKey = apiKeysConfig.getKakaoMapApiKey();
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
 		return "usr/index/index";
 	}
