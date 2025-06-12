@@ -1821,7 +1821,7 @@
         function appendMessage(message, className) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('message', className);
-            messageElement.textContent = message.replace(/\n/g, '<br>');;
+            messageElement.innerHTML = message.replace(/\n/g, '<br>');
             chatMessages.appendChild(messageElement);
             chatMessages.scrollTop = chatMessages.scrollHeight;
             console.log(`DEBUG: appendMessage called. Message: "${message}", Class: "${className}"`);
