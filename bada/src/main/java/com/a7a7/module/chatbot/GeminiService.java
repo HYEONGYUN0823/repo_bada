@@ -71,7 +71,7 @@ public class GeminiService {
             JsonNode textNode = root.path("candidates").path(0).path("content").path("parts").path(0).path("text");
 
             if (textNode.isTextual()) {
-                return textNode.asText().replace("\n", "<br>"); // 텍스트가 있다면 그대로 반환
+                return textNode.asText(); // 텍스트가 있다면 그대로 반환
             } else {
                 System.err.println("Gemini 응답에서 텍스트를 찾을 수 없거나 형식이 올바르지 않습니다: " + jsonResponse);
                 return "Gemini 응답 형식이 올바르지 않습니다.";
