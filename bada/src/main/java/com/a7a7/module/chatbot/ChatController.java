@@ -10,10 +10,8 @@ import java.util.Map;
 @RestController
 public class ChatController {
 
-    // 직접 PublicDataService와 GeminiService를 사용하지 않고, ChatbotService에 위임합니다.
     private final ChatbotService chatbotService;
 
-    // 생성자에서 ChatbotService만 주입받습니다.
     public ChatController(ChatbotService chatbotService) {
         this.chatbotService = chatbotService;
     }
@@ -25,7 +23,6 @@ public class ChatController {
             return Mono.just(Map.of("response", "메시지를 입력해주세요."));
         }
 
-        // 모든 챗봇 로직을 ChatbotService에 위임합니다.
         return chatbotService.processUserMessage(userMessage)
                 .map(response -> Map.of("response", response))
                 .onErrorResume(e -> {

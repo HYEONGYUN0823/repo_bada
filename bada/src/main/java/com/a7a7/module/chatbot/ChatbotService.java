@@ -27,7 +27,6 @@ public class ChatbotService {
     }
 
     public Mono<String> processUserMessage(String userMessage) {
-        // ✨ [수정됨] AI가 의도를 더 잘 파악하도록 프롬프트를 대폭 강화합니다. (Few-shot 예시 추가)
         String intentPrompt = String.format("""
             # 지침
             사용자의 질문을 분석하여 JSON 형식으로 응답해 주세요.
