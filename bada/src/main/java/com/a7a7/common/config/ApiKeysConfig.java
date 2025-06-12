@@ -1,11 +1,16 @@
 package com.a7a7.common.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ApiKeysConfig {
+	
+    @Value("${kakao.map.api}")
+    private String kakaoMapApiKey;
+	
     public String getKakaoMapApiKey() {
-        return System.getenv("KAKAO_MAP_API");
+        return kakaoMapApiKey;
     }
 
     public String getSeaApiKey() {
