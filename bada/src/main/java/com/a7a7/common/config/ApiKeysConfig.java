@@ -8,44 +8,71 @@ public class ApiKeysConfig {
 	
     @Value("${kakao.map.api}")
     private String kakaoMapApiKey;
-	
+    
+    @Value("${sea.api.key}")
+    private String seaApiKey;
+
+    @Value("${sea.api.dcokey}")
+    private String seaApiDcokey;
+
+    @Value("${accom.api.key}")
+    private String accomApiKey;
+
+    @Value("${accom.api.dcokey}")
+    private String accomApiDcokey;
+
+    @Value("${restaurant.api.key}")
+    private String restaurantApiKey;
+
+    @Value("${restaurant.api.dcokey}")
+    private String restaurantApiDcokey;
+
+    @Value("${toss.pay.api}")
+    private String tossPayApiKey;
+
+    @Value("${gemini.api.key}")
+    private String geminiApiKey;
+
+    @Value("${spring.mail.username}")
+    private String gmailApiKey;
+
     public String getKakaoMapApiKey() {
         return kakaoMapApiKey;
     }
 
     public String getSeaApiKey() {
-        return System.getenv("SEA_API_KEY");
+        return seaApiKey;
     }
 
     public String getSeaApiDcokey() {
-        return System.getenv("SEA_API_DCOKEY");
+        return seaApiDcokey;
     }
 
     public String getAccomApiKey() {
-        return System.getenv("ACCOM_API_KEY");
+        return accomApiKey;
     }
 
     public String getAccomApiDcokey() {
-        return System.getenv("ACCOM_API_DCOKEY");
+        return accomApiDcokey;
     }
 
     public String getRestaurantApiKey() {
-        return System.getenv("RESTAURANT_API_KEY");
+        return restaurantApiKey;
     }
 
     public String getRestaurantApiDcokey() {
-        return System.getenv("RESTAURANT_API_DCOKEY");
+        return restaurantApiDcokey;
     }
 
     public String getTossPayApiKey() {
-        return System.getenv("TOSSPAY_API");
+        return tossPayApiKey;
     }
 
     public String getGeminiApiKey() {
-        return System.getenv("GEMINI_API_KEY");
+        return geminiApiKey;
     }
     
     public String getGmailApiKey() {
-    	return System.getenv("GOOGLE_MAIL_USERNAME");
+        return gmailApiKey;
     }
 }

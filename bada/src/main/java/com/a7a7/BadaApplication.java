@@ -22,7 +22,7 @@ public class BadaApplication {
                         .allowedOrigins(
                             "http://127.0.0.1:5500",
                             "http://localhost:5500",
-                            "http://localhost:8080",
+                            "http://localhost:8888",
                             "http://43.201.33.231:8888"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
