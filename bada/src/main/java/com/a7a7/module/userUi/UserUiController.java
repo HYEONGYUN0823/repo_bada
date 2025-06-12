@@ -39,6 +39,7 @@ public class UserUiController {
 		model.addAttribute("items", processed); //여행지 위도,경도 값 자바스크립트에 보내기.
 		String kakaoApiKey = apiKeysConfig.getKakaoMapApiKey();
 		model.addAttribute("kakaoApiKey", kakaoApiKey);
+		System.out.println("Kakao API Key = " + apiKeysConfig.getKakaoMapApiKey());
 		return "usr/index/index";
 	}
 	

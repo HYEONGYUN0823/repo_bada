@@ -1659,7 +1659,12 @@
 	</form>
 
 	<!-- kakaoMap -->
-	<script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${kakaoApiKey}"></script>
+	<script th:inline="javascript">
+	    const kakaoApiKey = "[[${kakaoApiKey}]]";
+	    console.log("kakaoApiKey =", kakaoApiKey);
+	</script>
+	
+	<script th:src="@{|//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}|}"></script>
 	<script th:inline="javascript">const locations = /*[[${items}]]*/ [];</script>	<!-- th:inline="javascript", Spring에서 넘긴 items가 자동으로 JSON처럼 직렬화돼서 JavaScript 변수, 마커를 위한 위도경도-->
 	<div id="map" style="width:100%;height:400px;"></div>
 
