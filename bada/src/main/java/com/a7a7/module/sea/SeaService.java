@@ -242,11 +242,11 @@ public class SeaService {
 	
 	// 즐겨찾기.
 	
-	public int FavoriteD(SeaDto dto) {
+	public Integer FavoriteD(SeaDto dto) { // 사용여부 del_ny 1,0 값 찾기
 		return dao.FavoriteD(dto);
 	}
 	
-	public int seaFavoriteView(SeaDto dto) {
+	public int seaFavoriteView(SeaDto dto) { // 처음 insert, update인지 count 찾기.
 		return dao.seaFavoriteView(dto);
 	}
 	public int seaFavoriteAdd(SeaDto dto) {
@@ -258,4 +258,10 @@ public class SeaService {
 	public int favoriteDelete(SeaDto dto) {
 		return dao.favoriteDelete(dto);
 	}
+	
+	public List<SeaDto> favoriteList(SeaDto dto){
+		return dao.favoriteList(dto);
+	}
+	
+	
 }

@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.a7a7.common.config.ApiKeysConfig;
+import com.a7a7.common.config.MemberDetails;
+import com.a7a7.module.sea.SeaDto;
 import com.a7a7.module.sea.SeaService;
 
 @Controller
@@ -26,6 +27,8 @@ public class UserUiController {
 	
 	@Autowired
 	SeaService seaService;	//홈페이지화면에서 DB에 있는 여행지 위도경도값 받기 위해서 불러옴.
+	
+	
 	
 	
 	@RequestMapping(value = "/index")
@@ -118,7 +121,12 @@ public class UserUiController {
 	}
 	
 	@RequestMapping(value = "/bada/mypage/wishlist")
-	public String wishlist() {
+	public String wishlist(Authentication auth,SeaDto seaDto,Model model) {
+		MemberDetails details = (MemberDetails) auth.getPrincipal();
+		seaDto.setMemberId(details.getMemberId());
+		
+		model.addAttribute("items",seaService.favoriteList(seaDto));
+			
 		
 		return "usr/information/wishlist";
 	}

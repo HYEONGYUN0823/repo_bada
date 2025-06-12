@@ -85,12 +85,14 @@ public class SeaController {
 		
 		 if (auth == null) {
 		        System.out.println("로그인하지 않은 사용자입니다.");
-		 }else {
-			 MemberDetails details = (MemberDetails) auth.getPrincipal();
+		 }else if(auth !=null){
+			 	MemberDetails details = (MemberDetails) auth.getPrincipal();
 				dto.setMemberId(details.getMemberId());
 				dto.setSeaId(seaId);
-				int result = service.FavoriteD(dto);
-				model.addAttribute("fav", result);		 
+				Integer result = service.FavoriteD(dto);
+				if(result != null) {
+					model.addAttribute("fav", result);		 
+				} 
 		 }
 		
 		

@@ -17,17 +17,13 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">즐겨찾기 장소</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+    <tr th:each = "item:${items}">
+      <th scope="row"></th>
+      <td th:text="${item.sareaDtlNm}">Mark</td>
     </tr>
   </tbody>
 </table>

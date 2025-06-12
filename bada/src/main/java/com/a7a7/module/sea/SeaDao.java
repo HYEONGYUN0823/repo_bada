@@ -32,11 +32,14 @@ public interface SeaDao {
 	
 	
 	//즐겨찾기
-	public int FavoriteD(SeaDto dto);
+	public Integer FavoriteD(SeaDto dto);
 	
 	public int seaFavoriteView(SeaDto dto);
 	public int seaFavoriteAdd(SeaDto dto);
 	public int seaFavoriteUpdate(SeaDto dto);
 	public int favoriteDelete(SeaDto dto);
+	
+	//즐겨찾기 목록
+	public List<SeaDto> favoriteList(SeaDto dto);
 	
 }

@@ -313,5 +313,16 @@
 	
 	</update>
 	
+	<select id="favoriteList" resultMap="resultMapObj">
+	select 
+		a.sareaDtlNm
+	from
+		sea a
+	join favorite b on b.sea_id = a.sea_id
+	where 1=1
+	and b.member_id = #{memberId}
+	and b.del_ny = 0
+	</select>
+	
 	
 </mapper>
