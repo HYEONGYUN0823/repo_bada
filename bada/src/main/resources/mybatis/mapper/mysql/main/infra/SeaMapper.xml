@@ -128,16 +128,16 @@
 		and predcYmd = #{predcYmd}
 	</update>
 	
-	<update id="forecastDelete1">
+	<delete id="forecastDelete1">
     delete from forecast
     where predcYmd &lt; CURDATE() - INTERVAL 1 SECOND
-	</update>
+	</delete>
 
-	<update id="forecastDelete2">
+	<delete id="forecastDelete2">
     delete from forecast
     where 1=1
     and forecast_id = #{forecastId}
-	</update>
+	</delete>
 
 	
 	
