@@ -12,20 +12,11 @@ public class ApiKeysConfig {
     @Value("${sea.api.key}")
     private String seaApiKey;
 
-    @Value("${sea.api.dcokey}")
-    private String seaApiDcokey;
-
     @Value("${accom.api.key}")
     private String accomApiKey;
 
-    @Value("${accom.api.dcokey}")
-    private String accomApiDcokey;
-
     @Value("${restaurant.api.key}")
     private String restaurantApiKey;
-
-    @Value("${restaurant.api.dcokey}")
-    private String restaurantApiDcokey;
 
     @Value("${toss.pay.api}")
     private String tossPayApiKey;
@@ -43,25 +34,13 @@ public class ApiKeysConfig {
     public String getSeaApiKey() {
         return seaApiKey;
     }
-
-    public String getSeaApiDcokey() {
-        return seaApiDcokey;
-    }
-
+    
     public String getAccomApiKey() {
         return accomApiKey;
     }
 
-    public String getAccomApiDcokey() {
-        return accomApiDcokey;
-    }
-
     public String getRestaurantApiKey() {
         return restaurantApiKey;
-    }
-
-    public String getRestaurantApiDcokey() {
-        return restaurantApiDcokey;
     }
 
     public String getTossPayApiKey() {
