@@ -129,14 +129,12 @@
 	</update>
 	
 	<update id="forecastDelete1">
-    update forecast set 
-    	del_ny = 1
+    delete from forecast
     where predcYmd &lt; CURDATE() - INTERVAL 1 SECOND
 	</update>
 
 	<update id="forecastDelete2">
-    update forecast set 
-    	del_ny = 1
+    delete from forecast
     where 1=1
     and forecast_id = #{forecastId}
 	</update>
