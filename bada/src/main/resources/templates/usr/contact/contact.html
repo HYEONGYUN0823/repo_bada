@@ -91,6 +91,38 @@
 		</section>
 	</main>
 	
+	<!-- 로딩 모달 -->
+	<div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body text-center py-4">
+					<div class="spinner-border text-primary" role="status">
+						<span class="visually-hidden">로딩 중...</span>
+					</div>
+					<p class="mt-2">잠시만 기다려주세요...</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 성공 모달 -->
+	<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">문의 전송 완료</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>문의가 성공적으로 전송되었습니다.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.reload()">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<script type="text/javascript">
 	
 	document.querySelector("form").addEventListener("submit", function (e) {
@@ -128,6 +160,10 @@
 	        inquiryType: type              
 	    };
 	    
+	    // 로딩 모달 표시
+	    const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'));
+	    loadingModal.show();
+	    
 	    fetch("/inquiry", {
 	        method: "POST",
 	        headers: {
@@ -136,14 +172,20 @@
 	        body: JSON.stringify(payload)
 	    })
 	    .then(res => {
+	        // 로딩 모달 숨기기
+	        loadingModal.hide();
+	        
 	        if (res.ok) {
-	            alert("문의가 성공적으로 전송되었습니다.");
-	            location.reload();
+	            // 성공 모달 표시
+	            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+	            successModal.show();
 	        } else {
 	            alert("문의 전송 실패");
 	        }
 	    })
 	    .catch(err => {
+	        // 로딩 모달 숨기기
+	        loadingModal.hide();
 	        alert("오류 발생: " + err);
 	    });
 	});
