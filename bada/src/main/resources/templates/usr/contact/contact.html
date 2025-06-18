@@ -70,7 +70,7 @@
 								<!-- input -->
 								<label class="form-label" for="contactPhone">휴대전화번호</label>
 								<input type="text" id="contactPhone" name="contactPhone" class="form-control"
-									placeholder="휴대전화번호를 입력해주세요" required />
+									placeholder="휴대전화번호를 입력해주세요" required pattern="\d{11}" maxlength="11" minlength="11" inputmode="numeric" />
 								<div class="invalid-feedback">휴대전화번호를 입력해주세요.</div>
 							</div>
 							<div class="col-md-12 mb-3">
